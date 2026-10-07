@@ -1,4 +1,4 @@
-# UX Kanıt — Kanıta bağlı UX ön değerlendirmesi (0.8.2)
+# UX Kanıt — Kanıta bağlı UX ön değerlendirmesi (0.8.3)
 
 Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
 
@@ -72,6 +72,32 @@ Servis yalnızca 127.0.0.1:8787 adresinde dinler. Terminalde gösterilen oturuma
 Varsayılan sabit model gpt-4.1-mini-2025-04-14, temperature=0, promptVersion=norman-static-v1. Responses API, store=false ve strict JSON Schema kullanılır. Anahtar sadece servis ortam değişkeninden okunur. Günlüklerde anahtar, gövde ve sayfa metni yoktur. Açık .env düz metin yerel dosyadır; işletim sistemi hesabına erişimi olan kişilerden koruma sağlamaz. Dosyayı paylaşmayın.
 
 ## AI kanıt ve mahremiyet sınırları
+
+### Ücretli API'ye yerel alternatif — 0.8.3
+
+Servis artık `UX_LLM_PROVIDER=ollama` ile 127.0.0.1:11434 yerel Ollama chat API'sini kullanabilir. Bu modda OpenAI anahtarı gerekmez. Ollama ve yerel model ayrıca kurulmalıdır; mevcut bilgisayarda kurulum veya gerçek model yanıtı henüz doğrulanmadı. Küçük model çıktılarının kalitesi ayrıca ölçülmelidir. Cloud modeller kullanmayın; Ollama'nın cloud erişimini kapatın. Model indirme internet gerektirir; model çıkarımı için yardımcı servis yalnızca loopback adresine istek yapar. Rapor `provider` ve `llmDestination` bilgisini saklar; genel `localOnly` bayrağı AI çalıştığında muhafazakâr olarak false kalır.
+
+Ollama kurulmuş ve `qwen3:1.7b` yerel modeli indirilmişse, anahtarı okumadan PowerShell'de:
+
+```powershell
+$env:UX_LLM_PROVIDER='ollama'
+$env:OLLAMA_MODEL='qwen3:1.7b'
+node server/server.cjs
+```
+
+Aynı panel onayı, seçici/olgu doğrulaması ve yetersiz kanıt için null skor kuralları geçerlidir. Sıcaklık 0 ve seed 42 tekrar koşulu olarak kaydedilir; kararlılık garantisi değildir. 180 saniye model zaman aşımı ve 190 saniye panel bekleme sınırı vardır. Statik Geri Bildirim ilkesi hâlâ puanlanmaz; bu alternatif tam altı ilke görevini tek başına tamamlamaz. Ollama adaptörünün üç testinde sahte yanıtlar kullanıldı; toplam 35 yerel test geçti, gerçek LLM saha başarısı iddia edilmez.
+
+Resmî kaynaklar: [Ollama chat API](https://docs.ollama.com/api/chat), [JSON şema desteği](https://docs.ollama.com/capabilities/structured-outputs).
+
+### Tekrarların hesaplanması
+
+En az üç ayrı gerçek analiz raporu alındıktan sonra:
+
+```powershell
+node server/compare-repeats.cjs rapor1.json rapor2.json rapor3.json
+```
+
+Araç aynı snapshot hash/model/provider/prompt/sıcaklık/seed koşulunu ve ayrı istek kimliklerini kontrol eder. Her ilke ve mevcut AI ön toplamı için skor aralığı (max−min), ortalama ve popülasyon standart sapmasını hesaplar; null skorları karşılaştırmaz. 10 puanı aşan aralık işaretlenir. İlgili gerçek bulgu farklarının nedenleri ve çözüm sonrası tekrar ölçümü ayrıca raporlanmalıdır. Mevcut yalnız yerel raporlarla çalıştırıldığında eksik LLM sonucu nedeniyle reddetti; gerçek tekrar sonucu henüz yoktur.
 
 İlk 150 uygun UI öğesinin yapısal seçicileri, ölçümleri, ad kaynağı varlığı, required/disabled/expanded durumu ve önceden belirlenmiş genel UI kelimeleri gönderilir. Keyfi metin, kişi adı, URL, form değeri, seçenek değeri, placeholder veya ekran görüntüsü gönderilmez. FormValue alanı yalnızca sabit [MASKED] işaretidir; gerçek değer okunup sonra maskelenmez. 'Ara', 'Randevu al' gibi ifadeler sadece sabit izin listesindeki tam eşleşmelerden seçilir. Önizlemede kişisel veri görürseniz gönderimi onaylamayın. Giriş yapılmış veya kişisel/sağlık verisi içeren sayfalar bu proje kapsamı dışında; parola kontrolünün eksik algılaması kullanıcı doğrulamasıyla tamamlanır.
 

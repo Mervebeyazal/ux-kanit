@@ -54,7 +54,7 @@ aiSend.addEventListener('click',async () => {
     waitTimer=setInterval(() => {status.textContent=`AI yanıtı bekleniyor: ${Math.floor((Date.now()-started)/1000)} saniye. Bu aşamada düğmeye tekrar basma.`;},5000);
     const response=await fetch('http://127.0.0.1:8787/analyze', {
       method:'POST', headers:{'Content-Type':'application/json','X-UX-Pairing':pairing},
-      body:JSON.stringify({consent:true,snapshot:task.snapshot}), signal:AbortSignal.timeout(70000)
+      body:JSON.stringify({consent:true,snapshot:task.snapshot}), signal:AbortSignal.timeout(190000)
     });
     const data=await response.json();
     clearInterval(waitTimer);waitTimer=null;
@@ -80,6 +80,7 @@ aiSend.addEventListener('click',async () => {
     task.report.scores.combined={score:llm.complete && llmScore!==null ? .6*task.report.scores.deterministic.score+.4*llmScore:null,
       status:llm.complete?'provisional':'insufficient_principle_coverage',weights:{deterministic:.6,llm:.4}};
     task.report.privacy.localOnly=false; task.report.privacy.llmSendConsent=true;
+    task.report.privacy.llmDestination=data.provider==='ollama'?'local-model-service':'openai-api';
     task.report.privacy.llmPayloadScope='fixed UI tokens and anonymous structure; form values masked';
     task.report.findings=task.report.findings.filter(item=>item.source!=='llm').concat(accepted);
     scores.querySelector('p').textContent=`Yerel skor aday oranına dayalıdır. AI statik ön skoru: ${llmScore===null?'Kanıt yetersiz':llmScore.toFixed(1)+' / 100'} (${scored.length}/6 ilke). Birleşik toplam: ${task.report.scores.combined.score===null?'İlke kapsamı eksik':task.report.scores.combined.score.toFixed(1)+' / 100'}.`;

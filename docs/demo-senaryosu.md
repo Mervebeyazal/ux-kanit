@@ -24,3 +24,7 @@ Bu senaryo mevcut sürümü dürüstçe gösterir. Nihai kayıt LLM bölümü ta
 ## Teslim
 
 Kaydı izleyerek yazıların okunabildiğini, sesin duyulduğunu ve gizli bilgi görünmediğini kontrol et. 3–5 dakika aralığında MP4 dosyası teslim et veya hocanın istediği platforma yükleyip erişilebilir bağlantısını README'ye ekle. Büyük videoyu zorunlu olmadıkça Git reposuna koyma. Video bağlantısı ve kayıt tarihi henüz mevcut değil.
+
+## 7 Ekim kayıt durumu
+
+Kullanıcı iki sessiz kayıt oluşturdu: eklenti gösterimi 95.1 saniye, açıklamalar 64.4 saniye. Windows dosya metaverisinden toplam 159.5 saniye (yaklaşık 2:40) doğrulandı. Kullanıcı yeni kayıt eklememeyi tercih etti; bu süre yönergedeki 3–5 dakika aralığının altındadır. Dosyalar henüz tek videoda birleştirilmedi. Birleştirme için araç indirmesi bağlantı kesilmesi ve yavaşlık nedeniyle tamamlanamadı; Clipchamp ile yerel birleştirme sonraki adımdır. Video içeriği ve ses anlaşılabilirliği metaveriden doğrulanamaz. API/LLM bölümü eksik olarak gösterilmelidir.
