@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "UX Kanıt",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Kullanıcının başlattığı, kanıta dayalı yerel UX kontrolleri.",
   "permissions": ["activeTab", "scripting", "sidePanel"],
   "action": {"default_title": "UX Kanıt panelini aç"},

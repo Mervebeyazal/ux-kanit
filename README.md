@@ -1,4 +1,4 @@
-# UX Kanıt — Adım 4 (0.4.0)
+# UX Kanıt — Adım 5 (0.5.0)
 
 Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
 
@@ -9,15 +9,19 @@ Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim
 3. Paketlenmemiş öğe yükle düğmesine basın.
 4. Bu README ile manifest.json dosyasının bulunduğu ux-kanit klasörünü seçin.
 5. Herkese açık bir web sayfası açın. Eklentiler menüsünden UX Kanıt simgesine basın.
-6. Sayfanın uygunluğunu doğrulayın ve dil kontrolünü başlatın.
+6. Sayfanın uygunluğunu doğrulayın ve Sayfayı kontrol et düğmesine basın.
 
 ## Bu adımın kapsamı
 
-Manifest V3, yan panel ve kullanıcı tarafından başlatılan tek bir deterministik kontrol: html lang niteliğinin eksik veya boş olması. Form değerleri, sayfa metni, çerezler ve klavye vuruşları okunmaz. Ağ isteği ve API anahtarı yoktur. Parola alanı görülen sayfa engellenir; diğer hassas sayfalar için kullanıcı doğrulaması gerekir. Parola alanı kontrolü hassas sayfaları eksiksiz tanımaz.
+Manifest V3, yan panel ve kullanıcı tarafından başlatılan beş yerel kontrol: sayfa dili, görsel alternatif metni, form etiketi, hedef boyutu ve düğme/bağlantı adı. Form değerleri, çerezler ve klavye vuruşları okunmaz. Etiket ve kontrol metinlerinin yalnızca varlığı yerelde incelenir; içerikleri rapora alınmaz veya gönderilmez. Ağ isteği ve API anahtarı yoktur. Parola alanı görülen sayfa engellenir; diğer hassas sayfalar için kullanıcı doğrulaması gerekir. Parola alanı kontrolü hassas sayfaları eksiksiz tanımaz.
 
 ## Henüz tamamlanmayanlar
 
 axe-core, diğer kontroller, Norman LLM katmanı, skorlar, JSON dışa aktarımı, üç site raporu, manuel ekran okuyucu testi, tekrar ölçümleri, demo ve yansıtma notu sonraki adımlardadır. Doğrulama sonuçları henüz yoktur.
+
+## Düğme ve bağlantı adı kontrolü
+
+Ölçülebilen, etkin bağlantılar/düğmeler ve role=button/link kontrollerinde ad kaynaklarının varlığı incelenir. Mevcut aria-labelledby referansları önceliklidir; ardından aria-label, gizlenmemiş içerik (görsel alt ve SVG title dahil) ve title incelenir. Gizli doğrudan ad referansları da değerlendirilir. Form kontrollerinin değerleri okunmaz; ad metinleri rapora yazılmaz. Adaylar WCAG 4.1.2 ile ilişkilendirilir ancak kesin ihlal ilan edilmez. Bu, tam Accessible Name Computation uygulaması değildir: CSS sözde öğeleri, karmaşık iç içe ARIA referansları, özel bileşenler, iframe ve Shadow DOM kapsam dışıdır. Her kontrol için 1500 düğüm/60 derinlik sınırı vardır; sınır aşımı bulgu yerine belirsiz sayılır. Adın kalitesi, görünür metinle uyumu ve ekran okuyucu çıktısı ayrıca denetlenmelidir. Kaynak: https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html
 
 ## Eksik alternatif metin kontrolü
 

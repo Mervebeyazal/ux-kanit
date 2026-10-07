@@ -14,11 +14,12 @@ button.addEventListener('click', async () => {
     // Chrome can omit tab.url when activeTab has not been granted. Missing
     // metadata is not evidence that the page uses an unsupported protocol.
     if (tab.url && !/^https?:\/\//.test(tab.url)) throw new Error('Chrome ayarları veya yeni sekme yerine normal bir web sayfası aç.');
+    await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['control-name.js'] });
     const [execution] = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: () => {
         if (!/^https?:$/.test(location.protocol)) return { unsupported: true };
-        // No form values, text content, cookies or keystrokes are collected.
+        // No form values, page text, cookies or keystrokes are returned.
         if (document.querySelector('input[type="password"]')) return { blocked: true };
         const language = document.documentElement.getAttribute('lang');
         function selectorFor(target) {
@@ -98,8 +99,22 @@ button.addEventListener('click', async () => {
             evidence: `Öğenin ölçülen sınır kutusu ${width} × ${height} CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.`,
             recommendation: 'Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.' });
         }
+        const controls = targets.filter(target => target.matches('a[href], button, [role="button"], [role="link"]') && !target.matches('input, select, textarea, [contenteditable]:not([contenteditable="false"])'));
+        let unknownNameCount = 0;
+        for (const control of controls) {
+          const name = globalThis.UXControlName(control, document, getComputedStyle);
+          if (name.present === null) { unknownNameCount++; continue; }
+          if (name.present) continue;
+          findings.push({ selector: selectorFor(control), category: 'name', tag: control.tagName,
+            title: 'Düğme veya bağlantıda erişilebilir ad eksikliği adayı', severity: 'Yüksek',
+            rule: 'WCAG 4.1.2 — manuel doğrulama gerekli',
+            evidence: name.source === 'empty-reference'
+              ? 'aria-labelledby mevcut bir öğeye işaret ediyor ancak referanslarda metin veya görsel alternatif adı bulunamadı. Sayfa metinleri rapora alınmadı.'
+              : 'Kontrolde dolu ARIA adı, metinli referans, gizlenmemiş metin/görsel alternatif metni veya title ad kaynağı bulunamadı. Sayfa metinleri rapora alınmadı.',
+            recommendation: 'Düğmenin veya bağlantının amacını açıklayan görünür metin ekle. Yalnızca simge varsa uygun aria-label kullan; varsa bozuk veya boş aria-labelledby referansını düzelt.' });
+        }
         return { blocked: false, language, selector: 'html', rule: 'WCAG 3.1.1', missing: !language?.trim(),
-          targetCount: targets.length, fieldCount: fields.length, imageCount: images.length, visibleImageCount: visibleImages.length, findings };
+          controlCount: controls.length, unknownNameCount, targetCount: targets.length, fieldCount: fields.length, imageCount: images.length, visibleImageCount: visibleImages.length, findings };
       }
     });
     const finding = execution.result;
@@ -118,6 +133,9 @@ button.addEventListener('click', async () => {
     const targetSummary = document.createElement('p');
     targetSummary.textContent = `Dokunma hedefleri: ${finding.targetCount} ölçüldü. Küçük hedef adayı: ${finding.findings.filter(item => item.category === 'target').length}. Aralık ve diğer WCAG istisnaları otomatik değerlendirilmez; adaylar kesin ihlal sayılmaz.`;
     result.append(targetSummary);
+    const nameSummary = document.createElement('p');
+    nameSummary.textContent = `Düğme/bağlantı adları: ${finding.controlCount} kontrol incelendi. Adsız kontrol adayı: ${finding.findings.filter(item => item.category === 'name').length}. İnceleme sınırı nedeniyle belirsiz: ${finding.unknownNameCount}. Tam erişilebilir ad hesabı ve adın anlamlılığı manuel doğrulanmalıdır.`;
+    result.append(nameSummary);
     for (const item of finding.findings) {
       const card = document.createElement('article');
       const detail = document.createElement('p');
