@@ -1,8 +1,24 @@
 const button = document.querySelector('#analyze');
 const status = document.querySelector('#status');
 const result = document.querySelector('#result');
+const scores = document.querySelector('#scores');
+const exportButton = document.querySelector('#export');
+let lastReport = null;
+exportButton.addEventListener('click', () => {
+  if (!lastReport) return;
+  const blob = new Blob([JSON.stringify(lastReport, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `ux-kanit-${new URL(lastReport.page.origin).hostname}-${lastReport.analyzedAt.replace(/[:.]/g, '-')}.json`;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+});
 button.addEventListener('click', async () => {
   result.textContent = '';
+  scores.textContent = '';
+  lastReport = null;
+  exportButton.disabled = true;
   if (!document.querySelector('#consent').checked) {
     status.textContent = 'Devam etmek için sayfanın uygun olduğunu doğrula.';
     return;
@@ -38,6 +54,10 @@ button.addEventListener('click', async () => {
           return img.getClientRects().length && style.visibility !== 'hidden' && style.visibility !== 'collapse' && style.opacity !== '0';
         });
         const findings = [];
+        if (!language?.trim()) findings.push({ selector: 'html', category: 'language', tag: 'HTML',
+          title: 'Sayfa dili tanımlanmamış', severity: 'Orta', rule: 'WCAG 3.1.1',
+          evidence: 'html öğesinin lang niteliği yok veya boş.',
+          recommendation: 'Sayfanın gerçek diline uygun lang niteliği ekle; Türkçe için lang="tr".' });
         for (const img of visibleImages) {
           if (img.hasAttribute('alt')) continue;
           // Alternative accessible names and explicit decorative semantics
@@ -136,6 +156,7 @@ button.addEventListener('click', async () => {
             recommendation: `Metin veya arka plan rengini en az ${measurement.minimum}:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.` });
         }
         return { blocked: false, language, selector: 'html', rule: 'WCAG 3.1.1', missing: !language?.trim(),
+          page: { origin: location.origin, viewport: { width: innerWidth, height: innerHeight }, devicePixelRatio },
           contrastMeasured, contrastUnknown, contrastCandidates,
           controlCount: controls.length, unknownNameCount, targetCount: targets.length, fieldCount: fields.length, imageCount: images.length, visibleImageCount: visibleImages.length, findings };
       }
@@ -146,6 +167,44 @@ button.addEventListener('click', async () => {
       status.textContent = 'Parola alanı bulunan sayfalarda bu sürüm analiz yapmaz.';
       return;
     }
+    const deterministic = globalThis.UXScoring.compute(finding);
+    lastReport = {
+      schemaVersion: '1.0', extensionVersion: chrome.runtime.getManifest().version,
+      analyzedAt: new Date().toISOString(), page: finding.page,
+      privacy: { localOnly: true, publicPageConfirmed: true, formValuesCollected: false, pageTextExported: false,
+        urlScope: 'origin-only; path/query/fragment omitted' },
+      scores: { deterministic, llm: { score: null, status: 'not_evaluated', principles: [] },
+        combined: { score: null, status: 'awaiting_llm', weights: { deterministic: .6, llm: .4 } } },
+      counts: { imageTotal: finding.imageCount, imageVisible: finding.visibleImageCount, fieldCount: finding.fieldCount,
+        targetCount: finding.targetCount, controlCount: finding.controlCount, unknownNameCount: finding.unknownNameCount,
+        contrastMeasured: finding.contrastMeasured, contrastUnknown: finding.contrastUnknown },
+      findings: finding.findings.map((item, index) => ({ id: `D-${index + 1}`, source: 'deterministic',
+        validationStatus: 'pending_manual_review', ...item, evidenceMethods: ['dom-inspection', 'on-demand-highlight'] })),
+      limitations: ['Ön skor aday oranıdır; WCAG uygunluk veya nihai UX puanı değildir.',
+        'Iframe ve Shadow DOM kapsam dışı.', 'Hassas sayfa algılama eksiksiz değildir; kullanıcı doğrulaması gerekir.',
+        'Ölçülemeyen öğeler başarılı kabul edilmez; kategori skorundan çıkarılır.',
+        'Tam sayfa adresi mahremiyet için kaydedilmez; test edilen herkese açık adres doğrulama notunda ayrıca belirtilmelidir.']
+    };
+    const headline = document.createElement('h2');
+    headline.textContent = `Deterministik ön skor: ${deterministic.score.toFixed(1)} / 100`;
+    const explanation = document.createElement('p');
+    explanation.textContent = 'Aday bulguların oranına dayalı ön değerlendirme. Yüksek skor tüm sayfanın erişilebilir olduğunu göstermez. AI skoru: henüz değerlendirilmedi. Birleşik toplam: henüz hesaplanmadı.';
+    scores.append(headline, explanation);
+    const table = document.createElement('table');
+    const head = document.createElement('tr');
+    for (const label of ['Kategori', 'Ön skor', 'Aday / ölçülen', 'Ölçülemeyen']) {
+      const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; head.append(th);
+    }
+    table.append(head);
+    for (const item of deterministic.subscores) {
+      const row = document.createElement('tr');
+      for (const value of [item.label, item.score === null ? 'Değerlendirilmedi' : item.score.toFixed(1), `${item.candidates} / ${item.measured}`, item.unknown]) {
+        const cell = document.createElement('td'); cell.textContent = value; row.append(cell);
+      }
+      table.append(row);
+    }
+    scores.append(table);
+    exportButton.disabled = false;
     status.textContent = 'Yerel kontrol tamamlandı.';
     result.textContent = finding.missing
       ? 'Bulgu: Sayfa dili tanımlanmamış.\nÖğe: html\nKural: WCAG 3.1.1\nŞiddet: Orta\nKanıt: html öğesinin lang niteliği yok veya boş.\nÖneri: Sayfanın gerçek diline uygun lang niteliği ekle; Türkçe için lang="tr". '

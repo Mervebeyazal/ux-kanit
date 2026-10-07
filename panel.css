@@ -6,3 +6,6 @@ button:focus-visible { outline: 3px solid #17253a; outline-offset: 3px; }
 button:disabled { opacity: .6; }
 section { white-space: pre-wrap; overflow-wrap: anywhere; }
 article { margin: 16px 0; padding: 14px; background: white; border: 1px solid #cbd5e1; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; white-space: normal; }
+th, td { padding: 8px 4px; border-bottom: 1px solid #cbd5e1; text-align: left; overflow-wrap: anywhere; }
+#export { margin-top: 12px; }

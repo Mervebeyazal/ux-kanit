@@ -3,11 +3,14 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UX Kanıt</title><link rel="stylesheet" href="panel.css"></head>
 <body>
 <h1>UX Kanıt</h1>
-<p>Sürüm 0.6.1 · Altı yerel kontrol</p>
+<p>Sürüm 0.7.0 · Skor ve JSON raporu</p>
 <p>Yalnızca herkese açık, kişisel veri içermeyen sayfalarda kullan. Bu sürüm hiçbir veriyi dışarı göndermez ve form değerlerini okumaz.</p>
 <label><input type="checkbox" id="consent"> Sayfanın herkese açık olduğunu, giriş yapılmış bir oturuma veya kişisel/sağlık verilerine ait olmadığını doğruluyorum.</label>
 <button id="analyze">Sayfayı kontrol et</button>
+<button id="export" disabled>JSON raporunu indir</button>
 <p id="status" role="status" aria-live="polite">Analiz henüz başlamadı.</p>
+<section id="scores" aria-label="Ön değerlendirme skorları"></section>
 <section id="result"></section>
+<script src="scoring.js"></script>
 <script src="panel.js"></script>
 </body></html>

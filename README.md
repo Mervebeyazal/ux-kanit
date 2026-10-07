@@ -1,4 +1,4 @@
-# UX Kanıt — Adım 6 (0.6.1)
+# UX Kanıt — Skor ve JSON (0.7.0)
 
 Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
 
@@ -25,7 +25,28 @@ Görsel/gradyan arka plan, saydam renk, opaklık efekti, filtre, blend, transfor
 
 ## Henüz tamamlanmayanlar
 
-axe-core, diğer kontroller, Norman LLM katmanı, skorlar, JSON dışa aktarımı, üç site raporu, manuel ekran okuyucu testi, tekrar ölçümleri, demo ve yansıtma notu sonraki adımlardadır. Doğrulama sonuçları henüz yoktur.
+axe-core, Norman LLM katmanı, birleşik skorun tamamlanması, üç nihai site raporu, manuel ekran okuyucu testi, LLM tekrar ölçümleri, demo ve yansıtma notu sonraki adımlardadır. Ön testler docs/on-testler.md içinde; nihai doğrulama tamamlanmadı.
+
+## Skor formülü ve gerekçe
+
+Bu sürümün skoru doğrulanmış WCAG uygunluk puanı değil, aday bulgulara dayalı ön tarama göstergesidir. Her kategori için n ölçülen öğe sayısı, f aynı kategoride benzersiz seçiciye sahip aday sayısıdır: S=100×(1−f/n). n=0 ise S=null; ölçülemeyen öğeler başarı kabul edilmez. Sayfa dili kategorisinde n=1. Görsel için görünür görseller, form için incelenen görünür alanlar, hedef için ölçülen hedefler, ad için sınır nedeniyle belirsiz olmayan kontroller, kontrast için yalnızca güvenilir ölçülen metin öğeleri kullanılır. Ad ve kontrast için kapsam oranı n/(n+bilinmeyen) ayrıca JSON'da tutulur; bu diğer kapsam dışı DOM öğelerini kapsamaz.
+
+| Kategori | Ağırlık |
+|---|---:|
+| Dil | 5 |
+| Görseller | 15 |
+| Form | 20 |
+| Hedef boyutu | 15 |
+| Kontrol adı | 20 |
+| Kontrast | 25 |
+
+Deterministik ön toplam D=Σ(w×S)/Σ(w), yalnızca skoru null olmayan kategoriler üzerinde hesaplanır. Payda availableWeight alanındadır. Form ve kontrol adları temel işlemleri, kontrast geniş metin okunabilirliğini etkilediği için daha yüksek ağırlık alır; bu ağırlıklar proje tasarım kararıdır, WCAG'nin resmi puan sistemi değildir. Öğe oranı kullanımı büyük sayfalarda salt bulgu sayısının puanı gereksizce düşürmesini önler. Şiddet bu sürümde inceleme önceliğini gösterir, formülde ayrıca çarpılmaz; kategoride aynı öğe iki kez cezalandırılmaz. Çok sayıda sorunsuz öğe önemli bir tek sorunun etkisini seyreltebilir; bu sınırlama nedeniyle kritik görevler ayrıca manuel denetlenir.
+
+LLM toplamı L uygulandıktan sonra planlanan birleşik toplam T=0.60D+0.40L'dir. D veya L yoksa T=null; eksik LLM skoru 0 veya 100 ile doldurulmaz. LLM katmanı henüz uygulanmadığından panel ve JSON bunu açıkça belirtir. Norman ilkelerinin ağırlıkları ve L formülü ilgili katman geliştirilirken belgelenecek. Skor modeli candidate-rate-v1 olarak sürümlenir; elle doğrulanmış ihlal skoru ile karıştırılmamalıdır.
+
+## JSON dışa aktarımı
+
+Başarılı analizden sonra JSON raporunu indir düğmesi sonuçları yerel dosyaya kaydeder. Raporda zaman, eklenti/model sürümü, kategori skorları, kapsam/sayılar, seçiciler, kanıtlar, öneriler ve manuel doğrulama durumu bulunur. Form değerleri ve sayfa metinleri yoktur. Adresin yalnızca origin kısmı kaydedilir; hassas yol/sorgu/fragment dışarı aktarılmaz. Test edilen herkese açık tam adres doğrulama notunda ayrıca kaydedilmeli. Yeni veya başarısız analiz eski raporu indirilebilir bırakmaz. JSON bir anlık görüntüdür; sayfa değişirse yeniden analiz gerekir. on-demand-highlight alanı vurgulamanın kullanılabilir olduğunu belirtir, her öğenin manuel doğrulandığını iddia etmez.
 
 ## Düğme ve bağlantı adı kontrolü
 
