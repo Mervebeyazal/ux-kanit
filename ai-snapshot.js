@@ -16,7 +16,7 @@ globalThis.UXSnapshot = () => {
     return rect.width > 0 && rect.height > 0 && style.visibility === 'visible' && style.opacity !== '0' &&
       !element.closest('[aria-hidden="true"], [inert], [contenteditable]:not([contenteditable="false"])');
   });
-  const elements = eligible.slice(0, 150).map(element => {
+  const elements = eligible.slice(0, 20).map(element => {
     const field = element.matches('input, textarea, select');
     const rect = element.getBoundingClientRect();
     const style = getComputedStyle(element);
@@ -42,5 +42,6 @@ globalThis.UXSnapshot = () => {
   });
   return { snapshotVersion: 'static-ui-v1', observationMode: 'static-no-interactions',
     viewport: { width: innerWidth, height: innerHeight }, eligibleCount: eligible.length, sampledCount: elements.length,
-    elements, limitations: ['İlk 150 görünür UI öğesi; sayfanın tamamı değil.', 'Form değerleri maskeli; ham sayfa metni ve URL gönderilmez.', 'Etkileşim sonrası geri bildirim ve görev başarısı gözlenmedi.'] };
+    elements, limitations: ['İlk 20 görünür UI öğesi; sayfanın tamamı değil.', 'Form değerleri maskeli; ham sayfa metni ve URL gönderilmez.', 'Etkileşim sonrası geri bildirim ve görev başarısı gözlenmedi.'] };
 };
+

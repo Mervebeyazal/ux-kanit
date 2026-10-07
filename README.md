@@ -171,3 +171,7 @@ Bu bir sınır kutusu ölçümüdür; gerçek tıklanabilir şekli, üstü ört�
 Groq seçeneği için yerel .env içinde UX_LLM_PROVIDER=groq ve GROQ_API_KEY değerini ayarlayın. Varsayılan model openai/gpt-oss-20b; Groq üzerinden çalışır, OpenAI API hesabı kullanmaz. Modeli ayrıca indirmek gerekmez. Aynı ayrı gönderim onayı ve seçici/olgu doğrulaması uygulanır. temperature=0, seed=42 ve systemFingerprint raporda saklanır. Ücretsiz hesap kotası garanti edilmez; 429 hatasında otomatik tekrar yoktur. Mevcut 38 yerel test geçti; Groq adaptörü sahte yanıtlarla sınandı, gerçek analiz henüz doğrulanmadı. Yan panel sürümü 0.8.4'tür.
 
 Kaynaklar: [Groq JSON şema desteği](https://console.groq.com/docs/structured-outputs), [veri koşulları](https://console.groq.com/docs/your-data), [planlar](https://console.groq.com/docs/billing-faqs). Anahtarı paylaşmayın; .env repo dışında kalır. Bu sağlayıcı değişikliği statik Geri Bildirim kanıt eksikliğini çözmez.
+
+### 0.8.5 — gerçek Groq 413 denemesi
+
+Kullanıcı ilk Groq isteğinde HTTP 413 bildirdi; başarılı LLM yanıtı alınmadı. AI örneklemi tüm sağlayıcılarda ilk 150 yerine ilk 20 uygun UI öğesine düşürüldü (yerel altı kontrol kapsamı değişmedi). Groq çıktı bütçesi 7000 yerine 3500 token, bulgu sınırı promptta 3 oldu. Önizleme ve kayıt aynı küçültülmüş örneklemi içerir; seçici/olgu doğrulaması korunur. Bu değişiklik kapsamı azaltır; bütün sayfa için sonuç vermez. Yeniden saha testi bekleniyor. Önceki 150 öğe açıklamaları tarihsel sürüme aittir. Groq promptVersion norman-static-small-v2 olarak kaydedilir.
