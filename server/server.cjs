@@ -39,7 +39,7 @@ const server = http.createServer(async (req,res) => {
       stage='groq_evidence';
       const checked = validateResult(result.raw,snapshot);
       return reply(res,200,{ ...checked,provider,model:result.model,seed:result.seed,systemFingerprint:result.systemFingerprint,
-        temperature:0,promptVersion:'norman-static-small-v2',snapshotHash:hash(snapshot),requestId:result.requestId,
+        temperature:0,promptVersion:'norman-static-small-v3',snapshotHash:hash(snapshot),requestId:result.requestId,
         usage:result.usage,analyzedAt:new Date().toISOString() });
     }
     if (provider === 'ollama') {

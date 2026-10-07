@@ -179,3 +179,7 @@ Kullanıcı ilk Groq isteğinde HTTP 413 bildirdi; başarılı LLM yanıtı alı
 ### 0.8.6 — güvenli hata ayrımı
 
 İkinci Groq denemesinde genel doğrulama hatası bildirildi; kesin neden henüz bilinmiyor. Yeni hata kodları gözlem paketini, bağlantıyı, kesilmiş çıktıyı, geçersiz JSON'u ve ilke/kanıt sözleşmesini ayırır. Anahtar, istek gövdesi ve ham model metni hata çıktısına yazılmaz. Adaptörün üç testi geçti; yerel erişim testinin yeniden çalışması açık yardımcı servisin kullandığı 8787 portu nedeniyle başlatılamadı. Önceki başarılı test sonucu yeni saha denemesi yerine geçmez.
+
+### 0.8.7 — altı ilke yanıt yapısı
+
+Kullanıcı Groq yanıtının ilke/bulgu listesi biçimi kontrolünde reddedildiğini bildirdi. Groq şemasında principles listesi yerine altı adı ayrı zorunlu nesne anahtarı yapan yapı kullanıldı; adaptör bunu ortak doğrulayıcının listesine dönüştürür. Yetersiz kanıt null kalır, eksik skor doldurulmaz. Prompt sürümü norman-static-small-v3. Dört Groq testi ve on kanıt sözleşmesi testi geçti; yeni gerçek saha yanıtı bekleniyor.
