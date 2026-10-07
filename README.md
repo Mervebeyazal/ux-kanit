@@ -1,4 +1,4 @@
-# UX Kanıt — Adım 6 (0.6.0)
+# UX Kanıt — Adım 6 (0.6.1)
 
 Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
 
@@ -20,6 +20,8 @@ Manifest V3, yan panel ve kullanıcı tarafından başlatılan altı yerel kontr
 Doğrudan metin düğümü olan görünür öğelerin CSS renkleri yerelde incelenir; metin içerikleri rapora eklenmez. Form kontrolleri, düzenlenebilir içerik ve devre dışı kontroller kapsam dışıdır. Düz opak RGB arka plan bir üst öğeden çözülebiliyorsa oran=(L_açık+0.05)/(L_koyu+0.05) hesaplanır. sRGB kanalları c<=0.04045 için c/12.92, aksi halde ((c+0.055)/1.055)^2.4 ile lineerleştirilir; L=0.2126R+0.7152G+0.0722B. Eşik normal metin için 4.5, en az 24 CSS px veya en az 18.6667 CSS px ve 700 ağırlıktaki metin için 3'tür. Karşılaştırmada oran yuvarlanmaz.
 
 Görsel/gradyan arka plan, saydam renk, opaklık efekti, filtre, blend, transform, metin gölgesi, üretilmiş sözde öğe veya bilinmeyen canvas rengi ölçülemeyen sayılır. Bu muhafazakâr uygulama ölçüm kapsamını azaltır. Üst üste binen kardeşler, videolar, özel boyama, logo istisnaları, hover/focus durumu, placeholder ve görsel içindeki metin ayrıca incelenmelidir. Ölçümler adaydır; tam WCAG uygunluk denetimi değildir. Kaynak: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+
+0.6.1 düzeltmesi: Metin öğesinin sınır kutusu görünür img/video/canvas/svg sınır kutusuyla örtüşürse oran hesaplanmaz. Böylece kardeş öğe olarak konumlandırılmış fotoğrafı CSS arka plan rengi sanan yanlış ölçüm engellenir. Katman sırası çözülmediği için ilgisiz örtüşmeler de ölçümü dışarıda bırakabilir; bu, bilinçli olarak muhafazakâr bir yaklaşımdır.
 
 ## Henüz tamamlanmayanlar
 

@@ -21,7 +21,13 @@ globalThis.UXContrast = (() => {
   function minimum(size, weight) {
     return size >= 24 || (size >= 14 * 96 / 72 && weight >= 700) ? 3 : 4.5;
   }
-  function measure(element, styleOf) {
+  function measure(element, styleOf, mediaBounds = []) {
+    // An img/video/canvas/SVG can be painted behind text as a sibling,
+    // even when all ancestor CSS background-image values are "none".
+    if (mediaBounds.length) {
+      const bounds = element.getBoundingClientRect();
+      if (mediaBounds.some(media => bounds.left < media.right && bounds.right > media.left && bounds.top < media.bottom && bounds.bottom > media.top)) return null;
+    }
     const style = styleOf(element);
     const foreground = rgb(style.color);
     if (!foreground || foreground.alpha !== 1) return null;

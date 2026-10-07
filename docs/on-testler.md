@@ -25,3 +25,9 @@ Panel kanıtı: Görünür form alanında metinli ilişkili label, dolu aria-lab
 ## Tamamlanmamış doğrulamalar
 
 LLM değerlendirmesi, skorlar, üç tekrarlı tutarlılık testi, klavye ve ekran okuyucu görevi, halüsinasyon oranı, büyükanne ve gece 3 senaryoları henüz gerçekleştirilmedi. Nihai raporlar tüm analiz katmanları tamamlanınca yeniden alınmalı. Sıfır bulgu tam erişilebilirlik anlamına gelmez.
+
+## Kontrast ön testi ve bulunan yanlış ölçüm
+
+Kullanıcının 0.6.0 Acıbadem çıktısı: 151 öğe ölçüldü, 10 düşük kontrast adayı, 211 ölçülemeyen öğe. 'Doktorunuz ile Görüntülü Görüşün' başlığı için beyaz metin/açık mavi arka plan ve 1.211:1 oran raporlandı. Kullanıcının ekran görüntüsü metnin fotoğraf üzerinde olduğunu gösterdi. Dolayısıyla bu CSS arka plan ölçümü geçersiz; bu aday doğrulanmış ihlal sayılmadı. Fotoğraftaki gerçek kontrastın yeterli olduğu da bu görüntüden sayısal olarak doğrulanmadı.
+
+0.6.1'de img/video/canvas/svg ile sınır kutusu örtüşen metinleri ölçülemeyen olarak ayıran kontrol ve regresyon testi eklendi. Gerçek sitedeki düzeltme henüz yeniden test edilmedi; 0.6.0 sayıları nihai raporda kullanılmamalı.

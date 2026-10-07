@@ -18,3 +18,9 @@ test('image, transparency and unknown canvas are not assigned fabricated ratios'
   assert.equal(measure({ opacity: '.5' }), null);
   assert.equal(measure({ backgroundColor: 'rgba(0, 0, 0, 0)' }), null);
 });
+test('text overlapping a sibling image is unmeasurable, not low contrast', () => {
+  const heading = { parentElement: null, getBoundingClientRect: () => ({ left: 20, right: 300, top: 50, bottom: 90 }) };
+  const styleOf = (node, pseudo) => pseudo ? { content: 'none' } : base;
+  assert.equal(contrast.measure(heading, styleOf, [{ left: 0, right: 500, top: 0, bottom: 200 }]), null);
+  assert.ok(contrast.measure(heading, styleOf, [{ left: 0, right: 500, top: 200, bottom: 300 }]));
+});

@@ -114,6 +114,10 @@ button.addEventListener('click', async () => {
             recommendation: 'Düğmenin veya bağlantının amacını açıklayan görünür metin ekle. Yalnızca simge varsa uygun aria-label kullan; varsa bozuk veya boş aria-labelledby referansını düzelt.' });
         }
         let contrastMeasured = 0, contrastUnknown = 0, contrastCandidates = 0;
+        const mediaBounds = [...document.querySelectorAll('img, video, canvas, svg')].filter(media => {
+          const style = getComputedStyle(media);
+          return media.getClientRects().length && style.visibility !== 'hidden' && style.visibility !== 'collapse' && style.opacity !== '0';
+        }).map(media => media.getBoundingClientRect());
         const textElements = [...document.querySelectorAll('body *')].filter(element => {
           if (element.closest('input, textarea, select, script, style, template, [contenteditable]:not([contenteditable="false"]), [aria-hidden="true"], [inert], :disabled, [aria-disabled="true"]')) return false;
           if (![...element.childNodes].some(node => node.nodeType === 3 && node.nodeValue.trim())) return false;
@@ -121,7 +125,7 @@ button.addEventListener('click', async () => {
           return element.getClientRects().length && style.visibility !== 'hidden' && style.visibility !== 'collapse';
         });
         for (const element of textElements) {
-          const measurement = globalThis.UXContrast.measure(element, getComputedStyle);
+          const measurement = globalThis.UXContrast.measure(element, getComputedStyle, mediaBounds);
           if (!measurement) { contrastUnknown++; continue; }
           contrastMeasured++;
           if (measurement.ratio >= measurement.minimum) continue;
