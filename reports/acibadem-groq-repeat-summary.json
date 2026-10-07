@@ -1,0 +1,68 @@
+{
+  "runs": 3,
+  "model": "openai/gpt-oss-20b",
+  "snapshotHash": "be28342d4a186e3cb8277965dd64e2959aa0c30bc6f30e24e9073239e17ea455",
+  "definition": "Sapma = en yüksek skor − en düşük skor; null skorlar karşılaştırılmaz.",
+  "overall": {
+    "values": [
+      70,
+      63.333333333333336,
+      63.333333333333336
+    ],
+    "mean": 65.55555555555556,
+    "rangePoints": 6.666666666666664,
+    "populationStdDev": 3.1426968052735433,
+    "exceeds10Points": false
+  },
+  "principles": [
+    {
+      "principle": "Görünürlük",
+      "values": [
+        70,
+        70,
+        70
+      ],
+      "mean": 70,
+      "rangePoints": 0,
+      "populationStdDev": 0,
+      "exceeds10Points": false
+    },
+    {
+      "principle": "Geri Bildirim",
+      "status": "insufficient_evidence"
+    },
+    {
+      "principle": "Kısıtlar",
+      "values": [
+        70,
+        60,
+        60
+      ],
+      "mean": 63.333333333333336,
+      "rangePoints": 10,
+      "populationStdDev": 4.714045207910317,
+      "exceeds10Points": false
+    },
+    {
+      "principle": "Eşleme",
+      "values": [
+        70,
+        60,
+        60
+      ],
+      "mean": 63.333333333333336,
+      "rangePoints": 10,
+      "populationStdDev": 4.714045207910317,
+      "exceeds10Points": false
+    },
+    {
+      "principle": "Tutarlılık",
+      "status": "insufficient_evidence"
+    },
+    {
+      "principle": "Sağlarlık",
+      "status": "insufficient_evidence"
+    }
+  ],
+  "note": "10 puanı aşan sapma için gerçek bulgu farkları incelenmeli ve çözüm sonrası yeniden ölçülmeli. Bu çıktı yorum doğruluğunu kanıtlamaz."
+}

@@ -183,3 +183,9 @@ Kullanıcı ilk Groq isteğinde HTTP 413 bildirdi; başarılı LLM yanıtı alı
 ### 0.8.7 — altı ilke yanıt yapısı
 
 Kullanıcı Groq yanıtının ilke/bulgu listesi biçimi kontrolünde reddedildiğini bildirdi. Groq şemasında principles listesi yerine altı adı ayrı zorunlu nesne anahtarı yapan yapı kullanıldı; adaptör bunu ortak doğrulayıcının listesine dönüştürür. Yetersiz kanıt null kalır, eksik skor doldurulmaz. Prompt sürümü norman-static-small-v3. Dört Groq testi ve on kanıt sözleşmesi testi geçti; yeni gerçek saha yanıtı bekleniyor.
+
+## Gerçek Groq doğrulama güncellemesi — 8 Ekim 2026
+
+Üç başarılı gerçek Groq yanıtı aynı snapshot/model/prompt/sıcaklık/seed ile alındı. Başlangıç statik skorları 70, 63.33, 63.33; aralık 6.67 puan, standart sapma 3.14. Görünürlük aralığı 0, Kısıtlar ve Eşleme aralığı 10 puan; diğer ilkeler yetersiz kanıt nedeniyle karşılaştırılmadı. Sağlayıcı altyapı parmak izleri farklı. Önceki 'başarılı yanıt yok / sapma ölçülmedi' açıklamaları bu güncellemeden önceki durumu anlatır.
+
+Seçici eşleşmesi 9 öneride 0 örneklem dışı seçici gösterdi; ancak dokuz yorum da verilen olguyla gerekçelendirilemedi. Özellikle hasName=true ile 'isim yok' iddiası çelişiyor. Bu nedenle bu skorlar nihai doğrulanmış UX puanı değildir. Düzeltme ve yeniden ölçüm bekliyor; altı ilke ve birleşik skor hâlâ tamamlanmadı. Ayrıntılar ve ham raporlar: [LLM doğrulama kaydı](docs/llm-dogrulama.md).
