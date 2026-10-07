@@ -32,7 +32,14 @@ const server = http.createServer(async (req,res) => {
         input:JSON.stringify(snapshot), text:{ format:{ type:'json_schema', name:'norman_audit', strict:true, schema } } })
     });
     if (!response.ok) {
-      const message = response.status === 429 ? 'API kotası/bakiyesi veya hız sınırı nedeniyle analiz yapılamadı.' : response.status === 401 ? 'API anahtarı kabul edilmedi.' : `OpenAI isteği başarısız (${response.status}).`;
+      // Read only the machine error code; never echo upstream error messages.
+      const upstreamError = await response.json().catch(() => ({}));
+      const code = upstreamError.error?.code;
+      const quota = code === 'insufficient_quota' || code === 'billing_hard_limit_reached';
+      const message = response.status === 429
+        ? (quota ? 'API bakiyesi/kotası yetersiz. OpenAI API Platformunda Billing ve Limits bölümlerini kontrol et. ChatGPT aboneliği API bakiyesi değildir.'
+          : 'OpenAI hız sınırı yanıtı verdi (429). Bir süre bekle ve API Limits bölümünü kontrol et. Hata kodu kota nedenini kesinleştirmedi.')
+        : response.status === 401 ? 'API anahtarı kabul edilmedi.' : `OpenAI isteği başarısız (${response.status}).`;
       return reply(res,502,{error:message});
     }
     const result = await response.json();
