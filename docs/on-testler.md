@@ -31,3 +31,9 @@ LLM değerlendirmesi, skorlar, üç tekrarlı tutarlılık testi, klavye ve ekra
 Kullanıcının 0.6.0 Acıbadem çıktısı: 151 öğe ölçüldü, 10 düşük kontrast adayı, 211 ölçülemeyen öğe. 'Doktorunuz ile Görüntülü Görüşün' başlığı için beyaz metin/açık mavi arka plan ve 1.211:1 oran raporlandı. Kullanıcının ekran görüntüsü metnin fotoğraf üzerinde olduğunu gösterdi. Dolayısıyla bu CSS arka plan ölçümü geçersiz; bu aday doğrulanmış ihlal sayılmadı. Fotoğraftaki gerçek kontrastın yeterli olduğu da bu görüntüden sayısal olarak doğrulanmadı.
 
 0.6.1'de img/video/canvas/svg ile sınır kutusu örtüşen metinleri ölçülemeyen olarak ayıran kontrol ve regresyon testi eklendi. Gerçek sitedeki düzeltme henüz yeniden test edilmedi; 0.6.0 sayıları nihai raporda kullanılmamalı.
+
+### Kullanıcının 0.6.1 tekrar çıktısı
+
+122 metin öğesi ölçüldü; 4 düşük kontrast adayı, 240 güvenilir ölçülemeyen öğe raporlandı. Paylaşılan metinde dört kontrast kartı var; hepsi p öğelerinde RGB(132,144,156) / RGB(255,255,255), 3.256:1 oran, 4.5:1 eşik, 12 CSS px ve 400 ağırlık bildiriyor. Önceki div:nth-of-type(16) içindeki h1 adayı listede yok; fotoğraf üstündeki başlık için yanlış CSS renk oranının rapordan çıkarıldığı, kullanıcı çıktısı düzeyinde doğrulandı. Kalan dört adayın gerçek boyama ve istisna doğrulaması yapılmadı.
+
+0.6.0'dan 0.6.1'e aday sayısının 10'dan 4'e inmesi diğer altı öğenin erişilebilir olduğunu kanıtlamaz; ölçülemeyen kapsama alınmış olabilirler. Bunlar farklı sürüm ölçümleridir, LLM tutarlılık testi veya aynı sürüm tekrarlanabilirlik testi değildir. Dokunma hedefi sayısının 274'ten 277'ye, ad kontrolü sayısının 273'ten 276'ya değişmesi sayfa durumunun da değişmiş olabileceğini gösterir.
