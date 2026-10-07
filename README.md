@@ -1,4 +1,4 @@
-# UX Kanıt — Skor ve JSON (0.7.0)
+# UX Kanıt — Kanıta bağlı AI ön değerlendirmesi (0.8.0)
 
 Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
 
@@ -13,7 +13,15 @@ Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim
 
 ## Bu adımın kapsamı
 
-Manifest V3, yan panel ve kullanıcı tarafından başlatılan altı yerel kontrol: sayfa dili, görsel alternatif metni, form etiketi, hedef boyutu, düğme/bağlantı adı ve metin kontrastı. Form değerleri, çerezler ve klavye vuruşları okunmaz. Etiket ve kontrol metinlerinin yalnızca varlığı yerelde incelenir; içerikleri rapora alınmaz veya gönderilmez. Ağ isteği ve API anahtarı yoktur. Parola alanı görülen sayfa engellenir; diğer hassas sayfalar için kullanıcı doğrulaması gerekir. Parola alanı kontrolü hassas sayfaları eksiksiz tanımaz.
+Manifest V3, yan panel ve kullanıcı tarafından başlatılan altı yerel kontrol: sayfa dili, görsel alternatif metni, form etiketi, hedef boyutu, düğme/bağlantı adı ve metin kontrastı. Form değerleri, çerezler ve klavye vuruşları okunmaz. Etiket ve kontrol metinlerinin yalnızca varlığı yerelde incelenir; ham içerikleri rapora alınmaz veya gönderilmez. Yerel tarama ağ isteği ve API anahtarı gerektirmez. Ayrı AI analizi yukarıdaki onay akışına tabidir. Parola alanı görülen sayfa engellenir; diğer hassas sayfalar için kullanıcı doğrulaması gerekir. Parola alanı kontrolü hassas sayfaları eksiksiz tanımaz.
+
+## Yerel testler
+
+```powershell
+node --test tests/*.test.cjs
+```
+
+0.8.0 geliştirmesinde 31 hesaplama/kontrat testi ve 1 yerel HTTP erişim testi geçti. HTTP testi sahte anahtar kullanır ve OpenAI isteği yapmaz. Bunlar gerçek sitelerin manuel denetimi veya gerçek API doğrulaması yerine geçmez.
 
 ## Metin kontrastı
 
@@ -25,7 +33,49 @@ Görsel/gradyan arka plan, saydam renk, opaklık efekti, filtre, blend, transfor
 
 ## Henüz tamamlanmayanlar
 
-axe-core, Norman LLM katmanı, birleşik skorun tamamlanması, üç nihai site raporu, manuel ekran okuyucu testi, LLM tekrar ölçümleri, demo ve yansıtma notu sonraki adımlardadır. Ön testler docs/on-testler.md içinde; nihai doğrulama tamamlanmadı.
+axe-core, etkileşim kanıtı ile Norman değerlendirmesinin tamamlanması, birleşik skorun tamamlanması, üç nihai site raporu, manuel ekran okuyucu testi, LLM tekrar ölçümleri, demo ve yansıtma notu sonraki adımlardadır. Ön testler docs/on-testler.md içinde; nihai doğrulama tamamlanmadı. 0.8.0 AI bağlantısı yerel testlerle geliştirildi; gerçek API çalışması henüz doğrulanmadı.
+
+## AI yardımcı servisini çalıştırma
+
+Node.js 24 gereklidir. Proje klasöründe .env.example dosyasından yerel .env oluşturup OPENAI_API_KEY değerini yalnızca kendi bilgisayarınızda girin. .env Git tarafından hariç tutulur. Anahtarı eklentiye, rapora, ekran görüntüsüne veya repoya koymayın.
+
+```powershell
+node --env-file=.env server/server.cjs
+```
+
+Servis yalnızca 127.0.0.1:8787 adresinde dinler. Terminalde gösterilen oturuma özel yerel bağlantı kodunu paneldeki ilgili alana girin; bu OpenAI API anahtarı değildir. Servis açık kalmalı. Sonra yerel analiz, AI önizleme, gönderilecek paketi inceleme ve ayrı onay sırasını takip edin. Onay verilene kadar API isteği yapılmaz. Servis CORS ile yalnızca chrome-extension kökenlerini kabul eder; ayrıca rastgele bağlantı kodu gerekir. Oturum başına 20 istek, tek eşzamanlı istek ve 350 KB gövde sınırı vardır. Otomatik yeniden deneme yoktur. Gerçek API çağrısı kullanıcının API hesabından ücret/kota tüketebilir.
+
+Varsayılan sabit model gpt-4.1-mini-2025-04-14, temperature=0, promptVersion=norman-static-v1. Responses API, store=false ve strict JSON Schema kullanılır. Anahtar sadece servis ortam değişkeninden okunur. Günlüklerde anahtar, gövde ve sayfa metni yoktur. Açık .env düz metin yerel dosyadır; işletim sistemi hesabına erişimi olan kişilerden koruma sağlamaz. Dosyayı paylaşmayın.
+
+## AI kanıt ve mahremiyet sınırları
+
+İlk 150 uygun UI öğesinin yapısal seçicileri, ölçümleri, ad kaynağı varlığı, required/disabled/expanded durumu ve önceden belirlenmiş genel UI kelimeleri gönderilir. Keyfi metin, kişi adı, URL, form değeri, seçenek değeri, placeholder veya ekran görüntüsü gönderilmez. FormValue alanı yalnızca sabit [MASKED] işaretidir; gerçek değer okunup sonra maskelenmez. 'Ara', 'Randevu al' gibi ifadeler sadece sabit izin listesindeki tam eşleşmelerden seçilir. Önizlemede kişisel veri görürseniz gönderimi onaylamayın. Giriş yapılmış veya kişisel/sağlık verisi içeren sayfalar bu proje kapsamı dışında; parola kontrolünün eksik algılaması kullanıcı doğrulamasıyla tamamlanır.
+
+Servis izin verilmeyen alanları reddeder; her AI bulgusunun seçicisini snapshot içinde arar ve factKey/factValueJSON eşleşmesini kontrol eder. Uydurulan seçici veya ölçüm, kabul edilen bulgu listesine girmez; reddetme nedeni JSON'da saklanır. Yanıt sonrası panel güncel örneklemde seçici ve aynı olguyu tekrar kontrol eder. Bu, AI yorumunun doğru olduğunu kanıtlamaz; yorum ekran okuyucu/manuel inceleme bekler. Snapshot dışında kalan seçici oranı ve güncel örneklem reddi ayrı tutulur. Güncel örneklemde bulunmamak, öğenin bütün DOM'da kesinlikle olmadığı anlamına gelmez.
+
+## Norman skorları ve henüz eksik davranış kanıtı
+
+Model her ilke için 0-100 veya kanıt yetersizse null döndürür. Rubrik: 90-100 az risk, 70-89 sınırlı risk, 40-69 belirgin sorun, 0-39 ciddi engel. Her skor gerekçe ve örneklemde bulunan observationSelectors gerektirir. İlgili ilkenin uydurma bulgusu varsa skor null yapılır. Bu sürüm tıklama veya form gönderimi yapmadığından Geri Bildirim davranışı gözlenmez; bu skor zorunlu olarak null tutulur. Diğer ilkeler de yalnızca statik kanıt kapsamındaki aday değerlendirmedir; etiket anlamları gizlenince Eşleme gibi ilkeler de belirsiz kalabilir.
+
+AI statik ön toplamı L=Σ(skoru mevcut ilke puanları)/mevcut ilke sayısı; ilkeler eşit ağırlıklıdır. Mevcut ilke sayısı ve eksikler ayrıca gösterilir. Altı ilkenin tamamı değerlendirilemediyse birleşik toplam hesaplanmaz. Dolayısıyla 0.8.0 kapsamı ödevin tam davranış değerlendirmesini henüz karşılamaz; sonraki aşamada kullanıcı tarafından yapılan görevlerin kanıtlarıyla tamamlanmalıdır. Aynı snapshot hash, model, temperature ve prompt sürümü üç tekrarda kaydedilerek sapma ölçülmelidir; sıcaklık sıfır olması deterministik yanıt garantisi değildir.
+
+## Mimari
+
+```mermaid
+flowchart LR
+  Page[Herkese açık sayfa] --> Local[Altı yerel kontrol]
+  Page --> Snapshot[İzin listeli anonim UI gözlemi]
+  Local --> Panel[Chrome yan paneli]
+  Snapshot --> Preview[Veri önizlemesi ve ayrı onay]
+  Preview --> Service[127.0.0.1 yardımcı servis]
+  Env[Yerel .env anahtarı] --> Service
+  Service --> API[OpenAI Responses API]
+  API --> Validate[Seçici ve olgu doğrulaması]
+  Validate --> Panel
+  Panel --> JSON[JSON dışa aktarımı]
+```
+
+Resmi API kaynakları: https://developers.openai.com/api/reference/overview ve https://developers.openai.com/api/docs/guides/structured-outputs
 
 ## Skor formülü ve gerekçe
 
@@ -42,7 +92,7 @@ Bu sürümün skoru doğrulanmış WCAG uygunluk puanı değil, aday bulgulara d
 
 Deterministik ön toplam D=Σ(w×S)/Σ(w), yalnızca skoru null olmayan kategoriler üzerinde hesaplanır. Payda availableWeight alanındadır. Form ve kontrol adları temel işlemleri, kontrast geniş metin okunabilirliğini etkilediği için daha yüksek ağırlık alır; bu ağırlıklar proje tasarım kararıdır, WCAG'nin resmi puan sistemi değildir. Öğe oranı kullanımı büyük sayfalarda salt bulgu sayısının puanı gereksizce düşürmesini önler. Şiddet bu sürümde inceleme önceliğini gösterir, formülde ayrıca çarpılmaz; kategoride aynı öğe iki kez cezalandırılmaz. Çok sayıda sorunsuz öğe önemli bir tek sorunun etkisini seyreltebilir; bu sınırlama nedeniyle kritik görevler ayrıca manuel denetlenir.
 
-LLM toplamı L uygulandıktan sonra planlanan birleşik toplam T=0.60D+0.40L'dir. D veya L yoksa T=null; eksik LLM skoru 0 veya 100 ile doldurulmaz. LLM katmanı henüz uygulanmadığından panel ve JSON bunu açıkça belirtir. Norman ilkelerinin ağırlıkları ve L formülü ilgili katman geliştirilirken belgelenecek. Skor modeli candidate-rate-v1 olarak sürümlenir; elle doğrulanmış ihlal skoru ile karıştırılmamalıdır.
+Birleşik toplam T=0.60D+0.40L'dir; altı Norman ilkesinden herhangi biri eksikse veya D/L yoksa T=null. Eksik ilke 0 veya 100 ile doldurulmaz. Statik AI ön ortalaması ayrı gösterilir, eksik kapsam birleşik skora gizlenmez. Skor modeli candidate-rate-v1 olarak sürümlenir; elle doğrulanmış ihlal skoru ile karıştırılmamalıdır.
 
 ## JSON dışa aktarımı
 

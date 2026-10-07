@@ -1,0 +1,16 @@
+const test=require('node:test'); const assert=require('node:assert/strict');
+const {principles,validateSnapshot,validateResult,hash}=require('../server/contract.cjs');
+const selector='html > body:nth-of-type(1) > button:nth-of-type(1)';
+function snapshot(){return {snapshotVersion:'static-ui-v1',observationMode:'static-no-interactions',viewport:{width:1000,height:800},elements:[{selector,facts:{tag:'button',width:20,height:20,x:10,y:10,fontSize:16,hasName:false,uiToken:null,isField:false,formValue:null,required:false,disabled:false,statusRole:null,expanded:null,inViewport:true}}]};}
+function raw(){return {principles:principles.map(principle=>({principle,score:80,rationale:'Sınırlı statik gözlem',observationSelectors:[selector]})),findings:[]};}
+function finding(changes={}){return {principle:'Görünürlük',selector,factKey:'hasName',factValueJSON:'false',title:'Ad eksikliği adayı',rationale:'Gözlenen ad kaynağı yok',severity:'Yüksek',recommendation:'Kontrole ad ekle',...changes};}
+test('unknown top-level text and URLs are discarded',()=>{const input={...snapshot(),pageText:'private',url:'https://site/private'};const clean=validateSnapshot(input);assert.equal(clean.pageText,undefined);assert.equal(clean.url,undefined);});
+test('unmasked field values are rejected',()=>{const input=snapshot();input.elements[0].facts.isField=true;input.elements[0].facts.formValue='private';assert.throws(()=>validateSnapshot(input));});
+test('raw text inside element is rejected',()=>{const input=snapshot();input.elements[0].text='private';assert.throws(()=>validateSnapshot(input));});
+test('non-whitelisted UI text is rejected',()=>{const input=snapshot();input.elements[0].facts.uiToken='person@example.com';assert.throws(()=>validateSnapshot(input));});
+test('fabricated selectors are rejected and counted',()=>{const input=raw();input.findings=[finding({selector:'#imaginary'})];const checked=validateResult(input,validateSnapshot(snapshot()));assert.equal(checked.findings.length,0);assert.equal(checked.hallucination.nonexistentSnapshotSelectorRate,1);});
+test('existing selector with fabricated fact is rejected',()=>{const input=raw();input.findings=[finding({factValueJSON:'true'})];assert.equal(validateResult(input,snapshot()).rejected[0].reason,'unsupported_fact');});
+test('matching fact is accepted but interpretation stays pending',()=>{const input=raw();input.findings=[finding()];const checked=validateResult(input,snapshot());assert.equal(checked.findings.length,1);assert.match(checked.findings[0].validationStatus,/pending_manual/);});
+test('feedback is not scored without interaction evidence',()=>{const checked=validateResult(raw(),snapshot());assert.equal(checked.principles.find(p=>p.principle==='Geri Bildirim').score,null);assert.equal(checked.complete,false);});
+test('six principles and bounded scores are required',()=>{const input=raw();input.principles[0].score=101;assert.throws(()=>validateResult(input,snapshot()));});
+test('snapshot hash changes with evidence',()=>{const first=snapshot(),second=snapshot();second.elements[0].facts.width=21;assert.notEqual(hash(first),hash(second));});
