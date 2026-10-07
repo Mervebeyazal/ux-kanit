@@ -1,0 +1,474 @@
+{
+  "schemaVersion": "1.0",
+  "extensionVersion": "0.7.0",
+  "analyzedAt": "2026-10-07T17:08:30.966Z",
+  "page": {
+    "devicePixelRatio": 2,
+    "origin": "https://www.ibb.istanbul",
+    "viewport": {
+      "height": 817,
+      "width": 1054
+    }
+  },
+  "privacy": {
+    "localOnly": true,
+    "publicPageConfirmed": true,
+    "formValuesCollected": false,
+    "pageTextExported": false,
+    "urlScope": "origin-only; path/query/fragment omitted"
+  },
+  "scores": {
+    "deterministic": {
+      "modelVersion": "candidate-rate-v1",
+      "status": "provisional",
+      "subscores": [
+        {
+          "id": "language",
+          "label": "Sayfa dili",
+          "weight": 5,
+          "measured": 1,
+          "unknown": 0,
+          "candidates": 0,
+          "score": 100,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "image",
+          "label": "Görsel alternatif metni",
+          "weight": 15,
+          "measured": 36,
+          "unknown": 0,
+          "candidates": 0,
+          "score": 100,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "form",
+          "label": "Form etiketi",
+          "weight": 20,
+          "measured": 1,
+          "unknown": 0,
+          "candidates": 1,
+          "score": 0,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "target",
+          "label": "Dokunma hedefi",
+          "weight": 15,
+          "measured": 99,
+          "unknown": 0,
+          "candidates": 10,
+          "score": 89.8989898989899,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "name",
+          "label": "Düğme/bağlantı adı",
+          "weight": 20,
+          "measured": 98,
+          "unknown": 0,
+          "candidates": 0,
+          "score": 100,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "contrast",
+          "label": "Metin kontrastı",
+          "weight": 25,
+          "measured": 15,
+          "unknown": 82,
+          "candidates": 3,
+          "score": 80,
+          "coverage": 0.15463917525773196,
+          "status": "provisional"
+        }
+      ],
+      "availableWeight": 100,
+      "score": 73.48484848484848
+    },
+    "llm": {
+      "score": null,
+      "status": "not_evaluated",
+      "principles": []
+    },
+    "combined": {
+      "score": null,
+      "status": "awaiting_llm",
+      "weights": {
+        "deterministic": 0.6,
+        "llm": 0.4
+      }
+    }
+  },
+  "counts": {
+    "imageTotal": 37,
+    "imageVisible": 36,
+    "fieldCount": 1,
+    "targetCount": 99,
+    "controlCount": 98,
+    "unknownNameCount": 0,
+    "contrastMeasured": 15,
+    "contrastUnknown": 82
+  },
+  "findings": [
+    {
+      "id": "D-1",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "form",
+      "evidence": "Görünür form alanında metinli ilişkili label, dolu aria-label, metinli bir öğeye çözülen aria-labelledby veya dolu title bulunamadı. Alanın değeri okunmadı.",
+      "recommendation": "Alan için görünür bir label ekle ve for niteliğini alanın id niteliğiyle eşleştir. Yer tutucu metni tek etiket olarak kullanma.",
+      "rule": "WCAG 4.1.2 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "INPUT",
+      "title": "Form alanında erişilebilir etiket adayı eksik",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-2",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 14 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 14
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-3",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 12.25 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 12.25
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-4",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 8.75 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 8.75
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-5",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 15.75 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 15.75
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-6",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 21 × 32 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 32,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 21
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-7",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 15 × 32 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 32,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 15
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-8",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 21 × 24 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 24,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 21
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-9",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 15 × 24 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 24,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 15
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-10",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 319.86 × 14.5 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 14.5,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 319.859375
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-11",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 14.66 × 14.5 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 14.5,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 14.65625
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-12",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "contrast",
+      "evidence": "Metin RGB(255, 255, 255), arka plan RGB(198, 70, 164). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.",
+      "measurement": {
+        "background": [
+          198,
+          70,
+          164
+        ],
+        "fontSize": 16,
+        "fontWeight": 500,
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "minimum": 4.5,
+        "ratio": 4.362925519464876
+      },
+      "recommendation": "Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.",
+      "rule": "WCAG 1.4.3 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "SPAN",
+      "title": "Düşük metin kontrastı adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-13",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "contrast",
+      "evidence": "Metin RGB(198, 70, 164), arka plan RGB(255, 255, 255). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.",
+      "measurement": {
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "fontSize": 16,
+        "fontWeight": 500,
+        "foreground": [
+          198,
+          70,
+          164
+        ],
+        "minimum": 4.5,
+        "ratio": 4.362925519464876
+      },
+      "recommendation": "Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.",
+      "rule": "WCAG 1.4.3 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(2) > span:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "SPAN",
+      "title": "Düşük metin kontrastı adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-14",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "contrast",
+      "evidence": "Metin RGB(255, 255, 255), arka plan RGB(198, 70, 164). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.",
+      "measurement": {
+        "background": [
+          198,
+          70,
+          164
+        ],
+        "fontSize": 16,
+        "fontWeight": 500,
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "minimum": 4.5,
+        "ratio": 4.362925519464876
+      },
+      "recommendation": "Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.",
+      "rule": "WCAG 1.4.3 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(7) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "SPAN",
+      "title": "Düşük metin kontrastı adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    }
+  ],
+  "limitations": [
+    "Ön skor aday oranıdır; WCAG uygunluk veya nihai UX puanı değildir.",
+    "Iframe ve Shadow DOM kapsam dışı.",
+    "Hassas sayfa algılama eksiksiz değildir; kullanıcı doğrulaması gerekir.",
+    "Ölçülemeyen öğeler başarılı kabul edilmez; kategori skorundan çıkarılır.",
+    "Tam sayfa adresi mahremiyet için kaydedilmez; test edilen herkese açık adres doğrulama notunda ayrıca belirtilmelidir."
+  ]
+}

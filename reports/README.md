@@ -15,3 +15,17 @@ acibadem-0.7.0-preliminary.json yeni indirilen dosyanın değiştirilmemiş kopy
 ## Hepsiburada ön raporu
 
 hepsiburada-0.7.0-preliminary.json kullanıcının indirdiği dosyanın değiştirilmemiş kopyasıdır. Kayıt zamanı 2026-10-07T17:07:29.252Z; sürüm 0.7.0. Ön skor dosyadaki sayılardan yeniden hesaplanıp eşleşti: 85.81208281646879. 254 kategori adayı: 34 görsel, 152 küçük hedef, 56 adsız kontrol, 12 kontrast. Aynı DOM öğesi farklı kategorilerde yer alabilir; 254 benzersiz öğe veya kesin ihlal anlamına gelmez. Form alanı 1, etiket adayı 0. Kontrast 243 öğede ölçüldü, 214 öğe ölçülemedi. Kategoriler öğe oranıyla ağırlıklandırıldığından daha fazla aday sayısı her zaman daha düşük toplam skor anlamına gelmez. LLM ve manuel doğrulama bekliyor.
+
+## İBB ön raporu
+
+ibb-0.7.0-preliminary.json kullanıcının indirdiği dosyanın değiştirilmemiş kopyasıdır. Kayıt zamanı 2026-10-07T17:08:30.966Z; sürüm 0.7.0. Ön skor yeniden hesaplanıp eşleşti: 73.48484848484848. 14 aday: 1 form, 10 küçük hedef, 3 kontrast. 36 görünür görselde alt adayı ve 98 kontrolde adsız kontrol adayı yok. 99 hedef ölçüldü; kontrast 15 öğede ölçüldü, 82 öğe ölçülemedi. Özellikle kontrast kapsamı düşük olduğundan toplam skor kesin uygunluk veya siteler arası kalite sıralaması olarak yorumlanmamalı. LLM ve manuel doğrulama bekliyor.
+
+## 0.7.0 ön kayıt özeti
+
+| Kategori | Site | Deterministik ön skor | Kategori adayları |
+|---|---|---:|---:|
+| Sağlık | Acıbadem | 76.23 | 55 |
+| Türk e-ticaret | Hepsiburada | 85.81 | 254 |
+| Kamu | İBB | 73.48 | 14 |
+
+Üç dosyanın skorları yeniden hesaplandı ve temel bulgu alanları kontrol edildi. Bu doğrulama, bulguların gerçek ihlal olduğunu veya manuel testlerin tamamlandığını kanıtlamaz. Üç raporda da LLM ve birleşik skor henüz yoktur.
