@@ -29,3 +29,5 @@ ibb-0.7.0-preliminary.json kullanıcının indirdiği dosyanın değiştirilmemi
 | Kamu | İBB | 73.48 | 14 |
 
 Üç dosyanın skorları yeniden hesaplandı ve temel bulgu alanları kontrol edildi. Bu doğrulama, bulguların gerçek ihlal olduğunu veya manuel testlerin tamamlandığını kanıtlamaz. Üç raporda da LLM ve birleşik skor henüz yoktur.
+
+Ek manuel karşılaştırma raporu: `acibadem-atasehir-0.8.1-manual-comparison.json`. Kullanıcı tarafından hastane bilgisi görevi sonrasında dışa aktarıldı; sayfa ilişkilendirmesi sohbet bağlamına dayanır (JSON yalnızca origin içerir). Ön skor 80.31; 81 aday (form 5, hedef 62, kontrol adı 4, kontrast 10). Alt skorlar yeniden hesaplandı. Bulgular henüz tek tek doğrulanmadı; LLM değerlendirilmedi. Ayrıntılar: [Manuel denetim](../docs/manuel-denetim.md).
