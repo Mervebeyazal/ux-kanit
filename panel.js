@@ -242,11 +242,20 @@ button.addEventListener('click', async () => {
               }
               const marker = document.createElement('div');
               marker.setAttribute('aria-hidden', 'true');
-              marker.style.cssText = 'position:absolute;pointer-events:none;border:4px solid #e11d48;box-sizing:border-box;z-index:2147483647;background:transparent;';
-              const rect = element.getBoundingClientRect();
-              Object.assign(marker.style, { left: `${rect.left + scrollX}px`, top: `${rect.top + scrollY}px`, width: `${rect.width}px`, height: `${rect.height}px` });
+              marker.style.cssText = 'position:fixed;pointer-events:none;border:4px solid #e11d48;box-sizing:border-box;z-index:2147483647;background:transparent;';
               document.documentElement.append(marker);
               element.scrollIntoView({ block: 'center', behavior: 'instant' });
+              const deadline = performance.now() + 4000;
+              const track = () => {
+                if (!element.isConnected || performance.now() >= deadline) {
+                  marker.remove();
+                  return;
+                }
+                const rect = element.getBoundingClientRect();
+                Object.assign(marker.style, { left: `${rect.left}px`, top: `${rect.top}px`, width: `${rect.width}px`, height: `${rect.height}px` });
+                requestAnimationFrame(track);
+              };
+              track();
               setTimeout(() => marker.remove(), 4000);
               return 'shown';
             }
