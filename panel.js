@@ -78,8 +78,28 @@ button.addEventListener('click', async () => {
             evidence: 'Görünür form alanında metinli ilişkili label, dolu aria-label, metinli bir öğeye çözülen aria-labelledby veya dolu title bulunamadı. Alanın değeri okunmadı.',
             recommendation: 'Alan için görünür bir label ekle ve for niteliğini alanın id niteliğiyle eşleştir. Yer tutucu metni tek etiket olarak kullanma.' });
         }
+        const targets = [...document.querySelectorAll('a[href], button, input:not([type="hidden"]), select, textarea, [role="button"], [role="link"]')].filter(target => {
+          const style = getComputedStyle(target);
+          const rect = target.getBoundingClientRect();
+          return rect.width > 0 && rect.height > 0 && target.getClientRects().length &&
+            !target.closest('[aria-hidden="true"], [inert]') && !target.matches(':disabled, [aria-disabled="true"]') &&
+            style.visibility !== 'hidden' && style.visibility !== 'collapse' && style.opacity !== '0' && style.pointerEvents !== 'none';
+        });
+        for (const target of targets) {
+          const rect = target.getBoundingClientRect();
+          // Compare unrounded values: 23.99 is below the threshold, 24 is not.
+          if (rect.width >= 24 && rect.height >= 24) continue;
+          const width = Number(rect.width.toFixed(2));
+          const height = Number(rect.height.toFixed(2));
+          findings.push({ selector: selectorFor(target), category: 'target', tag: target.tagName,
+            title: '24 × 24 CSS pikselden küçük hedef adayı', severity: 'Orta',
+            rule: 'WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli',
+            measurement: { width: rect.width, height: rect.height, minimum: 24, unit: 'CSS px' },
+            evidence: `Öğenin ölçülen sınır kutusu ${width} × ${height} CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.`,
+            recommendation: 'Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.' });
+        }
         return { blocked: false, language, selector: 'html', rule: 'WCAG 3.1.1', missing: !language?.trim(),
-          fieldCount: fields.length, imageCount: images.length, visibleImageCount: visibleImages.length, findings };
+          targetCount: targets.length, fieldCount: fields.length, imageCount: images.length, visibleImageCount: visibleImages.length, findings };
       }
     });
     const finding = execution.result;
@@ -95,6 +115,9 @@ button.addEventListener('click', async () => {
     const summary = document.createElement('p');
     summary.textContent = `Görseller: ${finding.imageCount} toplam, ${finding.visibleImageCount} görünür. Eksik alternatif metin bulgusu: ${finding.findings.filter(item => item.category === 'image').length}.\nForm alanları: ${finding.fieldCount} görünür. Etiket eksikliği adayı: ${finding.findings.filter(item => item.category === 'form').length}.\nBoş alt metninin uygunluğu ve alternatif adların kalitesi henüz değerlendirilmez. iframe ve Shadow DOM kapsam dışıdır.`;
     result.append(summary);
+    const targetSummary = document.createElement('p');
+    targetSummary.textContent = `Dokunma hedefleri: ${finding.targetCount} ölçüldü. Küçük hedef adayı: ${finding.findings.filter(item => item.category === 'target').length}. Aralık ve diğer WCAG istisnaları otomatik değerlendirilmez; adaylar kesin ihlal sayılmaz.`;
+    result.append(targetSummary);
     for (const item of finding.findings) {
       const card = document.createElement('article');
       const detail = document.createElement('p');
@@ -110,6 +133,10 @@ button.addEventListener('click', async () => {
               if (document.querySelector('input[type="password"]')) return 'blocked';
               const element = document.querySelector(selector);
               if (!element || element.tagName !== tag || (category === 'image' && element.hasAttribute('alt'))) return 'stale';
+              if (category === 'target') {
+                const bounds = element.getBoundingClientRect();
+                if (bounds.width >= 24 && bounds.height >= 24) return 'stale';
+              }
               const marker = document.createElement('div');
               marker.setAttribute('aria-hidden', 'true');
               marker.style.cssText = 'position:absolute;pointer-events:none;border:4px solid #e11d48;box-sizing:border-box;z-index:2147483647;background:transparent;';
