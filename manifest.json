@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "UX Kanıt",
+  "version": "0.3.0",
+  "description": "Kullanıcının başlattığı, kanıta dayalı yerel UX kontrolleri.",
+  "permissions": ["activeTab", "scripting", "sidePanel"],
+  "action": {"default_title": "UX Kanıt panelini aç"},
+  "side_panel": {"default_path": "panel.html"},
+  "background": {"service_worker": "background.js"}
+}

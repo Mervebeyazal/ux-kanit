@@ -1,0 +1,14 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# Dependencies and temporary output
+node_modules/
+work/
+*.log
+.DS_Store
+Thumbs.db
