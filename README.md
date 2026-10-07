@@ -165,3 +165,9 @@ Görünür input, select ve textarea alanlarında metinli ilişkili label, dolu 
 Bağlantılar, düğmeler, görünür yerel form kontrolleri ve role=button/link öğeleri getBoundingClientRect ile ölçülür. Genişlik VEYA yükseklik 24 CSS px altındaysa aday raporlanır; tam 24 × 24 sınırın altı değildir. Sıfır boyutlu, gizli, inert, devre dışı veya pointer-events:none öğeleri hariç tutulur. Ham ölçümler bulguya eklenir; gösterim iki ondalıkla yapılır. Değerler okunmaz ve kontrol hiçbir öğeyi etkinleştirmez.
 
 Bu bir sınır kutusu ölçümüdür; gerçek tıklanabilir şekli, üstü örtülmüş alanları, taşan alt öğeleri, çok satırlı bağlantıların birleşik alanını ve özel JavaScript tıklama alanlarını tam belirleyemez. Ekran dışında düzenlenen öğeler de ölçülebilir. Boyutu yeterli öğelere kesin uygunluk sonucu verilmez. WCAG 2.5.8'in aralık, eşdeğer kontrol, satır içi hedef, tarayıcı kontrolü ve zorunlu sunum istisnaları otomatik hesaplanmaz; küçük hedef adayları manuel doğrulanmalıdır. Kaynak: https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html
+
+## Groq bağlantısı — 0.8.4
+
+Groq seçeneği için yerel .env içinde UX_LLM_PROVIDER=groq ve GROQ_API_KEY değerini ayarlayın. Varsayılan model openai/gpt-oss-20b; Groq üzerinden çalışır, OpenAI API hesabı kullanmaz. Modeli ayrıca indirmek gerekmez. Aynı ayrı gönderim onayı ve seçici/olgu doğrulaması uygulanır. temperature=0, seed=42 ve systemFingerprint raporda saklanır. Ücretsiz hesap kotası garanti edilmez; 429 hatasında otomatik tekrar yoktur. Mevcut 38 yerel test geçti; Groq adaptörü sahte yanıtlarla sınandı, gerçek analiz henüz doğrulanmadı. Yan panel sürümü 0.8.4'tür.
+
+Kaynaklar: [Groq JSON şema desteği](https://console.groq.com/docs/structured-outputs), [veri koşulları](https://console.groq.com/docs/your-data), [planlar](https://console.groq.com/docs/billing-faqs). Anahtarı paylaşmayın; .env repo dışında kalır. Bu sağlayıcı değişikliği statik Geri Bildirim kanıt eksikliğini çözmez.
