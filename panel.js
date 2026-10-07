@@ -14,7 +14,7 @@ button.addEventListener('click', async () => {
     // Chrome can omit tab.url when activeTab has not been granted. Missing
     // metadata is not evidence that the page uses an unsupported protocol.
     if (tab.url && !/^https?:\/\//.test(tab.url)) throw new Error('Chrome ayarları veya yeni sekme yerine normal bir web sayfası aç.');
-    await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['control-name.js'] });
+    await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['control-name.js', 'contrast.js'] });
     const [execution] = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: () => {
@@ -113,7 +113,26 @@ button.addEventListener('click', async () => {
               : 'Kontrolde dolu ARIA adı, metinli referans, gizlenmemiş metin/görsel alternatif metni veya title ad kaynağı bulunamadı. Sayfa metinleri rapora alınmadı.',
             recommendation: 'Düğmenin veya bağlantının amacını açıklayan görünür metin ekle. Yalnızca simge varsa uygun aria-label kullan; varsa bozuk veya boş aria-labelledby referansını düzelt.' });
         }
+        let contrastMeasured = 0, contrastUnknown = 0, contrastCandidates = 0;
+        const textElements = [...document.querySelectorAll('body *')].filter(element => {
+          if (element.closest('input, textarea, select, script, style, template, [contenteditable]:not([contenteditable="false"]), [aria-hidden="true"], [inert], :disabled, [aria-disabled="true"]')) return false;
+          if (![...element.childNodes].some(node => node.nodeType === 3 && node.nodeValue.trim())) return false;
+          const style = getComputedStyle(element);
+          return element.getClientRects().length && style.visibility !== 'hidden' && style.visibility !== 'collapse';
+        });
+        for (const element of textElements) {
+          const measurement = globalThis.UXContrast.measure(element, getComputedStyle);
+          if (!measurement) { contrastUnknown++; continue; }
+          contrastMeasured++;
+          if (measurement.ratio >= measurement.minimum) continue;
+          contrastCandidates++;
+          findings.push({ selector: selectorFor(element), category: 'contrast', tag: element.tagName,
+            title: 'Düşük metin kontrastı adayı', severity: 'Yüksek', rule: 'WCAG 1.4.3 — manuel doğrulama gerekli', measurement,
+            evidence: `Metin RGB(${measurement.foreground.join(', ')}), arka plan RGB(${measurement.background.join(', ')}). Hesaplanan oran ${measurement.ratio.toFixed(3)}:1; gerekli eşik ${measurement.minimum}:1. Yazı boyutu ${measurement.fontSize} CSS px, ağırlık ${measurement.fontWeight}. Karşılaştırma yuvarlanmamış oranla yapıldı.`,
+            recommendation: `Metin veya arka plan rengini en az ${measurement.minimum}:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.` });
+        }
         return { blocked: false, language, selector: 'html', rule: 'WCAG 3.1.1', missing: !language?.trim(),
+          contrastMeasured, contrastUnknown, contrastCandidates,
           controlCount: controls.length, unknownNameCount, targetCount: targets.length, fieldCount: fields.length, imageCount: images.length, visibleImageCount: visibleImages.length, findings };
       }
     });
@@ -136,6 +155,9 @@ button.addEventListener('click', async () => {
     const nameSummary = document.createElement('p');
     nameSummary.textContent = `Düğme/bağlantı adları: ${finding.controlCount} kontrol incelendi. Adsız kontrol adayı: ${finding.findings.filter(item => item.category === 'name').length}. İnceleme sınırı nedeniyle belirsiz: ${finding.unknownNameCount}. Tam erişilebilir ad hesabı ve adın anlamlılığı manuel doğrulanmalıdır.`;
     result.append(nameSummary);
+    const contrastSummary = document.createElement('p');
+    contrastSummary.textContent = `Metin kontrastı: ${finding.contrastMeasured} öğe ölçüldü. Düşük kontrast adayı: ${finding.contrastCandidates}. Güvenilir ölçülemeyen: ${finding.contrastUnknown}. Görsel/gradyan, saydamlık ve desteklenmeyen efektler ölçüm dışında; sıfır bulgu tam uygunluk anlamına gelmez.`;
+    result.append(contrastSummary);
     for (const item of finding.findings) {
       const card = document.createElement('article');
       const detail = document.createElement('p');
