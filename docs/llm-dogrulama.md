@@ -27,3 +27,17 @@ Ham rapor değiştirilmedi. Ön skor 70, bu adaylara dayandığı için nihai so
 Statik ön toplam ortalaması 65.56, popülasyon standart sapması 3.14. Hiçbir ölçülen skor aralığı 10 puanı aşmadı; iki ilke tam 10 puan aralığında. Bu nedenle yönergedeki '10 puandan fazla' koşulu bu örnekte oluşmadı. Altyapı parmak izi değişimini skor değişiminin kesin nedeni olarak göstermiyoruz. Statik skorlar üç kanıtı zayıf yoruma dayandığı için güvenilirlik sorunu sürüyor; bu ölçüm kararlılık ile doğruluğun ayrı olduğunu gösterir.
 
 Üç koşuda toplam 9 öneri (aynı üç öğe tekrarları), örneklem dışı seçici 0/9=%0. Bu oran snapshot eşleşmesidir, bağımsız tam DOM denetimi değildir. 9/9 yorum kendi verilen olgusuyla desteklenmiyor; 3 adsızlık iddiası hasName=true ile çelişiyor. Gerçek sayfada bulguların görsel doğrulaması tamamlanmadı. Düzeltme planı: ad kaynağı varlığından ad yokluğu çıkarımını ve izin listeli token bilgisinden simge/görsel yokluğu çıkarımını engellemek; yorum kanıtını sınırlayıp yeni prompt sürümünde ayrı tekrar testi yapmak. Henüz bu planın iyileşme sonucu ölçülmedi.
+
+## L-1 görsel doğrulama
+
+Kullanıcı ilk AI bulgusunu vurgulayıp [panel ve dil düğmesi görüntüsünü](evidence/acibadem-llm-language-false-positive.png) gönderdi. Panel seçicisi üç koşudaki L-1 ile eşleşiyor; çerçeve dünya simgesi ve TR metni olan dil düğmesinde. Böylece hedef öğenin gerçek sayfada varlığı görsel olarak doğrulandı. AI'ın 'etiket metni gizlenmiş' iddiası görünür TR metniyle çelişiyor; 'Ara' metni önerisi de hedefin dil kontrolü olmasıyla ilgisiz. Bu yorum yanlış alarm olarak kaydedildi. Düğmenin erişilebilir adının kalitesi veya dil değiştirmenin davranışı ayrıca test edilmedi. Bu tek görüntü diğer iki bulgunun görsel kontrolünün yerine geçmez.
+
+## L-2 görsel doğrulama
+
+Kullanıcının [ikinci AI bulgusu görüntüsünde](evidence/acibadem-llm-contact-false-positive.png) panel seçicisi L-2 ile eşleşiyor ve çerçeve görünür İletişim metnini çevreliyor. Hedef öğe sayfada var. 'İletişim linki görünür değil' başlığı ve 'metin ekleyin' önerisi görüntüyle çelişiyor. Link yanında simge bulunmaması tek başına yönlendirme sorunu veya Norman Kısıtlar ihlali kanıtı değildir. Bu bulgu yanlış alarm olarak kaydedildi; gerçek bağlantı davranışı test edilmedi.
+
+## L-3 görsel doğrulama ve örneklem sonucu
+
+Kullanıcının [Yardım bağlantısı görüntüsünde](evidence/acibadem-llm-help-unsupported.png) paneldeki L-3 seçicisiyle işaretlenen görünür Yardım metni bulunuyor. Öğe sayfada mevcut. Bağlantının yanında simge bulunmaması tek başına Eşleme sorunu veya kullanıcı yönlendirmesinin belirsizliği kanıtı değildir. Bağlantı hedefi ve görev davranışı test edilmedi; AI'ın sorun iddiası desteklenmeyen yorum olarak kaldı. Görünür metin zaten mevcut olduğu için metin ekleme önerisi de gerekçelendirilmedi.
+
+Üç benzersiz AI hedefinin üçü gerçek sayfada ayrı vurgulama görüntüleriyle doğrulandı. Bu manuel örneklemde var olmayan öğeye işaret eden oran 0/3=%0. İlk iki bulgu görünürlük/ad iddiaları bakımından yanlış alarm; üçüncü bulgu sorun iddiası kanıtsız. Üç önerinin hiçbiri doğrulanmış ihlal olarak kabul edilmedi. Bu sonuç tüm siteler veya gelecekteki AI yanıtları için genellenemez. Aynı üç öğenin üç koşuda tekrarlanması bağımsız dokuz manuel hedef denetimi olarak sayılmadı.
