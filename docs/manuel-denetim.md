@@ -17,3 +17,9 @@ Windows Ekran Okuyucusu ile alana odaklandığında kullanıcı 'Acıbademde ara
 ## Henüz tamamlanmayan görev
 
 Yalnızca alanı bulmak ve duyurusunu dinlemek gözlendi. Hastane bilgisine klavye ve ekran okuyucuyla ulaşma görevi, sonucu ve engelleri henüz kaydedilmedi. Nihai karşılaştırmada yakalanan/kaçırılan/yanlış alarm ayrımı, doğrulanmış gözlemlerle tamamlanmalı.
+
+### Hastane bilgi sayfasına ulaşma — yeni gözlem
+
+Kullanıcı 'detaylı bilgi ile buraya geldim' diyerek Acıbadem Ataşehir Hastanesi sayfasının ekran görüntüsünü paylaştı. Görüntüde hastane başlığı, adres, iletişim alanı ve Yol tarifi al bağlantısı görülüyor. Kanıt: [Hedef sayfa görüntüsü](evidence/acibadem-atasehir-manual-destination.png).
+
+Hedef sayfaya ulaşma sonucu görsel olarak doğrulandı. Önceki görev yönergesi fare kullanmadan ve ekran okuyucu açıkken ilerlemekti; kullanıcı bu yeni adımda yöntemi ve duyuruları ayrıca belirtmedi. Bu nedenle klavye+ekran okuyucu görevi tam başarılı olarak henüz işaretlenmedi. Fare kullanımı, bağlantıların nasıl duyurulduğu ve engel yaşanıp yaşanmadığı netleştirilmeli. Tam hedef URL ve tarayıcı/ekran okuyucu sürümleri henüz yok.
