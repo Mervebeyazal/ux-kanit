@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "UX Kanıt",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "Kullanıcının başlattığı, kanıta dayalı yerel UX kontrolleri.",
   "permissions": ["activeTab", "scripting", "sidePanel"],
   "host_permissions": ["http://127.0.0.1/*"],
@@ -9,6 +9,7 @@
   "side_panel": {"default_path": "panel.html"},
   "background": {"service_worker": "background.js"}
 }
+
 
 
 

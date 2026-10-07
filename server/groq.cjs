@@ -14,8 +14,17 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
   }
   const result=await response.json();
   const choice=result.choices?.[0];
-  if(choice?.finish_reason!=='stop' || typeof choice.message?.content!=='string') throw new Error('Groq yanıtı eksik.');
-  return {raw:JSON.parse(choice.message.content),model:result.model || model,
+  if(choice?.finish_reason!=='stop' || typeof choice.message?.content!=='string') {
+    const error=new Error(choice?.finish_reason==='length'
+      ? 'Groq yanıtı çıktı token sınırında kesildi (GROQ_OUTPUT_LIMIT). Analiz sonucu kabul edilmedi.'
+      : 'Groq tamamlanmış metin yanıtı vermedi (GROQ_INCOMPLETE).');
+    error.safeProviderError=true; throw error;
+  }
+  let raw;
+  try { raw=JSON.parse(choice.message.content); } catch {
+    const error=new Error('Groq yanıtı geçerli JSON değil (GROQ_INVALID_JSON).');error.safeProviderError=true;throw error;
+  }
+  return {raw,model:result.model || model,
     requestId:result.id,usage:result.usage,seed:42,systemFingerprint:result.system_fingerprint ?? null};
 }
 module.exports={analyzeGroq};

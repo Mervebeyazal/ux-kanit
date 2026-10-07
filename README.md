@@ -175,3 +175,7 @@ Kaynaklar: [Groq JSON şema desteği](https://console.groq.com/docs/structured-o
 ### 0.8.5 — gerçek Groq 413 denemesi
 
 Kullanıcı ilk Groq isteğinde HTTP 413 bildirdi; başarılı LLM yanıtı alınmadı. AI örneklemi tüm sağlayıcılarda ilk 150 yerine ilk 20 uygun UI öğesine düşürüldü (yerel altı kontrol kapsamı değişmedi). Groq çıktı bütçesi 7000 yerine 3500 token, bulgu sınırı promptta 3 oldu. Önizleme ve kayıt aynı küçültülmüş örneklemi içerir; seçici/olgu doğrulaması korunur. Bu değişiklik kapsamı azaltır; bütün sayfa için sonuç vermez. Yeniden saha testi bekleniyor. Önceki 150 öğe açıklamaları tarihsel sürüme aittir. Groq promptVersion norman-static-small-v2 olarak kaydedilir.
+
+### 0.8.6 — güvenli hata ayrımı
+
+İkinci Groq denemesinde genel doğrulama hatası bildirildi; kesin neden henüz bilinmiyor. Yeni hata kodları gözlem paketini, bağlantıyı, kesilmiş çıktıyı, geçersiz JSON'u ve ilke/kanıt sözleşmesini ayırır. Anahtar, istek gövdesi ve ham model metni hata çıktısına yazılmaz. Adaptörün üç testi geçti; yerel erişim testinin yeniden çalışması açık yardımcı servisin kullandığı 8787 portu nedeniyle başlatılamadı. Önceki başarılı test sonucu yeni saha denemesi yerine geçmez.

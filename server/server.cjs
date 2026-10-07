@@ -24,15 +24,19 @@ const server = http.createServer(async (req,res) => {
   if (req.method !== 'POST' || req.url !== '/analyze') return reply(res,404,{error:'Bulunamadı.'});
   if (busy || calls >= 20) return reply(res,429,{error:'Servis meşgul veya bu oturumdaki 20 istek sınırı doldu.'});
   busy = true;
+  let stage='request';
   try {
     const chunks = []; let size = 0;
     for await (const chunk of req) { size += chunk.length; if (size > 350000) throw new Error('Paket çok büyük.'); chunks.push(chunk); }
     const data = JSON.parse(Buffer.concat(chunks).toString('utf8'));
     if (data.consent !== true) return reply(res,400,{error:'Gönderim onayı eksik.'});
+    stage='snapshot';
     const snapshot = validateSnapshot(data.snapshot);
     calls++;
     if (provider === 'groq') {
+      stage='groq_connection';
       const result = await analyzeGroq({ apiKey:process.env.GROQ_API_KEY,model,snapshot,instructions,schema });
+      stage='groq_evidence';
       const checked = validateResult(result.raw,snapshot);
       return reply(res,200,{ ...checked,provider,model:result.model,seed:result.seed,systemFingerprint:result.systemFingerprint,
         temperature:0,promptVersion:'norman-static-small-v2',snapshotHash:hash(snapshot),requestId:result.requestId,
@@ -70,6 +74,18 @@ const server = http.createServer(async (req,res) => {
   } catch (error) {
     // Do not echo request bodies, upstream errors, API credentials or page data.
     if (error.safeProviderError) return reply(res,502,{error:error.message});
+    if (provider === 'groq') {
+      const reasons={ 'AI yanıt yapısı geçersiz.':'Altı ilke veya bulgu listesi biçimi geçersiz.',
+        'Altı ilke eksik.':'Altı Norman ilkesi tam ve benzersiz değil.',
+        'AI bulgusu geçersiz.':'Bulgu gerekçesi, şiddeti veya önerisi eksik.',
+        'İlke gerekçesi eksik.':'İlke gerekçesi veya kanıt seçicisi listesi eksik.',
+        'Geçersiz AI skoru.':'İlke skoru 0–100 aralığında değil.' };
+      const message=error.name==='TimeoutError'?'Groq isteği zaman aşımına uğradı.'
+        :stage==='snapshot'?'Gönderim önizlemesindeki gözlem paketi doğrulama kurallarını karşılamadı (SNAPSHOT_INVALID).'
+        :stage==='groq_evidence'?`Groq yanıtının kanıt kontrolü başarısız (GROQ_EVIDENCE_INVALID). ${reasons[error.message] || 'Yanıt sözleşmesi karşılanmadı.'}`
+        :'Groq ağına bağlantı veya yanıt okuma başarısız (GROQ_CONNECTION_FAILED).';
+      return reply(res,400,{error:message});
+    }
     reply(res,400,{error: error.name === 'TimeoutError' ? 'AI isteği zaman aşımına uğradı.' : provider === 'ollama' ? 'Yerel model bağlantısı veya yanıtı doğrulanamadı. Ollama açık mı ve model indirilmiş mi kontrol et. Otomatik tekrar yapılmadı.' : 'Gözlem veya AI yanıtı doğrulanamadı. Otomatik tekrar yapılmadı.'});
   } finally { busy = false; }
 });
