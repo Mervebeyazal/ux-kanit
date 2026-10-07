@@ -1,6 +1,6 @@
 # Manuel denetim — devam eden kayıt
 
-Kaynak: kullanıcının sohbet üzerinden bildirdiği gerçek klavye ve Windows Ekran Okuyucusu gözlemleri. Test sayfası: Acıbadem ana sayfası (önerilen adres https://www.acibadem.com.tr/). Chrome sürümü ve ekran okuyucu sürümü henüz kaydedilmedi. Bu belge tamamlanmış manuel görev raporu değildir.
+Kaynak: kullanıcının sohbet üzerinden bildirdiği gerçek klavye ve Windows Ekran Okuyucusu gözlemleri. Test sayfaları: Acıbadem ana sayfası (https://www.acibadem.com.tr/) ve görev bağlamında Ataşehir Hastanesi bilgi sayfası. Chrome sürümü ve ekran okuyucu sürümü henüz kaydedilmedi. Bu belge sınırlı örneklemli manuel görev ve karşılaştırma kaydıdır; kapsamlı erişilebilirlik denetimi değildir.
 
 ## Arama alanına erişim
 
@@ -15,9 +15,9 @@ Windows Ekran Okuyucusu ile alana odaklandığında kullanıcı 'Acıbademde ara
 | Odak görünürlüğü | Araç test etmiyor | Kullanıcı Tab ile ilerlerken odak çerçevesini görebildiğini doğruladı | Test edilen gezinimde kullanıcı bildirimiyle gözlendi |
 | Klavye tuzağı | Araç test etmiyor | Ayrı ölçüt yanıtı alınmadı | Değerlendirilmedi |
 
-## Henüz tamamlanmayan görev
+## Görevin ilk aşaması
 
-Yalnızca alanı bulmak ve duyurusunu dinlemek gözlendi. Hastane bilgisine klavye ve ekran okuyucuyla ulaşma görevi, sonucu ve engelleri henüz kaydedilmedi. Nihai karşılaştırmada yakalanan/kaçırılan/yanlış alarm ayrımı, doğrulanmış gözlemlerle tamamlanmalı.
+İlk aşamada alanı bulmak ve duyurusunu dinlemek gözlendi. Sonraki hastane bilgisine erişme görevinin sonucu ve ek karşılaştırmalar aşağıda kaydedildi. Kullanıcı diğer form adaylarını incelemeyi erteledi; kalan adaylar doğrulanmadı olarak tutulur.
 
 ### Hastane bilgi sayfasına ulaşma — yeni gözlem
 

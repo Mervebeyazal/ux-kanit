@@ -1,4 +1,4 @@
-# UX Kanıt — Kanıta bağlı AI ön değerlendirmesi (0.8.0)
+# UX Kanıt — Kanıta bağlı UX ön değerlendirmesi (0.8.2)
 
 Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
 
@@ -33,7 +33,31 @@ Görsel/gradyan arka plan, saydam renk, opaklık efekti, filtre, blend, transfor
 
 ## Henüz tamamlanmayanlar
 
-axe-core, etkileşim kanıtı ile Norman değerlendirmesinin tamamlanması, birleşik skorun tamamlanması, üç nihai site raporu, manuel ekran okuyucu testi, LLM tekrar ölçümleri, demo ve yansıtma notu sonraki adımlardadır. Ön testler docs/on-testler.md içinde; nihai doğrulama tamamlanmadı. 0.8.0 AI bağlantısı yerel testlerle geliştirildi; gerçek API çalışması henüz doğrulanmadı.
+Başarılı gerçek LLM analizi, altı ilkenin yeterli kanıtla değerlendirilmesi, birleşik skor, LLM tekrar ölçümleri ve gerçek LLM halüsinasyon kontrolü henüz tamamlanmadı. API isteği kota/bakiye veya hız sınırı hatasıyla sonuçlandı. Kullanıcının kararıyla LLM bölümü sona bırakıldı. axe-core entegre edilmedi; altı özel yerel kontrol tam WCAG 2.2 AA taraması değildir. Üç sitenin ön raporları mevcut, nihai LLM raporları bekleniyor. Demo senaryosu hazır; video henüz kaydedilmedi.
+
+## Doğrulama sonuçları
+
+Gerçek kullanıcı raporları ve kanıtlar [reports](reports/README.md) ve [manuel denetim](docs/manuel-denetim.md) belgelerinde saklanır. Ön raporların deterministik skorları Acıbadem 76.23, Hepsiburada 85.81, İBB 73.48'dir. Bunlar farklı sayfa anlık görüntüleridir; birbirleriyle tutarlılık testi sayılmaz. Ataşehir bilgi sayfasına bağlam yoluyla ilişkilendirilen ek 0.8.1 raporu 80.31 ön skor ve 81 aday içerir. Kontrast kapsamı yalnızca %28.13'tür. Skorlar formülden yeniden hesaplandı; bu işlem adayları kesin ihlal olarak doğrulamaz.
+
+| İstenen doğrulama | Gerçek sonuç | Durum / sınır |
+|---|---|---|
+| Aynı sayfada üç LLM analizi | Başarılı LLM yanıtı yok | Sapma hesaplanmadı; sıfır olduğu iddia edilmez |
+| Klavye + ekran okuyucu görevi | Kullanıcı fare kullanmadan Ataşehir Hastanesi bilgi sayfasına ulaştı; Tab odağını görebildiğini bildirdi | Kullanıcı bildirimi ve hedef ekran görüntüsü; tarayıcı/ekran okuyucu sürümü ve ses kaydı yok |
+| Araç / manuel karşılaştırma | Arama ve Mesajınız alanlarının amacı duyuruldu; telefon alanında yalnız 5XX biçimi duyuruldu | İlk iki alan tamamen adsızlık yorumu bakımından olası yanlış alarm; telefon etiketi adayı destekleniyor. Ad kaynakları DOM'da ayrıca doğrulanmalı |
+| LLM halüsinasyon kontrolü | Seçici/olgu doğrulama kodu yerel testlerden geçti | Gerçek LLM bulgusu yok; oran hesaplanmadı. Birim testi gerçek saha testi yerine geçmez |
+| Büyükanne senaryosu | Kullanıcı hastane bilgi sayfasında büyük telefon bilgisini zorlanmadan buldu | Yaşlı katılımcı testi değil; toplam gezinim süresi ölçülmedi |
+| Gece 3 senaryosu | Kullanıcı yaklaşık 3 dakika arayıp acil servis çalışma saatini bulamadı | Süre kullanıcı tahmini; bilginin tüm sitede yokluğunu veya servisin kapalı olduğunu kanıtlamaz. Yerel kontroller bunu yakalamıyor |
+
+Ana sayfada bağlantının yalnızca 'Detaylı Bilgi' diye duyurulması bağlamsal kullanılabilirlik adayıdır; kesin WCAG ihlali olarak sayılmadı. 81 adayın tamamı denetlenmediğinden genel doğruluk ve yanlış alarm yüzdesi hesaplanmadı. 0.8.1 vurgulama konum hatası gerçek görüntüyle kaydedildi; 0.8.2 güncel öğe konumunu takip eder. Yeniden test görüntüsünde çerçeve arama alanını doğru gösterdi.
+
+## Teslim dosyaları
+
+- GitHub: https://github.com/Mervebeyazal/ux-kanit — geliştirme aşamalarına ait birden fazla commit bulunur.
+- Üç kategori raporu ve ek manuel karşılaştırma: [Raporlar](reports/README.md).
+- Manuel görevler ve ekran görüntüleri: [Denetim kaydı](docs/manuel-denetim.md).
+- [Demo senaryosu ve kayıt adımları](docs/demo-senaryosu.md) — video teslimi bekleniyor.
+- [Yansıtma notu taslağı](docs/yansitma-notu.md) — öğrencinin okuyup kendi deneyimiyle doğrulaması gerekir.
+- [Son teslim kontrolü](docs/teslim-kontrol.md).
 
 ## AI yardımcı servisini çalıştırma
 
