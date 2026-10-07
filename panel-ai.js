@@ -3,6 +3,9 @@ const aiSend = document.querySelector('#ai-send');
 const aiConsent = document.querySelector('#ai-consent');
 const aiPreview = document.querySelector('#ai-preview');
 const aiResult = document.querySelector('#ai-result');
+const aiStatus = document.querySelector('#ai-status');
+// Keep feedback beside the AI button as well as at the top of the panel.
+new MutationObserver(() => { aiStatus.textContent=status.textContent; }).observe(status,{childList:true,characterData:true,subtree:true});
 let preparedAI = null;
 function normalizeSnapshot(raw) {
   return { snapshotVersion:raw.snapshotVersion, observationMode:raw.observationMode, viewport:raw.viewport,
@@ -39,18 +42,24 @@ aiSend.addEventListener('click',async () => {
   if (!/^[a-f0-9]{36}$/.test(pairing)) { status.textContent='Yardımcı servis terminalindeki yerel bağlantı kodunu gir. API anahtarını buraya girme.'; return; }
   aiSend.disabled=true; aiPrepare.disabled=true; button.disabled=true; exportButton.disabled=true;
   aiResult.textContent='';
+  status.textContent='Sayfanın onaylanan önizlemeyle eşleşmesi kontrol ediliyor…';
+  let waitTimer=null;
   try {
     const [tab]=await chrome.tabs.query({active:true,currentWindow:true});
     if (tab.id !== task.tabId || lastReport !== task.report) throw new Error('Analiz sayfası değişti; önizlemeyi yeniden hazırla.');
     const current=await readSnapshot(task.tabId);
     if (current.origin !== task.report.page.origin || JSON.stringify(normalizeSnapshot(current.snapshot)) !== JSON.stringify(task.snapshot)) throw new Error('Sayfa gözlemi değişti; önizlemeyi yeniden hazırla ve onayla.');
     status.textContent='Onaylanan yapı verileri OpenAI’a gönderiliyor. Bu işlem API kullanımına tabidir.';
+    const started=Date.now();
+    waitTimer=setInterval(() => {status.textContent=`AI yanıtı bekleniyor: ${Math.floor((Date.now()-started)/1000)} saniye. Bu aşamada düğmeye tekrar basma.`;},5000);
     const response=await fetch('http://127.0.0.1:8787/analyze', {
       method:'POST', headers:{'Content-Type':'application/json','X-UX-Pairing':pairing},
       body:JSON.stringify({consent:true,snapshot:task.snapshot}), signal:AbortSignal.timeout(70000)
     });
     const data=await response.json();
+    clearInterval(waitTimer);waitTimer=null;
     if (!response.ok) throw new Error(data.error || 'AI bağlantısı başarısız.');
+    status.textContent='AI yanıtı alındı; bulgular güncel sayfada doğrulanıyor…';
     const after=await readSnapshot(task.tabId);
     const currentBySelector=new Map(after.snapshot.elements.map(item => [item.selector,item]));
     const accepted=[], rejected=[...data.rejected];
@@ -105,6 +114,7 @@ aiSend.addEventListener('click',async () => {
   } catch(error) {
     status.textContent=error instanceof TypeError ? 'Yardımcı servise ulaşılamadı. Terminalde servisin açık olduğunu kontrol et.' : `AI analizi tamamlanamadı: ${error.message}`;
   } finally {
+    clearInterval(waitTimer);
     button.disabled=false;aiPrepare.disabled=false;exportButton.disabled=!lastReport;
     preparedAI=null;aiSend.disabled=true;aiConsent.checked=false;
   }
