@@ -1,4 +1,7 @@
 async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetchImpl = fetch }) {
+  const elements=snapshot?.elements || [];
+  const aliases=new Map(elements.map((item,index)=>[`E${index+1}`,item.selector]));
+  const compactSnapshot=snapshot ? {...snapshot,elements:elements.map((item,index)=>({...item,selector:`E${index+1}`}))} : snapshot;
   // Six required properties avoid an unconstrained array of principle results.
   const names=schema?.properties?.principles?.items?.properties?.principle?.enum;
   let responseSchema=schema;
@@ -8,7 +11,7 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
     const rating={type:'object',properties,required:Object.keys(properties),additionalProperties:false};
     responseSchema={...schema,properties:{...schema.properties,
       principles:{type:'object',properties:Object.fromEntries(names.map(name=>[name,rating])),required:names,additionalProperties:false}}};
-    const selectors=snapshot.elements.map(item=>item.selector);
+    const selectors=[...aliases.keys()];
     if(selectors.length) {
       rating.properties={...rating.properties,observationSelectors:{type:'array',items:{type:'string',enum:selectors}}};
       const finding=schema.properties.findings.items;
@@ -21,7 +24,7 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
     headers:{'Content-Type':'application/json',Authorization:`Bearer ${apiKey}`},
     body:JSON.stringify({ model, temperature:0, seed:42, max_completion_tokens:3500,
       reasoning_effort:'low', stream:false,
-      messages:[{role:'system',content:instructions + ' principles alanını altı ilke adını anahtar olarak içeren bir nesne olarak döndür; her anahtarda score, rationale, observationSelectors olsun. Seçicileri birebir kopyala, kısaltma. hasName=true adsızlık değildir. uiToken=null veya metnin anonimleştirilmesi, öğenin sayfada metinsiz ya da simgesiz olduğu anlamına gelmez. MASKED gizlilik işaretidir; gerçek alanın gizli olduğunu veya doğrulamasının eksik olduğunu göstermez. Sağlarlık eylem olanaklarının algılanabilirliğidir, hata önleme ile karıştırma. Bulgular yalnız hasName=false veya 24 piksel altındaki width/height ile temellendirilebilir; bu adaylar kesin ihlal değildir. findings her zaman bir dizi olsun; desteklenmiş sorun yoksa boş dizi kullan. Bu küçük örneklem için en fazla 3 bulgu üret; ilke gerekçeleri ve öneriler kısa olsun.'},{role:'user',content:JSON.stringify(snapshot)}],
+      messages:[{role:'system',content:instructions + ' principles alanını altı ilke adını anahtar olarak içeren bir nesne olarak döndür; her anahtarda score, rationale, observationSelectors olsun. Bu pakette selector kısa öğe kodudur (E1 vb); kodu birebir kullan. Servis kodu özgün DOM seçicisine çevirecek. hasName=true adsızlık değildir. uiToken=null veya metnin anonimleştirilmesi, öğenin sayfada metinsiz ya da simgesiz olduğu anlamına gelmez. MASKED gizlilik işaretidir; gerçek alanın gizli olduğunu veya doğrulamasının eksik olduğunu göstermez. Sağlarlık eylem olanaklarının algılanabilirliğidir, hata önleme ile karıştırma. Bulgular yalnız hasName=false veya 24 piksel altındaki width/height ile temellendirilebilir; bu adaylar kesin ihlal değildir. findings her zaman bir dizi olsun; desteklenmiş sorun yoksa boş dizi kullan. Bu küçük örneklem için en fazla 3 bulgu üret; ilke gerekçeleri ve öneriler kısa olsun.'},{role:'user',content:JSON.stringify(compactSnapshot)}],
       response_format:{type:'json_schema',json_schema:{name:'norman_audit',strict:true,schema:responseSchema}} })
   });
   if (!response.ok) {
@@ -44,6 +47,10 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
   if (names && raw.principles && !Array.isArray(raw.principles)) {
     raw={...raw,principles:names.map(principle=>({ ...raw.principles[principle],principle }))};
   }
+  const restore=value=>aliases.get(value) || value;
+  if(Array.isArray(raw.principles)) raw.principles=raw.principles.map(p=>({...p,
+    observationSelectors:Array.isArray(p.observationSelectors)?p.observationSelectors.map(restore):p.observationSelectors}));
+  if(Array.isArray(raw.findings)) raw.findings=raw.findings.map(f=>({...f,selector:restore(f.selector)}));
   return {raw,model:result.model || model,
     requestId:result.id,usage:result.usage,seed:42,systemFingerprint:result.system_fingerprint ?? null};
 }

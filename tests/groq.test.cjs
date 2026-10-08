@@ -26,8 +26,8 @@ test('Groq selectors constrained to actual snapshot options',async()=>{
   const selector='html > body:nth-of-type(1) > button:nth-of-type(1)';
   await analyzeGroq({schema,snapshot:{elements:[{selector}]},fetchImpl:async(url,opts)=>{
     const format=JSON.parse(opts.body).response_format.json_schema.schema;
-    assert.deepEqual(format.properties.findings.items.properties.selector.enum,[selector]);
-    assert.deepEqual(format.properties.principles.properties.Görünürlük.properties.observationSelectors.items.enum,[selector]);
+    assert.deepEqual(format.properties.findings.items.properties.selector.enum,['E1']);
+    assert.deepEqual(format.properties.principles.properties.Görünürlük.properties.observationSelectors.items.enum,['E1']);
     return {ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:'{}'}}]})};
   }});
 });
@@ -38,3 +38,17 @@ test('Groq truncated response rejected',async()=>{
   await assert.rejects(analyzeGroq({fetchImpl:async()=>({ok:true,json:async()=>({choices:[{finish_reason:'length',message:{content:'{}'}}]})})}));
 });
 
+
+test('compact aliases round-trip and unknown IDs remain rejectable',async()=>{
+  const {schema,principles}=require('../server/contract.cjs');
+  const selector='html > body:nth-of-type(1) > button:nth-of-type(1)';
+  const result=await analyzeGroq({schema,snapshot:{elements:[{selector,facts:{hasName:false}}]},fetchImpl:async(url,opts)=>{
+    const body=JSON.parse(opts.body);
+    assert.equal(JSON.parse(body.messages[1].content).elements[0].selector,'E1');
+    assert.equal(body.messages[1].content.includes(selector),false);
+    const ratings=Object.fromEntries(principles.map(p=>[p,{score:null,rationale:'test',observationSelectors:['E1','E99']}]));
+    return {ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:JSON.stringify({principles:ratings,findings:[{selector:'E1'}]})}}]})};
+  }});
+  assert.equal(result.raw.findings[0].selector,selector);
+  assert.deepEqual(result.raw.principles[0].observationSelectors,[selector,'E99']);
+});

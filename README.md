@@ -198,3 +198,7 @@ Olgu eşleşmesi tek başına kabul için yeterli değildir. Bu muhafazakâr sü
 Eski üç gerçek yanıt yeni doğrulayıcıyla çevrimdışı yeniden incelendi: her koşuda 0 kabul, 3 ret, skor null. [Yeniden doğrulama](reports/acibadem-groq-revalidation-0.8.8.json) yeni API denemesi değildir; ham yanıtlar korunur. 40 hesaplama/adaptör/kanıt testi geçti. HTTP erişim testi açık 8787 servisi nedeniyle bu çalıştırmaya dahil edilmedi; daha önce geçti. 0.8.8'in yeni gerçek model yanıtıyla yeniden denemesi bekliyor.
 
 Teslim sınırı: üç sitenin yerel raporları var; yalnız sağlık sitesinde gerçek LLM tekrarları var. Altı ilke ve birleşik skor, diğer iki sitenin LLM saha raporları, yeni korumanın gerçek yeniden denemesi ve nihai video dosyası/bağlantısı hâlâ eksik. Bu proje tam teslim olarak onaylanmadı.
+
+### 0.8.10 — kısa öğe kodları
+
+0.8.9 denemesinde kullanıcı yeniden HTTP 413 bildirdi. Uzun seçici enumlarının şemada altı kez tekrarı paket boyutunu artırdı. Groq taşıma paketinde seçiciler artık E1…E20 olarak kodlanır; izinli yanıt kodları bu listeden seçilir. Servis yanıtı özgün seçicilere dönüştürür, sonra aynı snapshot/olgu/sorun temeli doğrulamasını uygular. Bilinmeyen kodlar gerçek seçiciye dönüşmez, reddedilebilir kalır. Önizleme ve raporda insanın kontrol edebilmesi için özgün seçiciler bulunur; dışarı giden pakette aynı öğe/olgular kısa kodla temsil edilir. Prompt norman-static-small-v5; altı adaptör testi geçti. Yeni gerçek deneme bekleniyor.
