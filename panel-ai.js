@@ -13,7 +13,13 @@ function normalizeSnapshot(raw) {
 }
 async function readSnapshot(tabId) {
   await chrome.scripting.executeScript({ target:{ tabId }, files:['control-name.js','ai-snapshot.js'] });
-  const [response] = await chrome.scripting.executeScript({ target:{tabId}, func:() => ({ origin:location.origin, snapshot:globalThis.UXSnapshot() }) });
+  const activeTask=taskEvidence?.tabId===tabId ? taskEvidence : null;
+  const [response] = await chrome.scripting.executeScript({ target:{tabId}, args:[activeTask?.selector || null],func:(selector) => ({ origin:location.origin, snapshot:globalThis.UXSnapshot(selector) }) });
+  if(activeTask && response.result.origin===activeTask.origin) {
+    const item=response.result.snapshot.elements.find(el=>el.selector===activeTask.selector);
+    if(!item)throw new Error('Görev hedefi değişti; gözlemleri yeniden bağla.');
+    item.facts={...item.facts,taskEvidenceSource:'user-confirmed',...activeTask.observations};
+  }
   return response.result;
 }
 function resetAI() {
@@ -49,7 +55,7 @@ aiSend.addEventListener('click',async () => {
     if (tab.id !== task.tabId || lastReport !== task.report) throw new Error('Analiz sayfası değişti; önizlemeyi yeniden hazırla.');
     const current=await readSnapshot(task.tabId);
     if (current.origin !== task.report.page.origin || JSON.stringify(normalizeSnapshot(current.snapshot)) !== JSON.stringify(task.snapshot)) throw new Error('Sayfa gözlemi değişti; önizlemeyi yeniden hazırla ve onayla.');
-    status.textContent='Onaylanan yapı verileri OpenAI’a gönderiliyor. Bu işlem API kullanımına tabidir.';
+    status.textContent='Onaylanan yapı verileri seçilen modele gönderiliyor. Bu işlem API kullanımına tabidir.';
     const started=Date.now();
     waitTimer=setInterval(() => {status.textContent=`AI yanıtı bekleniyor: ${Math.floor((Date.now()-started)/1000)} saniye. Bu aşamada düğmeye tekrar basma.`;},5000);
     const response=await fetch('http://127.0.0.1:8787/analyze', {
@@ -81,12 +87,13 @@ aiSend.addEventListener('click',async () => {
       status:llm.complete?'provisional':'insufficient_principle_coverage',weights:{deterministic:.6,llm:.4}};
     task.report.privacy.localOnly=false; task.report.privacy.llmSendConsent=true;
     task.report.privacy.llmDestination=data.provider==='ollama'?'local-model-service':data.provider==='groq'?'groq-api':'openai-api';
-    task.report.privacy.llmPayloadScope='fixed UI tokens and anonymous structure; form values masked';
+    task.report.privacy.llmPayloadScope='fixed UI tokens, anonymous structure and optional user-confirmed task enums; form values masked';
+    task.report.privacy.userTaskObservationsIncluded=!!taskEvidence;
     task.report.findings=task.report.findings.filter(item=>item.source!=='llm').concat(accepted);
     scores.querySelector('p').textContent=`Yerel skor aday oranına dayalıdır. AI statik ön skoru: ${llmScore===null?'Kanıt yetersiz':llmScore.toFixed(1)+' / 100'} (${scored.length}/6 ilke). Birleşik toplam: ${task.report.scores.combined.score===null?'İlke kapsamı eksik':task.report.scores.combined.score.toFixed(1)+' / 100'}.`;
-    const title=document.createElement('h2'); title.textContent=`AI statik ön skor: ${llmScore===null?'Değerlendirilemedi':llmScore.toFixed(1)+' / 100'} (${scored.length}/6 ilke)`;
+    const title=document.createElement('h2'); title.textContent=`AI ön skor: ${llmScore===null?'Değerlendirilemedi':llmScore.toFixed(1)+' / 100'} (${scored.length}/6 ilke)`;
     aiResult.append(title);
-    const note=document.createElement('p'); note.textContent='Bu skor yalnızca kanıtı yeterli statik ilkelerin ortalaması. Geri bildirim davranışı gözlenmedi; birleşik toplam için altı ilkenin tamamı gerekir. Yorumlar manuel doğrulama bekliyor.'; aiResult.append(note);
+    const note=document.createElement('p'); note.textContent=taskEvidence?'Bu değerlendirme anonim DOM ölçümleri ve kullanıcı tarafından onaylanan menü görevi gözlemlerine dayanır. Görev gözlemleri otomatik ölçüm değildir; puan tüm siteyi temsil etmez.':'Bu skor yalnızca kanıtı yeterli statik ilkelerin ortalaması. Geri bildirim davranışı gözlenmedi; birleşik toplam için altı ilkenin tamamı gerekir. Yorumlar manuel doğrulama bekliyor.'; aiResult.append(note);
     for (const p of principles) {
       const paragraph=document.createElement('p'); paragraph.textContent=`${p.principle}: ${p.score===null?'Kanıt yetersiz':p.score.toFixed(1)+' / 100'}\n${p.rationale}`; aiResult.append(paragraph);
     }
@@ -120,3 +127,4 @@ aiSend.addEventListener('click',async () => {
     preparedAI=null;aiSend.disabled=true;aiConsent.checked=false;
   }
 });
+

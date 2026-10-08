@@ -16,3 +16,21 @@ test('six principles and bounded scores are required',()=>{const input=raw();inp
 test('snapshot hash changes with evidence',()=>{const first=snapshot(),second=snapshot();second.elements[0].facts.width=21;assert.notEqual(hash(first),hash(second));});
 test('positive name cannot underpin a missing-name claim',()=>{const page=snapshot();page.elements[0].facts.hasName=true;const input=raw();input.findings=[finding({factValueJSON:'true'})];const result=validateResult(input,page);assert.equal(result.findings.length,0);assert.equal(result.rejected[0].reason,'insufficient_issue_evidence');assert.equal(result.principles[0].score,null);});
 test('UI token alone cannot evidence invisible or missing visual control',()=>{const page=snapshot();page.elements[0].facts.uiToken='yardım';const input=raw();input.findings=[finding({factKey:'uiToken',factValueJSON:'"yardım"'})];assert.equal(validateResult(input,page).rejected[0].reason,'insufficient_issue_evidence');});
+
+function taskSnapshot(){const s=snapshot();Object.assign(s.elements[0].facts,{taskEvidenceSource:'user-confirmed',taskVisibility:'good',taskFeedback:'good',taskConstraints:'problem',taskMapping:'good',taskConsistency:'good',taskAffordance:'good'});return s;}
+test('confirmed task evidence permits feedback and complete coverage without fabricating scores',()=>{
+  const s=validateSnapshot(taskSnapshot());const result=validateResult(raw(),s);
+  assert.equal(result.complete,true);assert.equal(result.principles[1].score,80);
+  assert.equal(result.principles[1].evidenceSource,'user-confirmed-task-observation');
+  s.elements[0].facts.taskFeedback='untested';assert.equal(validateResult(raw(),s).principles[1].score,null);
+});
+test('task observations reject arbitrary text and partial evidence groups',()=>{
+  const s=taskSnapshot();s.elements[0].facts.taskFeedback='private free text';assert.throws(()=>validateSnapshot(s));
+  const partial=taskSnapshot();delete partial.elements[0].facts.taskMapping;assert.throws(()=>validateSnapshot(partial));
+});
+test('task issue requires negative observation and matching principle',()=>{
+  const s=taskSnapshot();const input=raw();input.findings=[finding({principle:'Kısıtlar',factKey:'taskConstraints',factValueJSON:'"problem"'})];
+  const result=validateResult(input,s);assert.equal(result.findings[0].evidenceSource,'user-confirmed-task-observation');
+  input.findings=[finding({principle:'Görünürlük',factKey:'taskConstraints',factValueJSON:'"problem"'})];assert.equal(validateResult(input,s).findings.length,0);
+  input.findings=[finding({factKey:'taskVisibility',factValueJSON:'"good"'})];assert.equal(validateResult(input,s).findings.length,0);
+});

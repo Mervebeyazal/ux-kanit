@@ -94,3 +94,13 @@ Kullanıcı [Mesajınız alanının vurgulandığı görüntüyü](evidence/acib
 | Tür | Alan | Manuel gözlem | Sınır |
 |---|---|---|---|
 | Olası yanlış alarm | Mesajınız | Ekran okuyucu 'Mesajınız' dedi | Erişilebilir ad tamamen yok denemez; etiket ilişkisinin kaynağı doğrulanmadı |
+
+## İBB menü için ek klavye gözlemi
+
+Kullanıcı Tab ile İstanbul öğesine ulaştı ve Esc sonrasında görünür değişiklik olmadığını bildirdi. [Görüntü](evidence/ibb-istanbul-keyboard-focus.png) İstanbul öğesinde belirgin siyah odak çerçevesi gösteriyor; açılmış alt menü görünmüyor. Bu nedenle önceki “açıldı” ifadesi menünün açıldığına kanıt sayılmadı; yalnız klavye erişimi ve görünür odak doğrulandı. Kapalı görünen bir menüde Esc'nin değişiklik oluşturmaması kusur değildir. Enter/Space ile açılma ve açık durumdan kapanma henüz doğrulanmadı. Bu gözlemden Geri Bildirim skoru üretilmedi.
+
+Enter adımından sonra kullanıcı [açık menü görüntüsünü](evidence/ibb-istanbul-menu-open.png) paylaştı. Önceki odak görüntüsünde aşağı olan ok yukarı dönmüş; Tarihçe, İstanbulu Seyret, Harita İstanbul ve İstanbul Senin seçenekleri görünür hale gelmiş. Görev bağlamı ve iki görüntü, kullanıcı etkinleştirmesi sonrası görünür durum değişimini destekliyor. Bu, yalnız bu menü için Geri Bildirim kanıtıdır; ekran okuyucu durum duyurusu, DOM aria-expanded ilişkisi, odak hareketi ve açık menünün Esc ile kapanması henüz doğrulanmadı. Sayfanın tüm Geri Bildirim ilkesine genellenmedi ve henüz otomatik LLM paketine eklenmedi.
+
+Kullanıcı menü açıkken Esc'ye bastığında seçeneklerin aynı kaldığını bildirdi. Açık durumda Esc ile görünür kapanma gözlenmedi. Sonuç, kullanıcının beyanıdır; bu adımın ayrı görüntüsü veya DOM kaydı yoktur. Kapatma davranışı için UX adayı olarak kaydedildi; etkileşim bileşeninin semantiği ve diğer kapatma yolları incelenmeden kesin WCAG ihlali veya klavye tuzağı ilan edilmedi. Enter ile tekrar etkinleştirme henüz denenmedi.
+
+Kullanıcı İstanbul öğesine tekrar Enter uyguladığında menünün kapandığını bildirdi. Görev özeti: Tab ile odak, Enter ile açılma, seçeneklerin ve yukarı okun görünmesi, açık durumda Esc ile değişiklik olmaması, tekrar Enter ile kapanma. Alternatif klavye kapatma yolu bulunduğu için bu gözlem klavye tuzağı değildir. Son iki adım kullanıcı beyanıdır. Bulgular tüm siteye genellenmedi; altı ilke için otomatik skor üretilmesini tek başına sağlamaz.

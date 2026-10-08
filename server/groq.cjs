@@ -16,7 +16,7 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
       rating.properties={...rating.properties,observationSelectors:{type:'array',items:{type:'string',enum:selectors}}};
       const finding=schema.properties.findings.items;
       responseSchema.properties.findings={type:'array',items:{...finding,properties:{...finding.properties,
-        selector:{type:'string',enum:selectors},factKey:{type:'string',enum:['hasName','width','height']}}}};
+        selector:{type:'string',enum:selectors},factKey:{type:'string',enum:['hasName','width','height','taskVisibility','taskFeedback','taskConstraints','taskMapping','taskConsistency','taskAffordance']}}}};
     }
   }
   const jsonMode=process.env.UX_GROQ_JSON_MODE==='object';
@@ -25,7 +25,7 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
     headers:{'Content-Type':'application/json',Authorization:`Bearer ${apiKey}`},
     body:JSON.stringify({ model, temperature:0, seed:42, max_completion_tokens:3500,
       reasoning_effort:'low', stream:false,
-      messages:[{role:'system',content:instructions + (jsonMode ? ' JSON yanıtını bu şemaya uygun üret: '+JSON.stringify(responseSchema) : '') + ' principles alanını altı ilke adını anahtar olarak içeren bir nesne olarak döndür; her anahtarda score, rationale, observationSelectors olsun. Bu pakette selector kısa öğe kodudur (E1 vb); kodu birebir kullan. Servis kodu özgün DOM seçicisine çevirecek. hasName=true adsızlık değildir. uiToken=null veya metnin anonimleştirilmesi, öğenin sayfada metinsiz ya da simgesiz olduğu anlamına gelmez. MASKED gizlilik işaretidir; gerçek alanın gizli olduğunu veya doğrulamasının eksik olduğunu göstermez. Sağlarlık eylem olanaklarının algılanabilirliğidir, hata önleme ile karıştırma. Bulgular yalnız hasName=false veya 24 piksel altındaki width/height ile temellendirilebilir; bu adaylar kesin ihlal değildir. findings her zaman bir dizi olsun; desteklenmiş sorun yoksa boş dizi kullan. Bu küçük örneklem için en fazla 3 bulgu üret; ilke gerekçeleri ve öneriler kısa olsun.'},{role:'user',content:JSON.stringify(compactSnapshot)}],
+      messages:[{role:'system',content:instructions + (jsonMode ? ' JSON yanıtını bu şemaya uygun üret: '+JSON.stringify(responseSchema) : '') + ' principles alanını altı ilke adını anahtar olarak içeren bir nesne olarak döndür; her anahtarda score, rationale, observationSelectors olsun. Bu pakette selector kısa öğe kodudur (E1 vb); kodu birebir kullan. Servis kodu özgün DOM seçicisine çevirecek. hasName=true adsızlık değildir. uiToken=null veya metnin anonimleştirilmesi, öğenin sayfada metinsiz ya da simgesiz olduğu anlamına gelmez. MASKED gizlilik işaretidir; gerçek alanın gizli olduğunu veya doğrulamasının eksik olduğunu göstermez. Sağlarlık eylem olanaklarının algılanabilirliğidir, hata önleme ile karıştırma. Bulgular yalnız hasName=false veya 24 piksel altındaki width/height ile temellendirilebilir; bu adaylar kesin ihlal değildir. findings her zaman bir dizi olsun; desteklenmiş sorun yoksa boş dizi kullan. taskEvidenceSource=user-confirmed ise taskVisibility, taskFeedback, taskConstraints, taskMapping, taskConsistency, taskAffordance kullanıcı görev gözlemleridir; sırasıyla altı ilkeye karşılık gelir. good olumlu gözlem, problem sorun adayı, untested kanıt yok demektir. Bu gözlemleri otomatik ölçüm gibi anlatma. Geri Bildirim için taskFeedback gözlendiyse puan verebilirsin. Her good/problem gözlemi ilgili ilkenin görev kapsamındaki değerlendirmesi için kullanılabilir; bütün siteye genelleme. Görev sorun bulgusu yalnız ilgili task alanı problem değerine dayanır. taskConstraints sorusu açık menünün Esc ile kapanmasıdır; Enter ile açılıp kapandığı ayrıca gözlenmiştir, klavye tuzağı ilan etme. Bu küçük örneklem için en fazla 3 bulgu üret; ilke gerekçeleri ve öneriler kısa olsun.'},{role:'user',content:JSON.stringify(compactSnapshot)}],
       response_format:jsonMode ? {type:'json_object'} : {type:'json_schema',json_schema:{name:'norman_audit',strict:true,schema:responseSchema}} })
   });
   if (!response.ok) {
@@ -70,6 +70,7 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
     requestId:result.id,usage:result.usage,seed:42,systemFingerprint:result.system_fingerprint ?? null};
 }
 module.exports={analyzeGroq};
+
 
 
 

@@ -1,5 +1,5 @@
 // Only fixed UI tokens and structural facts leave the page; never raw text.
-globalThis.UXSnapshot = () => {
+globalThis.UXSnapshot = (preferredSelector=null) => {
   if (!/^https?:$/.test(location.protocol) || document.querySelector('input[type="password"]')) throw new Error('Bu sayfada AI analizi engellendi.');
   const tokens = new Map(['ara', 'arama', 'randevu al', 'doktor bul', 'hastane bul', 'giriş yap', 'üye ol', 'menü', 'geri', 'ileri', 'detaylı bilgi', 'iletişim', 'yardım', 'sepete ekle', 'satın al', 'gönder', 'kapat'].map(text => [text, text]));
   function selectorFor(element) {
@@ -16,7 +16,9 @@ globalThis.UXSnapshot = () => {
     return rect.width > 0 && rect.height > 0 && style.visibility === 'visible' && style.opacity !== '0' &&
       !element.closest('[aria-hidden="true"], [inert], [contenteditable]:not([contenteditable="false"])');
   });
-  const elements = eligible.slice(0, 20).map(element => {
+  const preferred=preferredSelector ? document.querySelector(preferredSelector) : null;
+  const sample=preferred && eligible.includes(preferred) ? [preferred,...eligible.filter(el=>el!==preferred)] : eligible;
+  const elements = sample.slice(0, 20).map(element => {
     const field = element.matches('input, textarea, select');
     const rect = element.getBoundingClientRect();
     const style = getComputedStyle(element);
