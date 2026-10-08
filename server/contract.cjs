@@ -45,6 +45,11 @@ function validateResult(raw, snapshot) {
     if (!Object.hasOwn(observed.facts,item.factKey) || JSON.stringify(observed.facts[item.factKey]) !== item.factValueJSON) {
       rejected.push({ reason: 'unsupported_fact', finding: item }); continue;
     }
+    // A matched positive name or a UI token does not evidence a defect.
+    // Conservative scope: only absent name sources or small bounds can underpin candidates.
+    const issueBasis=(item.factKey==='hasName' && observed.facts.hasName===false) ||
+      (['width','height'].includes(item.factKey) && observed.facts[item.factKey]>0 && observed.facts[item.factKey]<24);
+    if (!issueBasis) { rejected.push({reason:'insufficient_issue_evidence',finding:item}); continue; }
     if (!principles.includes(item.principle) || !['Kritik','Yüksek','Orta','Düşük'].includes(item.severity) || !item.title || !item.rationale || !item.recommendation) throw new Error('AI bulgusu geçersiz.');
     accepted.push({ ...item, source: 'llm', rule: `Norman: ${item.principle}`, evidence: `${item.factKey} = ${item.factValueJSON}`,
       validationStatus: 'fact_matched_interpretation_pending_manual_review' });

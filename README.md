@@ -1,4 +1,4 @@
-# UX Kanıt — Kanıta bağlı UX ön değerlendirmesi (0.8.3)
+# UX Kanıt — Kanıta bağlı UX ön değerlendirmesi (0.8.8)
 
 Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
 
@@ -33,7 +33,7 @@ Görsel/gradyan arka plan, saydam renk, opaklık efekti, filtre, blend, transfor
 
 ## Henüz tamamlanmayanlar
 
-Başarılı gerçek LLM analizi, altı ilkenin yeterli kanıtla değerlendirilmesi, birleşik skor, LLM tekrar ölçümleri ve gerçek LLM halüsinasyon kontrolü henüz tamamlanmadı. API isteği kota/bakiye veya hız sınırı hatasıyla sonuçlandı. Kullanıcının kararıyla LLM bölümü sona bırakıldı. axe-core entegre edilmedi; altı özel yerel kontrol tam WCAG 2.2 AA taraması değildir. Üç sitenin ön raporları mevcut, nihai LLM raporları bekleniyor. Demo senaryosu hazır; video henüz kaydedilmedi.
+Groq ile üç gerçek LLM yanıtı ve tekrar ölçümü alındı; üç benzersiz hedef görsel olarak doğrulandı. Kanıtsız AI yorumları tespit edildi ve 0.8.8 korumasıyla eski yanıtların yeniden doğrulamasında reddedildi. Altı ilkenin yeterli kanıtla değerlendirilmesi ve birleşik skor hâlâ tamamlanmadı. axe-core entegre edilmedi; altı özel yerel kontrol tam WCAG 2.2 AA taraması değildir. Üç sitenin ön raporları mevcut, nihai LLM raporları bekleniyor. Kullanıcı birleşik videonun 3:10 olduğunu bildirdi; birleşik dosya ve paylaşım bağlantısı henüz teslim kaydına eklenmedi.
 
 ## Doğrulama sonuçları
 
@@ -189,3 +189,12 @@ Kullanıcı Groq yanıtının ilke/bulgu listesi biçimi kontrolünde reddedildi
 Üç başarılı gerçek Groq yanıtı aynı snapshot/model/prompt/sıcaklık/seed ile alındı. Başlangıç statik skorları 70, 63.33, 63.33; aralık 6.67 puan, standart sapma 3.14. Görünürlük aralığı 0, Kısıtlar ve Eşleme aralığı 10 puan; diğer ilkeler yetersiz kanıt nedeniyle karşılaştırılmadı. Sağlayıcı altyapı parmak izleri farklı. Önceki 'başarılı yanıt yok / sapma ölçülmedi' açıklamaları bu güncellemeden önceki durumu anlatır.
 
 Seçici eşleşmesi 9 öneride 0 örneklem dışı seçici gösterdi; ancak dokuz yorum da verilen olguyla gerekçelendirilemedi. Özellikle hasName=true ile 'isim yok' iddiası çelişiyor. Bu nedenle bu skorlar nihai doğrulanmış UX puanı değildir. Düzeltme ve yeniden ölçüm bekliyor; altı ilke ve birleşik skor hâlâ tamamlanmadı. Ayrıntılar ve ham raporlar: [LLM doğrulama kaydı](docs/llm-dogrulama.md).
+
+
+## 0.8.8 — kanıtsız sorun iddialarını reddetme
+
+Olgu eşleşmesi tek başına kabul için yeterli değildir. Bu muhafazakâr sürümde aday sorun temeli yalnız hasName=false veya 24 CSS px altındaki pozitif width/height ölçümü olabilir. hasName=true ve uiToken üzerinden sorun iddiası üretilirse insufficient_issue_evidence gerekçesiyle reddedilir; ilgili ilke puanı null olur. Küçük hedef ve ad yokluğu adayları yine manuel yorum doğrulaması gerektirir. Bu dar kural kapsamı azaltır; altı Norman ilkesinin tam analizi değildir.
+
+Eski üç gerçek yanıt yeni doğrulayıcıyla çevrimdışı yeniden incelendi: her koşuda 0 kabul, 3 ret, skor null. [Yeniden doğrulama](reports/acibadem-groq-revalidation-0.8.8.json) yeni API denemesi değildir; ham yanıtlar korunur. 40 hesaplama/adaptör/kanıt testi geçti. HTTP erişim testi açık 8787 servisi nedeniyle bu çalıştırmaya dahil edilmedi; daha önce geçti. 0.8.8'in yeni gerçek model yanıtıyla yeniden denemesi bekliyor.
+
+Teslim sınırı: üç sitenin yerel raporları var; yalnız sağlık sitesinde gerçek LLM tekrarları var. Altı ilke ve birleşik skor, diğer iki sitenin LLM saha raporları, yeni korumanın gerçek yeniden denemesi ve nihai video dosyası/bağlantısı hâlâ eksik. Bu proje tam teslim olarak onaylanmadı.

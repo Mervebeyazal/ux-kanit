@@ -1,0 +1,194 @@
+{
+  "method": "offline revalidation of existing model responses; no new API call",
+  "runs": [
+    {
+      "run": 1,
+      "originalRequestId": "chatcmpl-6f49c025-9a5b-4c54-994d-e9ec4a516cee",
+      "originalPromptVersion": "norman-static-small-v3",
+      "accepted": 0,
+      "rejected": 3,
+      "score": null,
+      "principles": [
+        {
+          "score": null,
+          "rationale": "Buton ve linklerin görsel/etiket eksikliği var.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(1)"
+          ],
+          "principle": "Görünürlük",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "İnteraksiyon gözlemlenmedi.",
+          "observationSelectors": [],
+          "principle": "Geri Bildirim",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Linklerin görsel eksikliği kullanıcıyı yönlendirme konusunda sınırlıyor.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(3)"
+          ],
+          "principle": "Kısıtlar",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Simge ve metin eşleşmesi eksik.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(4)"
+          ],
+          "principle": "Eşleme",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yeterli veri yok.",
+          "observationSelectors": [],
+          "principle": "Tutarlılık",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yeterli veri yok.",
+          "observationSelectors": [],
+          "principle": "Sağlarlık",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "reasons": [
+        "insufficient_issue_evidence",
+        "insufficient_issue_evidence",
+        "insufficient_issue_evidence"
+      ]
+    },
+    {
+      "run": 2,
+      "originalRequestId": "chatcmpl-e6096a9e-8da0-4b0f-9e07-015f0fbc1c23",
+      "originalPromptVersion": "norman-static-small-v3",
+      "accepted": 0,
+      "rejected": 3,
+      "score": null,
+      "principles": [
+        {
+          "score": null,
+          "rationale": "Bir butonun metni yok, görsel eksik. Kullanıcı yönlendirmesi kısıtlı.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(1)"
+          ],
+          "principle": "Görünürlük",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "İnteraksiyon gözlenmedi.",
+          "observationSelectors": [],
+          "principle": "Geri Bildirim",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "İletişim linki görseli yok, kullanıcı yönlendirmesi sınırlı.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(3)"
+          ],
+          "principle": "Kısıtlar",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yardım linki görsel eşlemesi eksik.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(4)"
+          ],
+          "principle": "Eşleme",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yeterli veri yok.",
+          "observationSelectors": [],
+          "principle": "Tutarlılık",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yeterli veri yok.",
+          "observationSelectors": [],
+          "principle": "Sağlarlık",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "reasons": [
+        "insufficient_issue_evidence",
+        "insufficient_issue_evidence",
+        "insufficient_issue_evidence"
+      ]
+    },
+    {
+      "run": 3,
+      "originalRequestId": "chatcmpl-b7347a17-3a1c-4ec4-8018-6f9119359ba5",
+      "originalPromptVersion": "norman-static-small-v3",
+      "accepted": 0,
+      "rejected": 3,
+      "score": null,
+      "principles": [
+        {
+          "score": null,
+          "rationale": "Buton ve linklerin metin içermemesi kullanıcı deneyimini kısıtlıyor.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(1)"
+          ],
+          "principle": "Görünürlük",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "İnteraksiyon gözlemlenmedi.",
+          "observationSelectors": [],
+          "principle": "Geri Bildirim",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "İletişim linki görsel eksikliği kullanıcıyı yönlendirme konusunda sınırlıyor.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(3)"
+          ],
+          "principle": "Kısıtlar",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yardım linki görsel eşlemesi eksik.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(4)"
+          ],
+          "principle": "Eşleme",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yeterli veri yok.",
+          "observationSelectors": [],
+          "principle": "Tutarlılık",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Yeterli veri yok.",
+          "observationSelectors": [],
+          "principle": "Sağlarlık",
+          "status": "insufficient_evidence"
+        }
+      ],
+      "reasons": [
+        "insufficient_issue_evidence",
+        "insufficient_issue_evidence",
+        "insufficient_issue_evidence"
+      ]
+    }
+  ]
+}
