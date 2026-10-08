@@ -47,3 +47,9 @@ Kullanıcının [Yardım bağlantısı görüntüsünde](evidence/acibadem-llm-h
 Kullanıcı 0.8.8 panel metnini paylaştı: deterministik ön skor 75.7, AI ilkeleri 0/6, öneri 3, kabul 0, ret 3, örneklem dışı seçici oranı %100. Bu yeni model yanıtının önceki üç koşuyla aynı hash/prompt/backend koşulunda olduğu henüz JSON'dan doğrulanmadı. %100, bu koşunun snapshot seçici oranıdır; öğelerin tüm DOM'da yokluğu anlamına gelmez. Önceki üç koşunun görsel olarak doğrulanan 0/3 olmayan öğe oranı değiştirilmedi. Yeni JSON reddetme nedenleri için bekleniyor. Modelin Sağlarlık ilkesini hata önleme olarak yorumlaması da kavramsal sınırlama; eylem olasılıklarının algılanabilirliği ayrıca incelenmeli.
 
 Paylaşılan panelde Groq bağlantısına rağmen OpenAI gönderim metni bulundu. Metin model bağlantısının terminalden kontrol edilmesini ve Groq/OpenAI bulut veya Ollama yerel seçeneklerini açıklayacak şekilde düzeltildi. Veri gönderim onayı her yeni denemede ayrıca alınır.
+
+## 0.8.8 JSON doğrulaması
+
+[Gerçek yeniden deneme raporu](../reports/acibadem-groq-0.8.8-retest.json) üç reddin nedenini nonexistent_snapshot_selector olarak doğruladı: model nth-of-type içeren seçicileri kısalttı. Hash 27ac4174… ile önceki be28342d… farklı; bu yanıt önceki tutarlılık hesabına eklenmedi. 0 kabul ve skor null. Yeni korumanın anlamsal reddi bu gerçek yanıtta sınanmadı; seçici kontrolü önce devreye girdi. Bu rapor yalnız mevcut seçici doğrulamasının gerçek reddini kanıtlar.
+
+0.8.9: Groq JSON şemasındaki seçiciler artık yalnız gönderilen gerçek seçeneklerden oluşan enum ile sınırlandı; factKey aday sorun temelleriyle sınırlandı. Anonimleştirilmiş veri ile görünür UI eksikliği arasındaki fark ve Sağlarlık anlamı promptta açıklığa kavuşturuldu. Prompt sürümü norman-static-small-v4; eski tekrarlarla karıştırılmayacak. İlgili 17 test geçti; yeni gerçek API yanıtı bekleniyor. Uzun seçicilerin şemada tekrarı paket boyutunu artırabilir; API kota/boyut sınırı ayrıca izlenmeli.

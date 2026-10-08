@@ -2,7 +2,7 @@ const test=require('node:test');const assert=require('node:assert/strict');
 const {analyzeGroq}=require('../server/groq.cjs');
 test('all six principles are required and normalized for evidence validation',async()=>{
   const {schema,principles}=require('../server/contract.cjs');
-  const result=await analyzeGroq({schema,fetchImpl:async(url,opts)=>{
+  const result=await analyzeGroq({schema,snapshot:{elements:[]},fetchImpl:async(url,opts)=>{
     const format=JSON.parse(opts.body).response_format.json_schema.schema;
     assert.equal(format.properties.principles.type,'object');
     assert.deepEqual(format.properties.principles.required,principles);
@@ -21,9 +21,20 @@ test('Groq adapter sends strict schema and records repeat metadata',async()=>{
     }});
   assert.equal(result.requestId,'test-request');assert.equal(result.systemFingerprint,'test-fingerprint');
 });
+test('Groq selectors constrained to actual snapshot options',async()=>{
+  const {schema}=require('../server/contract.cjs');
+  const selector='html > body:nth-of-type(1) > button:nth-of-type(1)';
+  await analyzeGroq({schema,snapshot:{elements:[{selector}]},fetchImpl:async(url,opts)=>{
+    const format=JSON.parse(opts.body).response_format.json_schema.schema;
+    assert.deepEqual(format.properties.findings.items.properties.selector.enum,[selector]);
+    assert.deepEqual(format.properties.principles.properties.Görünürlük.properties.observationSelectors.items.enum,[selector]);
+    return {ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:'{}'}}]})};
+  }});
+});
 test('Groq error never echoes upstream body or credentials',async()=>{
   await assert.rejects(analyzeGroq({apiKey:'secret',fetchImpl:async()=>({ok:false,status:429,json:()=>assert.fail('Do not read upstream error text')})}), e=>e.safeProviderError && !e.message.includes('secret'));
 });
 test('Groq truncated response rejected',async()=>{
   await assert.rejects(analyzeGroq({fetchImpl:async()=>({ok:true,json:async()=>({choices:[{finish_reason:'length',message:{content:'{}'}}]})})}));
 });
+
