@@ -35,3 +35,5 @@ Ek manuel karşılaştırma raporu: `acibadem-atasehir-0.8.1-manual-comparison.j
 Hepsiburada güncel AI kaydı: [hepsiburada-groq-0.8.10.json](hepsiburada-groq-0.8.10.json). Yerel ön skor 89.1; AI 70 (1/6), birleşik skor yok. Üç öneriden biri kabul; canlı DOM ve yorum doğrulaması bekliyor.
 
 İBB güncel AI kaydı: [ibb-groq-0.8.10.json](ibb-groq-0.8.10.json). 2026-10-08T09:33:25.297Z; yerel ön skor 73.45, AI 73.33 (3/6), birleşik skor yok. Üç önerinin seçici/ölçüm kontrolü geçti; canlı hedef ve yorum doğrulaması bekliyor.
+
+[ibb-task-0.9.0-unvalidated.json](ibb-task-0.9.0-unvalidated.json) altı ilke ve toplam skor üreten gerçek koşunun ham kaydıdır. Kısıtlar gözlemi manuel testle çeliştiği için 80.09 toplamı doğrulanmış nihai sonuç değildir; dosya değiştirilmedi.

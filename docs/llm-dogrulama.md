@@ -93,3 +93,9 @@ Groq strict JSON şema üretimi 400/json_validate_failed ile başarısız oldu. 
 ### İBB ikinci bağlantı ve hedef varlığı sonucu
 
 [Instagram bağlantısı görüntüsü](evidence/ibb-llm-target-instagram.png) yerel karttaki li:nth-of-type(2) > a:nth-of-type(1) seçicisi ile vurgulanan Instagram simgesini birlikte gösterir. Bu seçici ikinci AI bulgusuyla aynıdır; ölçüm kartta 12.25 × 36 CSS px olarak bulunur. Üç benzersiz AI hedefi (X, Instagram, arama input) canlı sayfada doğrulandı: var olmayan öğeye işaret eden oran 0/3=%0. Bu sonuç yalnız bu koşunun üç kabul edilen hedefi içindir. Aralık istisnası, gerçek erişilebilir ad ve kullanıcı görevindeki güçlük ayrıca doğrulanmadığından üç sorun iddiası kesin ihlal sayılmadı. Tüm sayfanın veya yorumların doğruluğu bu oranla kanıtlanmaz.
+
+## 0.9.0 son görev koşusu ve teslim kararı
+
+[Ham görev raporu](../reports/ibb-task-0.9.0-unvalidated.json), istek chatcmpl-fe27c917-5cd8-4e0b-8c61-2f5dc67b6a87. Altı kullanıcı alanı good; model altı ilkeye 90 verdi ve 0.6D+0.4L hesabıyla 80.090909 toplam üretildi. taskConstraints=good, gerçek menü testindeki Esc ile kapanmama gözlemiyle çelişir. Bu nedenle bu skor geçerli teslim sonucu olarak onaylanmadı; ham kayıt değiştirilmedi. Model Görünürlük gerekçesinde bütün gözlenen öğelerin adının bulunduğunu söylerken aynı yanıtta hasName=false input bulgusu üretmiştir; gerekçe ayrıca iç tutarsızlık içerir. hasName=false tam erişilebilir ad yokluğu kanıtı değildir.
+
+Kullanıcı daha fazla test yapmadan mevcut çalışmayı teslim etmeyi seçti. Skor yolu çalışır; tam ve doğru altı ilke değerlendirmesinin doğrulaması tamamlanmamıştır. Görev promptunda aynı paketle üç yeni tekrar yapılmadı; eski statik üç koşunun tutarlılık hesabı bu sürüme genellenmedi.

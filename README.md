@@ -1,7 +1,15 @@
-# UX Kanıt — Kanıta bağlı UX ön değerlendirmesi (0.8.8)
+# UX Kanıt — Kanıta bağlı UX ön değerlendirmesi (0.9.0)
 
-Bu, Deneyim Mühendisliği ödevi için geliştirilen ilk iskelettir. Tam teslim sürümü değildir.
+Deneyim Mühendisliği ödevi için geliştirilen Chrome Manifest V3 eklentisi. Altı yerel kontrol, Groq ile Norman değerlendirmesi, DOM kanıtı, vurgulama, kategori skorları ve JSON raporu içerir. Son teslim kapsamı ve ölçülmüş sınırlar aşağıda açıklanır.
 
+
+## Teslim kapsamı
+
+Çalışan eklenti, altı deterministik kontrol, üç kategorinin gerçek JSON raporları, üç tekrarlı LLM ölçümü, manuel klavye/ekran okuyucu görevi, sağlık senaryoları ve görüntü kanıtları sunulmuştur. Demo ayrı MP4 dosyasıdır: ux-kanit-demo.mp4, 190.369 saniye (3:10), 1920×1080. Video içeriğinin tamamı agent tarafından izlenmedi; süre metaveriden doğrulandı. GitHub reposu: https://github.com/Mervebeyazal/ux-kanit.
+
+0.9.0, kullanıcının altı ilke için menü gözlemlerini gerçek DOM öğesine bağlayıp LLM değerlendirmesine dahil eder. Gerçek İBB denemesinde altı ilke ve birleşik skor üretildi; ancak Kısıtlar gözlemi, Esc'nin kapatmadığı manuel teste rağmen good olarak gönderildi. Bu denemenin 90 AI / 80.09 toplamı doğrulanmış nihai sonuç olarak kullanılmaz. Ham kayıt reports/ibb-task-0.9.0-unvalidated.json içinde değiştirilmeden korunur. Bu kayıt, skor üretim yolunun çalıştığını gösterir; skorun geçerliliğini göstermez. Menü görevi bütün sitenin altı ilkesini temsil etmez. Son kullanıcı tercihiyle ek test yapılmadan teslim hazırlanmıştır.
+
+Okuma sırası: docs/teslim-ozeti.md, docs/llm-dogrulama.md, docs/manuel-denetim.md, docs/yansitma-notu.md. Eski sürüm notları geliştirme ve hata düzeltme izini korur; güncel teslim sonucu bu bölüm ve teslim özetidir.
 ## Chrome'a yükleme
 
 1. Chrome adres çubuğunda `chrome://extensions` açın.
@@ -222,3 +230,4 @@ Paneldeki görev kanıtı bölümü, kullanıcının gerçekleştirdiği İBB İ
 Görünürlük: klavye odağı; Geri Bildirim: Enter sonrası seçenekler/ok değişimi; Kısıtlar: Esc kapatma; Eşleme: başlık ve seçenek ilişkisi; Tutarlılık: üst menü yazı/ok düzeni; Sağlarlık: açılabilirlik işareti. Bunlar tüm siteyi değil tek menü görevini kapsayan dar operasyonel göstergelerdir. Kullanıcı gözlemi model yorumunun doğruluğunu otomatik kanıtlamaz. Altı gözlem varsa LLM altı ilkeyi görev kapsamında değerlendirebilir; puanlar yine gerçek model yanıtından gelir ve kanıt yetersizse null kalır. Özellikle Esc'nin kapatmaması, Enter'ın tekrar kapatabildiği menüde klavye tuzağı olarak yorumlanamaz.
 
 Skor formülü değişmedi: L, kanıtı yeterli ilke puanlarının eşit ağırlıklı ortalamasıdır. Altısı da puanlandığında T=0.6D+0.4L üretilir; bu sonuç dar görev kapsamı ile geniş yerel örneklemin ön değerlendirme bileşimidir, site sertifikası değildir. Yeni prompt norman-task-v6 veya norman-task-v6-json-object; eski tekrarlara katılmaz. 0.9.0 gerçek model koşusu henüz yapılmadı. Aynı menü kanıtı başka sitelere aktarılamaz.
+

@@ -4,8 +4,8 @@
 |---|---|
 | Manifest V3 çalışan eklenti | Kullanıcı yerel analiz ve vurgulamayı denedi |
 | 5–6 deterministik kontrol | Altı özel kontrol mevcut; tam WCAG denetimi değil |
-| Norman altı ilke LLM değerlendirmesi | Groq gerçek yanıtları mevcut; altı ilkenin kanıtı eksik, statik Geri Bildirim puanlanmıyor |
-| Ayrı skorlar, ağırlıklar ve formül | Formül, yerel ve kısmi LLM skorları mevcut; altı ilke ve birleşik skor eksik |
+| Norman altı ilke LLM değerlendirmesi | Statik kısmi yanıtlar ve 0.9.0 kullanıcı görevli altı ilke yanıtı mevcut; son görev gözlemi tutarsız, skor doğrulanmadı |
+| Ayrı skorlar, ağırlıklar ve formül | Formül, yerel, kısmi AI ve görevli toplam üretimi mevcut; 80.09 görev sonucu doğrulanmamış |
 | Seçici, kural, şiddet, düzeltme, highlight | Yerel adaylarda mevcut; örnekler doğrulandı, tüm adaylar değil |
 | Panel ve JSON raporu | Kullanıcı tarafından çalıştırıldı |
 | Üç site raporu | Üç kategorinin gerçek AI içeren 0.8.10 JSON raporları repoda; kapsam eksikleri açıklanmış |
@@ -19,7 +19,8 @@
 | 3–5 dakika demo videosu | Son MP4 alındı; metaveride 3:10 ve 1920×1080 doğrulandı. Ayrı video teslim dosyası hazır; GitHub bağlantısı yok |
 | Yarım sayfa yansıtma notu | Taslak hazır; öğrenci onayı ve nihai LLM sonuçlarıyla güncelleme bekliyor |
 
-LLM çalışıyor; kanıt kapsamı ve birleşik skor eksik. Eksik sonuçlar başarı olarak işaretlenmeyecek. Bu liste tam teslim onayı değildir.
+Son teslim özeti docs/teslim-ozeti.md içindedir. Kullanıcı tercihiyle ek test durduruldu; doğrulanmamış sonuçlar nihai başarı olarak gösterilmedi.
+
 
 
 
