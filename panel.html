@@ -4,7 +4,7 @@
 <body>
 <h1>UX Kanıt</h1>
 <p>Sürüm 0.8.8 · Yerel ve AI analizi</p>
-<p>Yalnızca herkese açık, kişisel veri içermeyen sayfalarda kullan. Yerel kontrol veri göndermez. AI analizi ayrı önizleme ve onaydan sonra OpenAI’a anonim yapı verileri gönderir; form değerleri okunmaz.</p>
+<p>Yalnızca herkese açık, kişisel veri içermeyen sayfalarda kullan. Yerel kontrol veri göndermez. AI analizi ayrı önizleme ve onaydan sonra yardımcı serviste seçilen modele anonim yapı verileri gönderir (Groq / OpenAI bulut API veya Ollama yerel model); form değerleri okunmaz.</p>
 <label><input type="checkbox" id="consent"> Sayfanın herkese açık olduğunu, giriş yapılmış bir oturuma veya kişisel/sağlık verilerine ait olmadığını doğruluyorum.</label>
 <button id="analyze">Sayfayı kontrol et</button>
 <button id="export" disabled>JSON raporunu indir</button>
@@ -16,7 +16,7 @@
 <label for="ai-pairing">Yerel bağlantı kodu</label><input id="ai-pairing" type="password" autocomplete="off">
 <button id="ai-prepare">AI gönderim önizlemesini hazırla</button>
 <details><summary>Gönderilecek veri paketini incele</summary><pre id="ai-preview"></pre></details>
-<label><input id="ai-consent" type="checkbox"> Önizlemeyi inceledim; bu anonim yapı verilerinin OpenAI’a gönderilmesine ve API kullanımına onay veriyorum. Sayfa giriş yapılmış veya kişisel/sağlık verisi içeren bir sayfa değil.</label>
+<label><input id="ai-consent" type="checkbox"> Önizlemeyi inceledim ve terminaldeki model bağlantısını kontrol ettim; bu anonim yapı verilerinin o sağlayıcıya gönderilmesine ve model/API kullanımına onay veriyorum. Sayfa giriş yapılmış veya kişisel/sağlık verisi içeren bir sayfa değil.</label>
 <button id="ai-send" disabled>Onaylanan veriyi AI ile analiz et</button>
 <p id="ai-status" role="status" aria-live="polite">AI analizi henüz başlamadı.</p>
 <section id="ai-result" aria-live="polite"></section>
