@@ -1,0 +1,213 @@
+UX Kanıt
+Sürüm 0.8.10 · Yerel ve AI analizi
+
+Yalnızca herkese açık, kişisel veri içermeyen sayfalarda kullan. Yerel kontrol veri göndermez. AI analizi ayrı önizleme ve onaydan sonra yardımcı serviste seçilen modele anonim yapı verileri gönderir (Groq / OpenAI bulut API veya Ollama yerel model); form değerleri okunmaz.
+
+ Sayfanın herkese açık olduğunu, giriş yapılmış bir oturuma veya kişisel/sağlık verilerine ait olmadığını doğruluyorum.
+Sayfayı kontrol et JSON raporunu indir
+AI yanıtı alındı ve seçici/ölçüm eşleşmesi kontrol edildi. Güncellenmiş JSON’u indirebilirsin.
+
+Deterministik ön skor: 73.5 / 100
+Yerel skor aday oranına dayalıdır. AI statik ön skoru: 73.3 / 100 (3/6 ilke). Birleşik toplam: İlke kapsamı eksik.
+
+Kategori	Ön skor	Aday / ölçülen	Ölçülemeyen
+Sayfa dili	100.0	0 / 1	0
+Görsel alternatif metni	100.0	0 / 36	0
+Form etiketi	0.0	1 / 1	0
+Dokunma hedefi	89.7	10 / 97	0
+Düğme/bağlantı adı	100.0	0 / 96	0
+Metin kontrastı	80.0	3 / 15	80
+
+Norman ilkeleri — AI
+
+Önce yerel analizi çalıştır. Anahtar yardımcı serviste kalır. Bu alan yalnızca servisin yerel bağlantı kodu içindir.
+
+
+Yerel bağlantı kodu
+••••••••••••••••••••••••••••••••••••
+
+AI gönderim önizlemesini hazırla
+Gönderilecek veri paketini incele
+
+ Önizlemeyi inceledim ve terminaldeki model bağlantısını kontrol ettim; bu anonim yapı verilerinin o sağlayıcıya gönderilmesine ve model/API kullanımına onay veriyorum. Sayfa giriş yapılmış veya kişisel/sağlık verisi içeren bir sayfa değil.
+
+Onaylanan veriyi AI ile analiz et
+AI yanıtı alındı ve seçici/ölçüm eşleşmesi kontrol edildi. Güncellenmiş JSON’u indirebilirsin.
+
+
+AI statik ön skor: 73.3 / 100 (3/6 ilke)
+Bu skor yalnızca kanıtı yeterli statik ilkelerin ortalaması. Geri bildirim davranışı gözlenmedi; birleşik toplam için altı ilkenin tamamı gerekir. Yorumlar manuel doğrulama bekliyor.
+
+Görünürlük: 70.0 / 100
+E1‑E5 görünür fakat çok küçük, 24 px altı genişlikte; kullanıcılar için fark edilmesi zor.
+
+Geri Bildirim: Kanıt yetersiz
+İnteraktif öğelerle ilgili geri bildirim gözlemlenmedi.
+
+Kısıtlar: Kanıt yetersiz
+Tüm öğeler disabled=false, isField=false; kısıtlamalar yeterli.
+
+Eşleme: Kanıt yetersiz
+Etiket ve işlev uyumlu; <a> ve <button> doğru kullanılmış.
+
+Tutarlılık: 80.0 / 100
+Büyük butonlar (E7‑E10) tutarlı boyut ve font; küçük linkler farklı.
+
+Sağlarlık: 70.0 / 100
+Küçük linklerin tıklanabilirliği sınırlı; hata önleme eksik.
+
+Küçük link genişliği
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)
+Norman: Görünürlük
+Şiddet: Orta
+Kanıt: width = 14
+AI yorumu: E1 14 px genişliğinde, 24 px altı; kullanıcılar için fark edilmesi zor.
+Öneri: Genişliği en az 24 px’e çıkarın veya görsel işaret ekleyin.
+
+Sayfada göster
+Küçük link genişliği
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)
+Norman: Görünürlük
+Şiddet: Orta
+Kanıt: width = 12.25
+AI yorumu: E2 12.25 px genişliğinde, 24 px altı; tıklanabilirlik düşük.
+Öneri: Genişliği 24 px’e yükseltin veya ikon ekleyin.
+
+Sayfada göster
+İsimsiz form alanı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)
+Norman: Görünürlük
+Şiddet: Yüksek
+Kanıt: hasName = false
+AI yorumu: E11 form alanı hasName=false; erişilebilirlik kısıtlaması.
+Öneri: input’a aria-label veya label ekleyin.
+
+Sayfada göster
+AI önerileri: 3. Kabul edilen: 3. Reddedilen: 0. Snapshotta olmayan seçici oranı: 0.0%. Bu oran yorumların doğruluğunu kanıtlamaz.
+
+
+Sayfa dili niteliği mevcut: tr
+Kanıt: html[lang] niteliği okundu.
+Bu kontrol dil kodunun geçerliliğini veya içerikle eşleşmesini henüz doğrulamaz.
+Görseller: 37 toplam, 36 görünür. Eksik alternatif metin bulgusu: 0.
+Form alanları: 1 görünür. Etiket eksikliği adayı: 1.
+Boş alt metninin uygunluğu ve alternatif adların kalitesi henüz değerlendirilmez. iframe ve Shadow DOM kapsam dışıdır.
+
+Dokunma hedefleri: 97 ölçüldü. Küçük hedef adayı: 10. Aralık ve diğer WCAG istisnaları otomatik değerlendirilmez; adaylar kesin ihlal sayılmaz.
+
+Düğme/bağlantı adları: 96 kontrol incelendi. Adsız kontrol adayı: 0. İnceleme sınırı nedeniyle belirsiz: 0. Tam erişilebilir ad hesabı ve adın anlamlılığı manuel doğrulanmalıdır.
+
+Metin kontrastı: 15 öğe ölçüldü. Düşük kontrast adayı: 3. Güvenilir ölçülemeyen: 80. Görsel/gradyan, saydamlık ve desteklenmeyen efektler ölçüm dışında; sıfır bulgu tam uygunluk anlamına gelmez.
+
+Form alanında erişilebilir etiket adayı eksik
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)
+Kural: WCAG 4.1.2 — manuel doğrulama gerekli
+Şiddet: Yüksek
+Kanıt: Görünür form alanında metinli ilişkili label, dolu aria-label, metinli bir öğeye çözülen aria-labelledby veya dolu title bulunamadı. Alanın değeri okunmadı.
+Öneri: Alan için görünür bir label ekle ve for niteliğini alanın id niteliğiyle eşleştir. Yer tutucu metni tek etiket olarak kullanma.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 14 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 12.25 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 8.75 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 15.75 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 21 × 32 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 15 × 32 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 21 × 24 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 15 × 24 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 319.86 × 14.5 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+24 × 24 CSS pikselden küçük hedef adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)
+Kural: WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli
+Şiddet: Orta
+Kanıt: Öğenin ölçülen sınır kutusu 14.66 × 14.5 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.
+Öneri: Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.
+
+Sayfada göster
+Düşük metin kontrastı adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(1)
+Kural: WCAG 1.4.3 — manuel doğrulama gerekli
+Şiddet: Yüksek
+Kanıt: Metin RGB(255, 255, 255), arka plan RGB(198, 70, 164). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.
+Öneri: Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.
+
+Sayfada göster
+Düşük metin kontrastı adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(2) > span:nth-of-type(1)
+Kural: WCAG 1.4.3 — manuel doğrulama gerekli
+Şiddet: Yüksek
+Kanıt: Metin RGB(198, 70, 164), arka plan RGB(255, 255, 255). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.
+Öneri: Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.
+
+Sayfada göster
+Düşük metin kontrastı adayı
+Öğe: html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(7) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(1)
+Kural: WCAG 1.4.3 — manuel doğrulama gerekli
+Şiddet: Yüksek
+Kanıt: Metin RGB(255, 255, 255), arka plan RGB(198, 70, 164). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.
+Öneri: Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.
+
+Sayfada göster

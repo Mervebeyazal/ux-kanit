@@ -202,3 +202,15 @@ Teslim sınırı: üç sitenin yerel raporları var; yalnız sağlık sitesinde 
 ### 0.8.10 — kısa öğe kodları
 
 0.8.9 denemesinde kullanıcı yeniden HTTP 413 bildirdi. Uzun seçici enumlarının şemada altı kez tekrarı paket boyutunu artırdı. Groq taşıma paketinde seçiciler artık E1…E20 olarak kodlanır; izinli yanıt kodları bu listeden seçilir. Servis yanıtı özgün seçicilere dönüştürür, sonra aynı snapshot/olgu/sorun temeli doğrulamasını uygular. Bilinmeyen kodlar gerçek seçiciye dönüşmez, reddedilebilir kalır. Önizleme ve raporda insanın kontrol edebilmesi için özgün seçiciler bulunur; dışarı giden pakette aynı öğe/olgular kısa kodla temsil edilir. Prompt norman-static-small-v5; altı adaptör testi geçti. Yeni gerçek deneme bekleniyor.
+
+## Son gerçek analiz kayıtları — 8 Ekim 2026
+
+| Site | Yerel ön skor | AI statik ön skor | İlke kapsamı | Canlı hedef kontrolü |
+|---|---:|---:|---|---|
+| Acıbadem | 75.7 | 70 | 1/6 | Arama alanı önceki manuel görevde gözlendi; adsızlık iddiası kesin değil |
+| Hepsiburada | 89.1 | 70 | 1/6 | 1/1 kabul edilen hedef mevcut; satır içi link, sorun yorumu doğrulanmadı |
+| İBB | 73.5 | 73.3 | 3/6 | 3/3 kabul edilen hedef mevcut; sorun yorumları kesin ihlal sayılmadı |
+
+Güncel dosyalar: reports/acibadem-groq-0.8.10.json, reports/hepsiburada-groq-0.8.10.json, reports/ibb-groq-0.8.10.json. Birleşik toplam hiçbirinde üretilmedi; altı ilkenin kanıtı tamamlanmadı. Ayrıntılı görüntüler ve ret nedenleri docs/llm-dogrulama.md içindedir.
+
+Groq zorunlu şema üretiminde 400/json_validate_failed verirse kullanıcı yeni gönderimi onaylayarak alternatif JSON modunu kullanabilir: PowerShell'de $env:UX_GROQ_JSON_MODE="object" ardından servisi yeniden başlatır. Biçim, seçici ve olgu kontrolleri korunur; otomatik tekrar yapılmaz. Bu mod istemi değiştirir; yeni raporlar norman-static-small-v5-json-object sürümüyle kaydedilir. İlk İBB raporu bu metadata düzeltmesinden önce üretildi ve mod farkı doğrulama notunda açıklandı. Modlar arasında tutarlılık hesabı yapılmaz.

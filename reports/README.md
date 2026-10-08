@@ -31,3 +31,7 @@ ibb-0.7.0-preliminary.json kullanıcının indirdiği dosyanın değiştirilmemi
 Üç dosyanın skorları yeniden hesaplandı ve temel bulgu alanları kontrol edildi. Bu doğrulama, bulguların gerçek ihlal olduğunu veya manuel testlerin tamamlandığını kanıtlamaz. Üç raporda da LLM ve birleşik skor henüz yoktur.
 
 Ek manuel karşılaştırma raporu: `acibadem-atasehir-0.8.1-manual-comparison.json`. Kullanıcı tarafından hastane bilgisi görevi sonrasında dışa aktarıldı; sayfa ilişkilendirmesi sohbet bağlamına dayanır (JSON yalnızca origin içerir). Ön skor 80.31; 81 aday (form 5, hedef 62, kontrol adı 4, kontrast 10). Alt skorlar yeniden hesaplandı. Bulgular henüz tek tek doğrulanmadı; LLM değerlendirilmedi. Ayrıntılar: [Manuel denetim](../docs/manuel-denetim.md).
+
+Hepsiburada güncel AI kaydı: [hepsiburada-groq-0.8.10.json](hepsiburada-groq-0.8.10.json). Yerel ön skor 89.1; AI 70 (1/6), birleşik skor yok. Üç öneriden biri kabul; canlı DOM ve yorum doğrulaması bekliyor.
+
+İBB güncel AI kaydı: [ibb-groq-0.8.10.json](ibb-groq-0.8.10.json). 2026-10-08T09:33:25.297Z; yerel ön skor 73.45, AI 73.33 (3/6), birleşik skor yok. Üç önerinin seçici/ölçüm kontrolü geçti; canlı hedef ve yorum doğrulaması bekliyor.

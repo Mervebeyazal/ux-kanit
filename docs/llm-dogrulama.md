@@ -61,3 +61,35 @@ Kullanıcı panel metninde gerçek AI yanıtının alındığını bildirdi: 3 �
 Yeni koşunun paket/model/ret nedenleri JSON'dan doğrulanmalı. Bu panel sonucu bütün altı ilkenin başarıyla değerlendirildiği anlamına gelmez. Önceki üç koşunun sapma hesabına yeni prompt sürümü eklenmedi.
 
 0.8.10 JSON alındı: [rapor](../reports/acibadem-groq-0.8.10.json). prompt norman-static-small-v5 ve hash 27ac4174… doğrulandı. Önceki 0.8.8 ret denemesiyle aynı paket, farklı prompt. İki ret insufficient_issue_evidence: model 166.83px genişliği yetersiz diye yorumladı; 45px yüksekliği 24px altında diye yanlış karşılaştırdı. Yeni sorun temeli kontrolü bunları kabul etmedi. Bir kabul edilen hasName=false adayı tam ad hesabı olmadığı için manuel olası yanlış alarm durumunda. 70 ön skoru nihai uygunluk sonucu değildir.
+
+## Hepsiburada 0.8.10 gerçek AI raporu
+
+[Değiştirilmemiş JSON](../reports/hepsiburada-groq-0.8.10.json), 2026-10-08T06:14:45.782Z. Deterministik ön skor 89.1; AI ön skoru 70, yalnız Sağlarlık (1/6). Birleşik skor yok. Üç öneriden biri kabul, ikisi insufficient_issue_evidence nedeniyle reddedildi. Adı bulunan bağlantıyı sorun diye listelemek ve 99.94px genişliği yetersiz ilan etmek desteklenmedi. Snapshot dışı seçici oranı 0/3; güncel DOM doğrulaması henüz yapılmadı.
+
+Kabul edilen aday bir bağlantının 15 CSS px yüksekliğine dayanır. Bu ölçüm tek başına Sağlarlık sorununun veya WCAG ihlalinin kanıtı değildir; satır içi bağlantı ve hedef aralığı istisnaları elle incelenmeli. Modelin 44px önerisi ergonomi önerisidir, 24px AA eşiğiyle aynı değildir. Canlı vurgulama görüntüsü bekleniyor. İlk 20 öğelik örneklem ve kontrastta 533 ölçülemeyen öğe kapsam sınırlamasıdır. Bu farklı sitenin koşusu Acıbadem tekrar hesabına katılmadı.
+
+### Hepsiburada canlı hedef doğrulaması
+
+[Kullanıcının vurgulama görüntüsü](evidence/hepsiburada-llm-inline-link.png), kabul edilen L-1 seçicisinin paragraf içindeki “Samsung telefon” bağlantısını işaretlediğini gösteriyor. Bu benzersiz hedef için var olmayan öğe oranı 0/1=%0; diğer iki reddedilen önerinin canlı hedefleri ayrıca incelenmedi. Görüntü ölçümün yeniden hesaplanmasını sağlamaz; 15 CSS px yüksekliği JSON ölçümüdür.
+
+Bağlantı cümle/paragraf içinde yer alıyor. Küçük yükseklikten kesin hedef boyutu ihlali çıkarılamaz; satır içi bağlantı istisnası dikkate alınmalıdır. Sağlarlık yorumu için kullanıcı görevinde güçlük gösterilmedi. Sonuç: DOM hedefi doğrulandı, sorun iddiası doğrulanmadı; kesin ihlal olarak sayılmadı. 44px önerisi bu metin bağlantısına zorunlu WCAG eşiği olarak uygulanamaz.
+
+## İBB gerçek panel sonucu — alternatif JSON modu
+
+[Paylaşılan panel kaydı](evidence/ibb-0.8.10-panel.txt): yerel ön skor 73.5; AI statik ön skor 73.3 (Görünürlük 70, Tutarlılık 80, Sağlarlık 70; 3/6). Üç öneri kabul, ret yok, snapshot dışı seçici oranı %0. JSON dosyası ve üç canlı vurgulama görüntüsü bekleniyor. Kabul, ölçüm/seçici eşleşmesidir; sorun yorumunun doğruluğu anlamına gelmez. İki aday 14px ve 12.25px genişliğinde bağlantı, üçüncü aday hasName=false form alanıdır. Hedef aralığı istisnaları ve gerçek erişilebilir ad elle incelenmeli. Sağlarlık gerekçesindeki “hata önleme” kavramı ilkeyle karıştırılmış; bu yorum doğrulanmış sonuç sayılmadı.
+
+Groq strict JSON şema üretimi 400/json_validate_failed ile başarısız oldu. Kullanıcının yeni ayrı onayından sonra UX_GROQ_JSON_MODE=object seçeneğiyle JSON modu kullanıldı; servisteki biçim, altı ilke, seçici ve olgu doğrulamaları korunur. Bu mod şemayı sistem mesajına eklediği için önceki strict mod koşularıyla aynı istem değildir; tutarlılık hesabına eklenmedi. Yeni mod için üç aynı-paket koşusu henüz yapılmadı.
+
+İBB JSON alındı: [gerçek rapor](../reports/ibb-groq-0.8.10.json). Panelle skorlar ve üç olgu eşleşiyor: width=14, width=12.25, hasName=false. Snapshot hash b2b005e7…; Acıbadem tekrarıyla farklıdır. Rapor promptVersion=v5 gösterse de alternatif JSON modu şemayı mesaja ekler; mod farkı bu doğrulama notunda korunmuştur. Üç sitenin güncel AI içeren JSON kayıtları artık reports klasöründedir; tam altı ilke kapsamı ve nihai toplam halen eksiktir.
+
+### İBB arama alanının canlı doğrulaması
+
+[Arama alanı görüntüsü](evidence/ibb-llm-search.png) paneldeki L-3 input seçicisinin “Size nasıl yardımcı olabiliriz?” yer tutucusu bulunan arama alanını işaretlediğini gösteriyor. Bu hedef mevcut; bu aşamada canlı doğrulanan AI hedefi 1/3. hasName=false sınırlı etiket sezgisidir; görünür placeholder, erişilebilir adın kaynağını veya yokluğunu kanıtlamaz. DOM etiket ilişkisi ve ekran okuyucu duyurusu ayrıca incelenmeden kesin adsızlık ihlali sayılmadı. Üstte Instagram simgesi üzerinde de bir çerçeve görünüyor; ilgili bulgu kartı görüntüde olmadığı için bu çerçeve L-1 veya L-2 doğrulaması olarak sayılmadı.
+
+### İBB ilk bağlantının canlı doğrulaması
+
+[X bağlantısı görüntüsü](evidence/ibb-llm-target-x.png), yerel WCAG hedef adayı kartında li:nth-of-type(1) > a:nth-of-type(1) seçicisini ve X simgesinin vurgulanmasını birlikte gösterir. Bu tam seçici, JSON'daki ilk AI önerisinin seçicisiyle aynıdır. Bu nedenle görüntü yerel karttan alınmış olsa da AI hedefinin varlığı doğrulandı; canlı doğrulanan hedef 2/3 oldu. Kartta ölçüm 14 × 36 CSS px olarak yer alır. Görüntü tek başına yeniden ölçüm veya aralık istisnasının değerlendirmesi değildir. Küçük genişlikten Görünürlük sorunu ya da kesin WCAG ihlali çıkarılmadı.
+
+### İBB ikinci bağlantı ve hedef varlığı sonucu
+
+[Instagram bağlantısı görüntüsü](evidence/ibb-llm-target-instagram.png) yerel karttaki li:nth-of-type(2) > a:nth-of-type(1) seçicisi ile vurgulanan Instagram simgesini birlikte gösterir. Bu seçici ikinci AI bulgusuyla aynıdır; ölçüm kartta 12.25 × 36 CSS px olarak bulunur. Üç benzersiz AI hedefi (X, Instagram, arama input) canlı sayfada doğrulandı: var olmayan öğeye işaret eden oran 0/3=%0. Bu sonuç yalnız bu koşunun üç kabul edilen hedefi içindir. Aralık istisnası, gerçek erişilebilir ad ve kullanıcı görevindeki güçlük ayrıca doğrulanmadığından üç sorun iddiası kesin ihlal sayılmadı. Tüm sayfanın veya yorumların doğruluğu bu oranla kanıtlanmaz.

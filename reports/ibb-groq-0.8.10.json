@@ -1,0 +1,1075 @@
+{
+  "schemaVersion": "1.0",
+  "extensionVersion": "0.8.10",
+  "analyzedAt": "2026-10-08T09:33:25.297Z",
+  "page": {
+    "devicePixelRatio": 2,
+    "origin": "https://www.ibb.istanbul",
+    "viewport": {
+      "height": 817,
+      "width": 1054
+    }
+  },
+  "privacy": {
+    "localOnly": false,
+    "publicPageConfirmed": true,
+    "formValuesCollected": false,
+    "pageTextExported": false,
+    "urlScope": "origin-only; path/query/fragment omitted",
+    "llmSendConsent": true,
+    "llmDestination": "groq-api",
+    "llmPayloadScope": "fixed UI tokens and anonymous structure; form values masked"
+  },
+  "scores": {
+    "deterministic": {
+      "modelVersion": "candidate-rate-v1",
+      "status": "provisional",
+      "subscores": [
+        {
+          "id": "language",
+          "label": "Sayfa dili",
+          "weight": 5,
+          "measured": 1,
+          "unknown": 0,
+          "candidates": 0,
+          "score": 100,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "image",
+          "label": "Görsel alternatif metni",
+          "weight": 15,
+          "measured": 36,
+          "unknown": 0,
+          "candidates": 0,
+          "score": 100,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "form",
+          "label": "Form etiketi",
+          "weight": 20,
+          "measured": 1,
+          "unknown": 0,
+          "candidates": 1,
+          "score": 0,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "target",
+          "label": "Dokunma hedefi",
+          "weight": 15,
+          "measured": 97,
+          "unknown": 0,
+          "candidates": 10,
+          "score": 89.69072164948454,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "name",
+          "label": "Düğme/bağlantı adı",
+          "weight": 20,
+          "measured": 96,
+          "unknown": 0,
+          "candidates": 0,
+          "score": 100,
+          "coverage": 1,
+          "status": "provisional"
+        },
+        {
+          "id": "contrast",
+          "label": "Metin kontrastı",
+          "weight": 25,
+          "measured": 15,
+          "unknown": 80,
+          "candidates": 3,
+          "score": 80,
+          "coverage": 0.15789473684210525,
+          "status": "provisional"
+        }
+      ],
+      "availableWeight": 100,
+      "score": 73.45360824742268
+    },
+    "llm": {
+      "principles": [
+        {
+          "score": 70,
+          "rationale": "E1‑E5 görünür fakat çok küçük, 24 px altı genişlikte; kullanıcılar için fark edilmesi zor.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          ],
+          "principle": "Görünürlük",
+          "status": "provisional_static"
+        },
+        {
+          "score": null,
+          "rationale": "İnteraktif öğelerle ilgili geri bildirim gözlemlenmedi.",
+          "observationSelectors": [],
+          "principle": "Geri Bildirim",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Tüm öğeler disabled=false, isField=false; kısıtlamalar yeterli.",
+          "observationSelectors": [],
+          "principle": "Kısıtlar",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": null,
+          "rationale": "Etiket ve işlev uyumlu; <a> ve <button> doğru kullanılmış.",
+          "observationSelectors": [],
+          "principle": "Eşleme",
+          "status": "insufficient_evidence"
+        },
+        {
+          "score": 80,
+          "rationale": "Büyük butonlar (E7‑E10) tutarlı boyut ve font; küçük linkler farklı.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > button:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > button:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > button:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > button:nth-of-type(1)"
+          ],
+          "principle": "Tutarlılık",
+          "status": "provisional_static"
+        },
+        {
+          "score": 70,
+          "rationale": "Küçük linklerin tıklanabilirliği sınırlı; hata önleme eksik.",
+          "observationSelectors": [
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)",
+            "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          ],
+          "principle": "Sağlarlık",
+          "status": "provisional_static"
+        }
+      ],
+      "score": 73.33333333333333,
+      "scoreScope": "available-static-principles-only",
+      "complete": false,
+      "findings": [
+        {
+          "principle": "Görünürlük",
+          "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+          "factKey": "width",
+          "factValueJSON": "14",
+          "title": "Küçük link genişliği",
+          "rationale": "E1 14 px genişliğinde, 24 px altı; kullanıcılar için fark edilmesi zor.",
+          "severity": "Orta",
+          "recommendation": "Genişliği en az 24 px’e çıkarın veya görsel işaret ekleyin.",
+          "source": "llm",
+          "rule": "Norman: Görünürlük",
+          "evidence": "width = 14",
+          "validationStatus": "current_sample_fact_matched_interpretation_pending_manual_review",
+          "id": "L-1"
+        },
+        {
+          "principle": "Görünürlük",
+          "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+          "factKey": "width",
+          "factValueJSON": "12.25",
+          "title": "Küçük link genişliği",
+          "rationale": "E2 12.25 px genişliğinde, 24 px altı; tıklanabilirlik düşük.",
+          "severity": "Orta",
+          "recommendation": "Genişliği 24 px’e yükseltin veya ikon ekleyin.",
+          "source": "llm",
+          "rule": "Norman: Görünürlük",
+          "evidence": "width = 12.25",
+          "validationStatus": "current_sample_fact_matched_interpretation_pending_manual_review",
+          "id": "L-2"
+        },
+        {
+          "principle": "Görünürlük",
+          "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)",
+          "factKey": "hasName",
+          "factValueJSON": "false",
+          "title": "İsimsiz form alanı",
+          "rationale": "E11 form alanı hasName=false; erişilebilirlik kısıtlaması.",
+          "severity": "Yüksek",
+          "recommendation": "input’a aria-label veya label ekleyin.",
+          "source": "llm",
+          "rule": "Norman: Görünürlük",
+          "evidence": "hasName = false",
+          "validationStatus": "current_sample_fact_matched_interpretation_pending_manual_review",
+          "id": "L-3"
+        }
+      ],
+      "rejected": [],
+      "hallucination": {
+        "proposed": 3,
+        "nonexistentSnapshotSelectors": 0,
+        "nonexistentSnapshotSelectorRate": 0,
+        "note": "Bu oran snapshot seçicileri içindir; güncel DOM varlığı ve yorum doğruluğu ayrıca doğrulanır."
+      },
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b",
+      "seed": 42,
+      "systemFingerprint": "fp_d3e146e1a5",
+      "temperature": 0,
+      "promptVersion": "norman-static-small-v5",
+      "snapshotHash": "b2b005e7cf2f87e56f4b63eadaa58edcf36c0714af94498321441464f5048896",
+      "requestId": "chatcmpl-24bdda9d-fef8-475f-a395-425c5112e589",
+      "usage": {
+        "queue_time": 0.015850803,
+        "prompt_tokens": 3318,
+        "prompt_time": 0.230896329,
+        "completion_tokens": 619,
+        "completion_time": 0.634882839,
+        "total_tokens": 3937,
+        "total_time": 0.865779168,
+        "completion_tokens_details": {
+          "reasoning_tokens": 61
+        }
+      },
+      "analyzedAt": "2026-10-08T09:33:33.253Z",
+      "status": "provisional_static",
+      "currentSampleValidation": {
+        "checked": 3,
+        "accepted": 3,
+        "rejected": 0
+      },
+      "snapshot": {
+        "snapshotVersion": "static-ui-v1",
+        "observationMode": "static-no-interactions",
+        "viewport": {
+          "height": 817,
+          "width": 1054
+        },
+        "sampledCount": 20,
+        "elements": [
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 12,
+              "formValue": null,
+              "hasName": true,
+              "height": 36,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 14,
+              "x": 884.09,
+              "y": 0
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 12,
+              "formValue": null,
+              "hasName": true,
+              "height": 36,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 12.25,
+              "x": 910.09,
+              "y": 0
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 12,
+              "formValue": null,
+              "hasName": true,
+              "height": 36,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 8.75,
+              "x": 934.34,
+              "y": 0
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 12,
+              "formValue": null,
+              "hasName": true,
+              "height": 36,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 15.75,
+              "x": 955.09,
+              "y": 0
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 12,
+              "formValue": null,
+              "hasName": true,
+              "height": 36,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 27.66,
+              "x": 988.84,
+              "y": 0
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 80,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 62.06,
+              "x": 22.5,
+              "y": 36
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 80,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "button",
+              "uiToken": null,
+              "width": 83.95,
+              "x": 281.63,
+              "y": 36
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > button:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 80,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "button",
+              "uiToken": null,
+              "width": 81.29,
+              "x": 389.58,
+              "y": 36
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > button:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 80,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "button",
+              "uiToken": null,
+              "width": 76.71,
+              "x": 494.87,
+              "y": 36
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > button:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 80,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "button",
+              "uiToken": null,
+              "width": 71.98,
+              "x": 595.58,
+              "y": 36
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > nav:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > button:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": "[MASKED]",
+              "hasName": false,
+              "height": 44,
+              "inViewport": true,
+              "isField": true,
+              "required": false,
+              "statusRole": null,
+              "tag": "input",
+              "uiToken": null,
+              "width": 249.5,
+              "x": 767,
+              "y": 54
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 400,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 690,
+              "x": 22.5,
+              "y": 168
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 24,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 24,
+              "x": 231.5,
+              "y": 583.5
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 24,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 24,
+              "x": 419.5,
+              "y": 583.5
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 24,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 24,
+              "x": 607.5,
+              "y": 583.5
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 32,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 248.5,
+              "x": 768,
+              "y": 168
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 117,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 248.5,
+              "x": 768,
+              "y": 236
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 93,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 248.5,
+              "x": 768,
+              "y": 367
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(2)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 93,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 248.5,
+              "x": 768,
+              "y": 474
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(3)"
+          },
+          {
+            "facts": {
+              "disabled": false,
+              "expanded": null,
+              "fontSize": 16,
+              "formValue": null,
+              "hasName": true,
+              "height": 93,
+              "inViewport": true,
+              "isField": false,
+              "required": false,
+              "statusRole": null,
+              "tag": "a",
+              "uiToken": null,
+              "width": 248.5,
+              "x": 768,
+              "y": 581
+            },
+            "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(4)"
+          }
+        ]
+      }
+    },
+    "combined": {
+      "score": null,
+      "status": "insufficient_principle_coverage",
+      "weights": {
+        "deterministic": 0.6,
+        "llm": 0.4
+      }
+    }
+  },
+  "counts": {
+    "imageTotal": 37,
+    "imageVisible": 36,
+    "fieldCount": 1,
+    "targetCount": 97,
+    "controlCount": 96,
+    "unknownNameCount": 0,
+    "contrastMeasured": 15,
+    "contrastUnknown": 80
+  },
+  "findings": [
+    {
+      "id": "D-1",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "form",
+      "evidence": "Görünür form alanında metinli ilişkili label, dolu aria-label, metinli bir öğeye çözülen aria-labelledby veya dolu title bulunamadı. Alanın değeri okunmadı.",
+      "recommendation": "Alan için görünür bir label ekle ve for niteliğini alanın id niteliğiyle eşleştir. Yer tutucu metni tek etiket olarak kullanma.",
+      "rule": "WCAG 4.1.2 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "INPUT",
+      "title": "Form alanında erişilebilir etiket adayı eksik",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-2",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 14 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 14
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-3",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 12.25 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 12.25
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-4",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 8.75 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 8.75
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-5",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 15.75 × 36 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 36,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 15.75
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-6",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 21 × 32 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 32,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 21
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-7",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 15 × 32 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 32,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 15
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-8",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 21 × 24 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 24,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 21
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-9",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 15 × 24 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 24,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 15
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-10",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 319.86 × 14.5 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 14.5,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 319.859375
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-11",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "target",
+      "evidence": "Öğenin ölçülen sınır kutusu 14.66 × 14.5 CSS px. Genişlik veya yükseklik 24 CSS px altında. Bu ölçüm tek başına kesin WCAG ihlali değildir.",
+      "measurement": {
+        "height": 14.5,
+        "minimum": 24,
+        "unit": "CSS px",
+        "width": 14.65625
+      },
+      "recommendation": "Tıklanabilir alanı en az 24 × 24 CSS px olacak şekilde büyüt. Aralık, satır içi bağlantı, eşdeğer kontrol, tarayıcı kontrolü ve zorunlu sunum istisnalarını ayrıca doğrula.",
+      "rule": "WCAG 2.5.8 — istisnalar için manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > footer:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+      "severity": "Orta",
+      "tag": "A",
+      "title": "24 × 24 CSS pikselden küçük hedef adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-12",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "contrast",
+      "evidence": "Metin RGB(255, 255, 255), arka plan RGB(198, 70, 164). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.",
+      "measurement": {
+        "background": [
+          198,
+          70,
+          164
+        ],
+        "fontSize": 16,
+        "fontWeight": 500,
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "minimum": 4.5,
+        "ratio": 4.362925519464876
+      },
+      "recommendation": "Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.",
+      "rule": "WCAG 1.4.3 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "SPAN",
+      "title": "Düşük metin kontrastı adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-13",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "contrast",
+      "evidence": "Metin RGB(198, 70, 164), arka plan RGB(255, 255, 255). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.",
+      "measurement": {
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "fontSize": 16,
+        "fontWeight": 500,
+        "foreground": [
+          198,
+          70,
+          164
+        ],
+        "minimum": 4.5,
+        "ratio": 4.362925519464876
+      },
+      "recommendation": "Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.",
+      "rule": "WCAG 1.4.3 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(2) > span:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "SPAN",
+      "title": "Düşük metin kontrastı adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "id": "D-14",
+      "source": "deterministic",
+      "validationStatus": "pending_manual_review",
+      "category": "contrast",
+      "evidence": "Metin RGB(255, 255, 255), arka plan RGB(198, 70, 164). Hesaplanan oran 4.363:1; gerekli eşik 4.5:1. Yazı boyutu 16 CSS px, ağırlık 500. Karşılaştırma yuvarlanmamış oranla yapıldı.",
+      "measurement": {
+        "background": [
+          198,
+          70,
+          164
+        ],
+        "fontSize": 16,
+        "fontWeight": 500,
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "minimum": 4.5,
+        "ratio": 4.362925519464876
+      },
+      "recommendation": "Metin veya arka plan rengini en az 4.5:1 kontrast sağlayacak şekilde değiştir. Logo/dekoratif metin istisnalarını ve gerçek boyanan arka planı elle doğrula.",
+      "rule": "WCAG 1.4.3 — manuel doğrulama gerekli",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(2) > section:nth-of-type(7) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(1)",
+      "severity": "Yüksek",
+      "tag": "SPAN",
+      "title": "Düşük metin kontrastı adayı",
+      "evidenceMethods": [
+        "dom-inspection",
+        "on-demand-highlight"
+      ]
+    },
+    {
+      "principle": "Görünürlük",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)",
+      "factKey": "width",
+      "factValueJSON": "14",
+      "title": "Küçük link genişliği",
+      "rationale": "E1 14 px genişliğinde, 24 px altı; kullanıcılar için fark edilmesi zor.",
+      "severity": "Orta",
+      "recommendation": "Genişliği en az 24 px’e çıkarın veya görsel işaret ekleyin.",
+      "source": "llm",
+      "rule": "Norman: Görünürlük",
+      "evidence": "width = 14",
+      "validationStatus": "current_sample_fact_matched_interpretation_pending_manual_review",
+      "id": "L-1"
+    },
+    {
+      "principle": "Görünürlük",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)",
+      "factKey": "width",
+      "factValueJSON": "12.25",
+      "title": "Küçük link genişliği",
+      "rationale": "E2 12.25 px genişliğinde, 24 px altı; tıklanabilirlik düşük.",
+      "severity": "Orta",
+      "recommendation": "Genişliği 24 px’e yükseltin veya ikon ekleyin.",
+      "source": "llm",
+      "rule": "Norman: Görünürlük",
+      "evidence": "width = 12.25",
+      "validationStatus": "current_sample_fact_matched_interpretation_pending_manual_review",
+      "id": "L-2"
+    },
+    {
+      "principle": "Görünürlük",
+      "selector": "html > body:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > main:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)",
+      "factKey": "hasName",
+      "factValueJSON": "false",
+      "title": "İsimsiz form alanı",
+      "rationale": "E11 form alanı hasName=false; erişilebilirlik kısıtlaması.",
+      "severity": "Yüksek",
+      "recommendation": "input’a aria-label veya label ekleyin.",
+      "source": "llm",
+      "rule": "Norman: Görünürlük",
+      "evidence": "hasName = false",
+      "validationStatus": "current_sample_fact_matched_interpretation_pending_manual_review",
+      "id": "L-3"
+    }
+  ],
+  "limitations": [
+    "Ön skor aday oranıdır; WCAG uygunluk veya nihai UX puanı değildir.",
+    "Iframe ve Shadow DOM kapsam dışı.",
+    "Hassas sayfa algılama eksiksiz değildir; kullanıcı doğrulaması gerekir.",
+    "Ölçülemeyen öğeler başarılı kabul edilmez; kategori skorundan çıkarılır.",
+    "Tam sayfa adresi mahremiyet için kaydedilmez; test edilen herkese açık adres doğrulama notunda ayrıca belirtilmelidir."
+  ]
+}

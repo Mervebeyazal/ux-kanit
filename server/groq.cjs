@@ -19,17 +19,32 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
         selector:{type:'string',enum:selectors},factKey:{type:'string',enum:['hasName','width','height']}}}};
     }
   }
+  const jsonMode=process.env.UX_GROQ_JSON_MODE==='object';
   const response = await fetchImpl('https://api.groq.com/openai/v1/chat/completions', {
     method:'POST', signal:AbortSignal.timeout(90000),
     headers:{'Content-Type':'application/json',Authorization:`Bearer ${apiKey}`},
     body:JSON.stringify({ model, temperature:0, seed:42, max_completion_tokens:3500,
       reasoning_effort:'low', stream:false,
-      messages:[{role:'system',content:instructions + ' principles alanını altı ilke adını anahtar olarak içeren bir nesne olarak döndür; her anahtarda score, rationale, observationSelectors olsun. Bu pakette selector kısa öğe kodudur (E1 vb); kodu birebir kullan. Servis kodu özgün DOM seçicisine çevirecek. hasName=true adsızlık değildir. uiToken=null veya metnin anonimleştirilmesi, öğenin sayfada metinsiz ya da simgesiz olduğu anlamına gelmez. MASKED gizlilik işaretidir; gerçek alanın gizli olduğunu veya doğrulamasının eksik olduğunu göstermez. Sağlarlık eylem olanaklarının algılanabilirliğidir, hata önleme ile karıştırma. Bulgular yalnız hasName=false veya 24 piksel altındaki width/height ile temellendirilebilir; bu adaylar kesin ihlal değildir. findings her zaman bir dizi olsun; desteklenmiş sorun yoksa boş dizi kullan. Bu küçük örneklem için en fazla 3 bulgu üret; ilke gerekçeleri ve öneriler kısa olsun.'},{role:'user',content:JSON.stringify(compactSnapshot)}],
-      response_format:{type:'json_schema',json_schema:{name:'norman_audit',strict:true,schema:responseSchema}} })
+      messages:[{role:'system',content:instructions + (jsonMode ? ' JSON yanıtını bu şemaya uygun üret: '+JSON.stringify(responseSchema) : '') + ' principles alanını altı ilke adını anahtar olarak içeren bir nesne olarak döndür; her anahtarda score, rationale, observationSelectors olsun. Bu pakette selector kısa öğe kodudur (E1 vb); kodu birebir kullan. Servis kodu özgün DOM seçicisine çevirecek. hasName=true adsızlık değildir. uiToken=null veya metnin anonimleştirilmesi, öğenin sayfada metinsiz ya da simgesiz olduğu anlamına gelmez. MASKED gizlilik işaretidir; gerçek alanın gizli olduğunu veya doğrulamasının eksik olduğunu göstermez. Sağlarlık eylem olanaklarının algılanabilirliğidir, hata önleme ile karıştırma. Bulgular yalnız hasName=false veya 24 piksel altındaki width/height ile temellendirilebilir; bu adaylar kesin ihlal değildir. findings her zaman bir dizi olsun; desteklenmiş sorun yoksa boş dizi kullan. Bu küçük örneklem için en fazla 3 bulgu üret; ilke gerekçeleri ve öneriler kısa olsun.'},{role:'user',content:JSON.stringify(compactSnapshot)}],
+      response_format:jsonMode ? {type:'json_object'} : {type:'json_schema',json_schema:{name:'norman_audit',strict:true,schema:responseSchema}} })
   });
   if (!response.ok) {
+    let detail='';
+    if(response.status===400) {
+      // Only fixed explanations leave the service; never echo generated text or payloads.
+      try {
+        const failure=await response.json();
+        const code=failure?.error?.code;
+        const message=typeof failure?.error?.message==='string'?failure.error.message:'';
+        if(code==='json_validate_failed') detail=' Model yanıtı zorunlu JSON biçimine uymadı (GROQ_JSON_SCHEMA_FAILED). Yeni önizleme hazırlayıp ayrı onayla yeniden deneyebilirsin.';
+        else if(code==='tool_use_failed') detail=' Model yapılandırılmış yanıtı üretemedi (GROQ_STRUCTURED_OUTPUT_FAILED).';
+        else if(/schema|response_format/i.test(message)) detail=' Sağlayıcı yanıt şemasını reddetti (GROQ_SCHEMA_REJECTED).';
+        else if(/token|context|length/i.test(message)) detail=' Sağlayıcı istek veya yanıt uzunluğunu reddetti (GROQ_LENGTH_REJECTED).';
+        else detail=' Sağlayıcı isteği geçersiz buldu (GROQ_BAD_REQUEST).';
+      } catch { detail=' Sağlayıcı isteği geçersiz buldu (GROQ_BAD_REQUEST).'; }
+    }
     const error = new Error(response.status === 429 ? 'Groq ücretsiz kota veya hız sınırına ulaşıldı. Bir süre bekle ve Groq Limits bölümünü kontrol et.'
-      : response.status === 401 ? 'Groq API anahtarı kabul edilmedi.' : `Groq isteği başarısız (${response.status}); otomatik tekrar yapılmadı.`);
+      : response.status === 401 ? 'Groq API anahtarı kabul edilmedi.' : `Groq isteği başarısız (${response.status}); otomatik tekrar yapılmadı.${detail}`);
     error.safeProviderError=true; throw error;
   }
   const result=await response.json();
@@ -55,5 +70,6 @@ async function analyzeGroq({ apiKey, model, snapshot, instructions, schema, fetc
     requestId:result.id,usage:result.usage,seed:42,systemFingerprint:result.system_fingerprint ?? null};
 }
 module.exports={analyzeGroq};
+
 
 

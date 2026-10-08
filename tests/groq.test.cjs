@@ -52,3 +52,17 @@ test('compact aliases round-trip and unknown IDs remain rejectable',async()=>{
   assert.equal(result.raw.findings[0].selector,selector);
   assert.deepEqual(result.raw.principles[0].observationSelectors,[selector,'E99']);
 });
+
+test('JSON object fallback keeps evidence schema in instructions without automatic retry',async()=>{
+  const prior=process.env.UX_GROQ_JSON_MODE;process.env.UX_GROQ_JSON_MODE='object';
+  let calls=0;
+  try {
+    await analyzeGroq({instructions:'test',schema:{type:'object'},snapshot:{elements:[]},fetchImpl:async(url,opts)=>{
+      calls++;const body=JSON.parse(opts.body);
+      assert.deepEqual(body.response_format,{type:'json_object'});
+      assert.ok(body.messages[0].content.includes('"type":"object"'));
+      return {ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:'{}'}}]})};
+    }});
+    assert.equal(calls,1);
+  } finally { if(prior===undefined)delete process.env.UX_GROQ_JSON_MODE;else process.env.UX_GROQ_JSON_MODE=prior; }
+});

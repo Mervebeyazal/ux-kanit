@@ -39,7 +39,7 @@ const server = http.createServer(async (req,res) => {
       stage='groq_evidence';
       const checked = validateResult(result.raw,snapshot);
       return reply(res,200,{ ...checked,provider,model:result.model,seed:result.seed,systemFingerprint:result.systemFingerprint,
-        temperature:0,promptVersion:'norman-static-small-v5',snapshotHash:hash(snapshot),requestId:result.requestId,
+        temperature:0,promptVersion:process.env.UX_GROQ_JSON_MODE==='object'?'norman-static-small-v5-json-object':'norman-static-small-v5',snapshotHash:hash(snapshot),requestId:result.requestId,
         usage:result.usage,analyzedAt:new Date().toISOString() });
     }
     if (provider === 'ollama') {
@@ -96,5 +96,6 @@ server.listen(8787,'127.0.0.1',() => {
   console.log(`Eklentide kullanılacak yerel bağlantı kodu: ${pairing}`);
   console.log('API isteği yalnızca eklentide ayrı gönderim onayı verildiğinde yapılır.');
 });
+
 
 
