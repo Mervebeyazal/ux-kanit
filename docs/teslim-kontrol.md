@@ -16,9 +16,10 @@
 | Gizlilik, ayrı onay, anahtarın repo dışında tutulması | Uygulandı; hassas sayfa algılama eksiksiz değil, kullanıcı doğrulaması gerekli |
 | GitHub ve birden fazla anlamlı commit | Mevcut; son hazırlık commit'i ayrıca push edilmeli |
 | README mimari, kurulum, formül, doğrulama, sınırlar | Mevcut |
-| 3–5 dakika demo videosu | Kullanıcı 3:10 birleşik kayıt bildirdi; nihai dosya/bağlantı henüz eklenmedi |
+| 3–5 dakika demo videosu | Son MP4 alındı; metaveride 3:10 ve 1920×1080 doğrulandı. Ayrı video teslim dosyası hazır; GitHub bağlantısı yok |
 | Yarım sayfa yansıtma notu | Taslak hazır; öğrenci onayı ve nihai LLM sonuçlarıyla güncelleme bekliyor |
 
 LLM çalışıyor; kanıt kapsamı ve birleşik skor eksik. Eksik sonuçlar başarı olarak işaretlenmeyecek. Bu liste tam teslim onayı değildir.
+
 
 

@@ -28,3 +28,7 @@ Kaydı izleyerek yazıların okunabildiğini, sesin duyulduğunu ve gizli bilgi 
 ## 7 Ekim kayıt durumu
 
 Kullanıcı iki sessiz kayıt oluşturdu: eklenti gösterimi 95.1 saniye, açıklamalar 64.4 saniye. Windows dosya metaverisinden toplam 159.5 saniye (yaklaşık 2:40) doğrulandı. Kullanıcı yeni kayıt eklememeyi tercih etti; bu süre yönergedeki 3–5 dakika aralığının altındadır. Dosyalar henüz tek videoda birleştirilmedi. Birleştirme için araç indirmesi bağlantı kesilmesi ve yavaşlık nedeniyle tamamlanamadı; Clipchamp ile yerel birleştirme sonraki adımdır. Video içeriği ve ses anlaşılabilirliği metaveriden doğrulanamaz. API/LLM bölümü eksik olarak gösterilmelidir.
+
+## Son birleşik demo — 8 Ekim 2026
+
+Kullanıcının sağladığı Video Project.mp4 dosyasının Windows medya metaverisi kontrol edildi: 190.369 saniye (3 dakika 10 saniye), 1920 × 1080, 84,129,081 bayt. Böylece süre yönergedeki 3–5 dakika aralığını karşılıyor. Önceki 2:40 kayıt durumu bu birleşik video ile güncellendi. Teslim kopyası repo dışında outputs/ux-kanit-demo.mp4 olarak saklandı; GitHub'a video bağlantısı henüz eklenmedi. Video ayrı teslim dosyasıdır. İçeriğin tamamı izlenmedi; süre ve çözünürlük kontrolü gizli bilgi veya anlatım kalitesi doğrulaması değildir. Kayıt son LLM denemelerinden önce hazırlanmış olabilir; güncel doğrulama sonuçlarının kaynağı README, JSON ve kanıt görüntüleridir.
